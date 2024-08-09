@@ -1,9 +1,7 @@
 ---
-import Navigation from "../components/Navigation.astro"
+import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
-interface Props {
-	title: string;
-}
+import "../styles/global.css"
 
 const { title } = Astro.props;
 ---
@@ -14,18 +12,19 @@ const { title } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/webp" href="/BABLR_logo.webp" />
+		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
 	<body>
-		<Navigation/>
+		<Header />
 		<slot />
 		<Footer/>
+		<script> import '../scripts/menu.js'</script>
 	</body>
 </html>
 <style is:global>
-	:root {
+:root {
 		--accent: #e28743;
 /*		--accent-light: #e0ccfa;*/
 		--accent-light: #dffacc;
@@ -36,20 +35,24 @@ const { title } = Astro.props;
 			var(--accent-light) 30%,
 			white 60%
 		);
+		--accent-text: #dc322f;
 	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #fdf6e3;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+body {
+	margin: auto;
+}
+html {
+	font-family: system-ui, sans-serif;
+	background: #fdf6e3;
+}
+code {
+	font-family:
+		Menlo,
+		Monaco,
+		Lucida Console,
+		Liberation Mono,
+		DejaVu Sans Mono,css
+		Bitstream Vera Sans Mono,
+		Courier New,
+		monospace;
+}
 </style>
