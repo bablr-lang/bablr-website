@@ -1,0 +1,37 @@
+---
+import {Image} from "astro:assets"
+import BABLRTransparent from '../images/BABLRTransparent.png'
+import "../styles/global.css"
+import Navigation from "./Navigation.astro"
+import Hamburger from "./Hamburger.astro"
+---
+
+<header> 
+	<main>
+		<a href="/"><Image src={BABLRTransparent} alt="bablr logo" padding="10" height="60" loading="eager"></a>
+		<nav>
+			<Hamburger />
+			<Navigation />
+		</nav>
+	</main>
+</header>
+
+<style>
+main {
+	padding: 0em;
+	display: flex;
+	width: 960px;
+	justify-content: space-between;
+	align-items: center;
+}
+header {
+	display: flex;
+	padding: 0.5em;
+	width: 100%;
+	background: white;
+	justify-content: center;
+}
+nav {
+	float: right;
+}
+</style>
