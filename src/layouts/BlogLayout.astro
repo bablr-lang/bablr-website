@@ -1,0 +1,67 @@
+---
+import Layout from "./Layout.astro"
+
+const {frontmatter} = Astro.props
+---
+
+<Layout title={frontmatter.title}>
+	<main>
+		<titleBlock>
+			<h1>{frontmatter.title}</h1>
+			<author>{frontmatter.author}</author>
+			<date>{frontmatter.date}</date>
+		</titleBlock>
+		<content>
+			<slot />
+		</content>
+	</main>
+</Layout>
+
+<style>
+h1 {
+	font-size: 3rem;
+	font-weight: 700;
+	line-height: 1;
+	margin-bottom: .25em;
+}
+titleBlock {
+	text-align: left;
+	display: block;
+	margin: auto;
+}
+author {
+	font-style: italic;
+	color: #dc322f;
+}
+date {
+	padding-left: 0.5rem;
+	color: grey;
+}
+content {
+	margin: auto;
+	display: block;
+	text-align: left;
+}
+
+@media screen and (min-width: 636px) {
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		margin-bottom: .25em;
+	}
+	content { 
+		font-size: 18px;
+		margin: auto;
+		display: block;
+		text-align: left;
+		max-width: 75%;
+	}
+	titleBlock {
+		text-align: center;
+		display: block;
+		margin: auto;
+		max-width: 75%;
+	}
+}
+</style>

@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import BlogCard from '../../components/BlogCard.astro'
+const allPosts = await Astro.glob('./*.md')
+---
+
+<Layout title="Blog">
+	<main>
+		<h1> BABLR Blog </h1>
+			{allPosts.map((post) => <BlogCard 
+			href={post.url}
+			title={post.frontmatter.title} 
+			date={post.frontmatter.date}
+			author={post.frontmatter.author}
+			/>)}
+	</main>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+</style>

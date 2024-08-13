@@ -1,0 +1,29 @@
+---
+const {href, title, date, author} = Astro.props;
+---
+
+<li class="blog-card">
+	<a href={href}>
+	<h2> {title} </h2>
+	<authorDate>
+		<date> {date} </date>
+		<author> by {author} </author>
+	</authorDate>
+</li>
+
+<style>
+.blog-card {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+}
+.blog-card > a {
+	text-decoration: none;
+	color: black;
+}
+authorDate {
+	display: block;
+	align-content: space-between;
+}
+
+</style>
