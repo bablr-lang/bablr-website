@@ -33,8 +33,7 @@
 }
 
 .nav-links a:hover, a:focus {
-  background-color: #2aa198;
-  border-radius: 30px;
+  text-decoration: underline;
 }
 
 .expanded {
