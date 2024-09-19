@@ -1,6 +1,4 @@
-import { defineConfig } from 'astro/config';
-
-import node from '@astrojs/node';
+import { defineConfig } from "astro/config";
 
 // import qwikdev from "@qwikdev/astro";
 
@@ -8,9 +6,6 @@ import node from '@astrojs/node';
 export default defineConfig({
   integrations: [],
   server: { port: 8080 },
-  site: 'https://bablr-website.fly.dev',
-  output: 'server',
-  adapter: node({
-    mode: 'standalone'
-  })
+  site: "https://bablr-website.fly.dev",
+  output: "server",
 });
