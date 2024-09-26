@@ -7,5 +7,5 @@ export default defineConfig({
   integrations: [],
   server: { port: 8080 },
   site: "https://bablr.org",
-  output: "server",
+  output: "static",
 });
