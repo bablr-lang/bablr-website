@@ -17,6 +17,16 @@ import Card from '../components/Card.astro';
 				title="Community"
 				body="Join our Discord and help with the development."
 			/>
+			<Card
+				href="/tutorials"
+				title="Getting Started"
+				body="Check out some tutorials and write your first language!"
+			/>
+			<Card 
+				href="/docs"
+				title="Documentation"
+				body="Read the docs."
+			/>
 		</ul>
 	</main>
 </Layout>
@@ -59,5 +69,7 @@ import Card from '../components/Card.astro';
 		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
 		gap: 2rem;
 		padding: 0;
+		max-width: 800px;
+		margin: auto;
 	}
 </style>

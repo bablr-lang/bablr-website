@@ -32,12 +32,17 @@
   color: var(--accent-text);
 }
 
-.nav-links a:hover, a:focus {
+.nav-links a:hover,
+a:focus {
   text-decoration: underline;
 }
 
 .expanded {
   display: unset;
+}
+
+.nav-seperator-expanded {
+  display: none;
 }
 
 @media screen and (min-width: 636px) {
