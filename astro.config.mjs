@@ -6,6 +6,6 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   integrations: [],
   server: { port: 8080 },
-  site: "https://bablr-website.fly.dev",
+  site: "https://bablr.org",
   output: "server",
 });
