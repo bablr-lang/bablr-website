@@ -13,6 +13,7 @@ export default defineConfig({
       title: "BABLR docs",
       logo: { src: "./src/images/BABLRTransparent.png", replacesTitle: true },
       prerender: false,
+      favicon: "/favicon.ico",
     }),
   ],
   server: { port: 8080 },
