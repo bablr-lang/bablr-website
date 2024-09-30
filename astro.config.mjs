@@ -10,8 +10,8 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   integrations: [
     starlight({
-      title: "BABLR docs",
-      logo: { src: "./src/images/BABLRTransparent.png", replacesTitle: true },
+      title: "Docs",
+      logo: { src: "./src/images/BABLRTransparent.png" },
       prerender: false,
       favicon: "/favicon.ico",
     }),
