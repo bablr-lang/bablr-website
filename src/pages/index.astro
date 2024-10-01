@@ -5,52 +5,46 @@ import CTAButton from "../components/CTAButton.astro";
 ---
 
 <Layout title="Welcome">
-	<main>
-		<h1>Welcome to &lt;<span class="text-gradient">BABLR</span>&gt;</h1>
-		<div class="link-container">
-			<ul role="list" class="link-card-grid">
-				<Card
-					href="https://github.com/bablr-lang"
-					title="Github"
-					body="Learn about BABLR and its mission."
-				/>
-				<Card
-					href="https://discord.gg/pTbg4JGEZp"
-					title="Community"
-					body="Join our Discord and help with the development."
-				/>
-				<Card
-					href="/tutorials"
-					title="Getting Started"
-					body="Check out some tutorials and write your first language!"
-				/>
-				<Card
-					href="/docs"
-					title="Documentation"
-					body="Read the docs."
-				/>
-			</ul>
-		</div>
+	<h1>Welcome to &lt;<span class="text-gradient">BABLR</span>&gt;</h1>
+	<div class="link-container">
+		<ul role="list" class="link-card-grid">
+			<Card
+				href="https://github.com/bablr-lang"
+				title="Github"
+				body="Learn about BABLR and its mission."
+			/>
+			<Card
+				href="https://discord.gg/pTbg4JGEZp"
+				title="Community"
+				body="Join our Discord and help with the development."
+			/>
+			<Card
+				href="/tutorials"
+				title="Getting Started"
+				body="Check out some tutorials and write your first language!"
+			/>
+			<Card href="/docs" title="Documentation" body="Read the docs." />
+		</ul>
+	</div>
 
-		<roadmap>
-			<div class="content">
-				<div class="text-space">
-					<h2>Roadmap</h2>
-					<p>Where are we going? Where have we been?</p>
-				</div>
-				<div class="button-space">
-					<CTAButton href="/roadmap" text="explore" />
-				</div>
+	<roadmap>
+		<div class="content">
+			<div class="text-space">
+				<h2>Roadmap</h2>
+				<p>Where are we going?<br />Where have we been?</p>
 			</div>
-		</roadmap>
-	</main>
+			<div class="button-space">
+				<CTAButton href="/roadmap" text="explore" />
+			</div>
+		</div>
+	</roadmap>
 </Layout>
 
 <style>
-	main {
+	/*	main {
 		margin: auto;
 		width: 100%;
-	}
+	}*/
 	h1 {
 		font-size: 4rem;
 		font-weight: 700;
@@ -96,21 +90,20 @@ import CTAButton from "../components/CTAButton.astro";
 	}
 	.link-container {
 		padding-bottom: 4rem;
-		width: 960px;
+		max-width: calc(100% - 2rem);
 		margin: auto;
 	}
 	roadmap {
-		padding: 8rem 0;
+		padding: 4rem 0;
 		background: #eee8d5;
 		color: #268bd2;
-		width: 100%;
-		display: flex;
+		text-align: center;
+		display: block;
 	}
 	roadmap .content {
 		margin: auto;
 		font-size: x-large;
-		display: flex;
-		width: 1060px
+		max-width: calc(100% - 2rem);
 	}
 	roadmap .text-space {
 		margin: auto;
@@ -121,5 +114,27 @@ import CTAButton from "../components/CTAButton.astro";
 	}
 	roadmap h2 {
 		font-size: 3rem;
+		margin: 0;
+	}
+
+	@media screen and (min-width: 636px) {
+		roadmap {
+			padding: 4rem 0;
+			background: #eee8d5;
+			color: #268bd2;
+			display: flex;
+			width: 100%;
+		}
+		roadmap .content {
+			margin: auto;
+			font-size: x-large;
+			width: 1060px;
+			display: flex;
+		}
+		roadmap .text-space {
+			margin: auto;
+		}
+		roadmap .button-space {
+		}
 	}
 </style>

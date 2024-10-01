@@ -64,4 +64,9 @@ a:focus {
     font-size: 40px;
     font-weight: 200;
   }
+  .link-container {
+    padding-bottom: 4rem;
+    width: 720px;
+    margin: auto;
+  }
 }
