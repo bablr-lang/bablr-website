@@ -4,18 +4,16 @@ import node from "@astrojs/node";
 
 import starlight from "@astrojs/starlight";
 
-// import qwikdev from "@qwikdev/astro";
+import qwikdev from "@qwikdev/astro";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: "Docs",
-      logo: { src: "./src/images/BABLRTransparent.png" },
-      prerender: false,
-      favicon: "/favicon.ico",
-    }),
-  ],
+  integrations: [starlight({
+    title: "DOCS",
+    logo: { src: "./src/images/BABLRTransparent.png" },
+    prerender: false,
+    favicon: "/favicon.ico",
+  }), qwikdev()],
   server: { port: 8080 },
   site: "https://bablr.org",
   output: "server",

@@ -1,37 +1,56 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import CTAButton from "../components/CTAButton.astro";
 ---
 
 <Layout title="Welcome">
 	<main>
-		<h1>Welcome to <span class="text-gradient">BABLR</span></h1>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://github.com/bablr-lang"
-				title="Github"
-				body="Learn about BABLR and its mission."
-			/>
-			<Card
-				href="https://discord.gg/pTbg4JGEZp"
-				title="Community"
-				body="Join our Discord and help with the development."
-			/>
-			<Card
-				href="/tutorials"
-				title="Getting Started"
-				body="Check out some tutorials and write your first language!"
-			/>
-			<Card 
-				href="/docs"
-				title="Documentation"
-				body="Read the docs."
-			/>
-		</ul>
+		<h1>Welcome to &lt;<span class="text-gradient">BABLR</span>&gt;</h1>
+		<div class="link-container">
+			<ul role="list" class="link-card-grid">
+				<Card
+					href="https://github.com/bablr-lang"
+					title="Github"
+					body="Learn about BABLR and its mission."
+				/>
+				<Card
+					href="https://discord.gg/pTbg4JGEZp"
+					title="Community"
+					body="Join our Discord and help with the development."
+				/>
+				<Card
+					href="/tutorials"
+					title="Getting Started"
+					body="Check out some tutorials and write your first language!"
+				/>
+				<Card
+					href="/docs"
+					title="Documentation"
+					body="Read the docs."
+				/>
+			</ul>
+		</div>
+
+		<roadmap>
+			<div class="content">
+				<div class="text-space">
+					<h2>Roadmap</h2>
+					<p>Where are we going? Where have we been?</p>
+				</div>
+				<div class="button-space">
+					<CTAButton href="/roadmap" text="explore" />
+				</div>
+			</div>
+		</roadmap>
 	</main>
 </Layout>
 
 <style>
+	main {
+		margin: auto;
+		width: 100%;
+	}
 	h1 {
 		font-size: 4rem;
 		font-weight: 700;
@@ -49,7 +68,10 @@ import Card from '../components/Card.astro';
 	.instructions {
 		margin-bottom: 2rem;
 		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		background: linear-gradient(
+			rgba(var(--accent-dark), 66%),
+			rgba(var(--accent-dark), 33%)
+		);
 		padding: 1.5rem;
 		border-radius: 8px;
 	}
@@ -71,5 +93,33 @@ import Card from '../components/Card.astro';
 		padding: 0;
 		max-width: 800px;
 		margin: auto;
+	}
+	.link-container {
+		padding-bottom: 4rem;
+		width: 960px;
+		margin: auto;
+	}
+	roadmap {
+		padding: 8rem 0;
+		background: #eee8d5;
+		color: #268bd2;
+		width: 100%;
+		display: flex;
+	}
+	roadmap .content {
+		margin: auto;
+		font-size: x-large;
+		display: flex;
+		width: 1060px
+	}
+	roadmap .text-space {
+		margin: auto;
+	}
+	roadmap .button-space {
+		align-content: center;
+		margin: auto;
+	}
+	roadmap h2 {
+		font-size: 3rem;
 	}
 </style>
