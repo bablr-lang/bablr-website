@@ -1,0 +1,354 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"work",
+				"workspace:*\","
+			],
+			[
+				"aut",
+				"authorDate"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"align",
+				"align-items"
+			],
+			[
+				"al",
+				"align-content"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"font-st",
+				"font-style"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"blog",
+				"blogTitle"
+			],
+			[
+				"B",
+				"BABLRLogo"
+			],
+			[
+				"padding",
+				"padding=\"10"
+			],
+			[
+				"ima",
+				"images/BABLR_transparent"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"inline",
+				"inline-flex;"
+			],
+			[
+				"hei",
+				"height: 23px;"
+			],
+			[
+				"from",
+				"from \"../components/Footer.astro\""
+			],
+			[
+				"60px",
+				"60px auto"
+			],
+			[
+				"disp",
+				"display: inline"
+			],
+			[
+				"comp",
+				"components/navigation/navigation."
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"",
+				"Convert Case: Lower Case"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"color",
+				"UI: Select Color Scheme"
+			],
+			[
+				"intsall",
+				"Package Control: Install Package"
+			],
+			[
+				"col",
+				"UI: Select Color Scheme"
+			],
+			[
+				"preference",
+				"Preferences: Settings"
+			],
+			[
+				"tabnin",
+				"⌬ tabnine: Open Configuration"
+			],
+			[
+				"pak",
+				"Package Control: Install Package"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"tab",
+				"⌬ tabnine: Open Configuration"
+			],
+			[
+				"tabnine",
+				"⌬ tabnine: Open Configuration"
+			],
+			[
+				"ckage",
+				"Package Control: List Packages"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"astro",
+				"Set Syntax: HTML (Astro)"
+			],
+			[
+				"ui",
+				"UI: Select Color Scheme"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 160.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/stirl/bablr/dev/.gitmodules",
+		"/home/stirl/bablr/dev/repos/language-en-es3/lib/regex.js",
+		"/home/stirl/bablr/dev/.npmrc",
+		"/home/stirl/bablr/dev/package.json",
+		"/home/stirl/bablr/dev/node_modules/.modules.yaml",
+		"/home/stirl/.config/sublime-text/Packages/User/Preferences.sublime-settings",
+		"/home/stirl/.config/sublime-text/Packages/Default/Preferences.sublime-settings",
+		"/home/stirl/bablr/bablr-website/src/scripts/menu.js",
+		"/home/stirl/bablr/bablr-website/src/styles/global.css",
+		"/home/stirl/bablr/bablr-website/src/layouts/BlogLayout.astro",
+		"/home/stirl/bablr/bablr-website/src/components/BlogCard.astro",
+		"/home/stirl/bablr/bablr-website/src/pages/about.astro",
+		"/home/stirl/bablr/bablr-website/src/components/Navigation.astro",
+		"/home/stirl/bablr/bablr-website/src/components/Card.astro",
+		"/home/stirl/bablr/bablr-website/src/layouts/Layout.astro",
+		"/home/stirl/bablr/bablr-website/src/pages/blog/index.astro",
+		"/home/stirl/bablr/bablr-website/src/pages/index.astro",
+		"/home/stirl/bablr/bablr-website/src/components/Header.astro",
+		"/home/stirl/bablr/bablr-website/src/components/Hamburger.astro",
+		"/home/stirl/bablr/bablr-website/src/pages/blog/firstBlog.md",
+		"/home/stirl/bablr/bablr-website/astro.config.mjs",
+		"/home/stirl/bablr/bablr-website/src/components/Footer.astro",
+		"/home/stirl/Downloads/BABLR_LOGO/BABLR_LOGO/BABLR_logo.ico",
+		"/home/stirl/bablr/bablr-website/public/discord_favicon.svg",
+		"/home/stirl/bablr/bablr-website/public/favicon.svg",
+		"/home/stirl/bablr/bablr-website/public/BABLR_logo.svg",
+		"/home/stirl/bablr/bablr-website/LICENSE.md",
+		"/home/stirl/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 116.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 32.0
+	},
+	"input":
+	{
+		"height": 44.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.LSP Log Panel":
+	{
+		"height": 0.0
+	},
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.diagnostics":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "astro.config.sublime-project",
+	"replace":
+	{
+		"height": 60.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 250.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

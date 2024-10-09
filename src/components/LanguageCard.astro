@@ -1,0 +1,25 @@
+---
+const {href, language} = Astro.props;
+---
+
+<li class="language-card">
+	<a href={href}>
+	<h2> {language} </h2>
+</li>
+
+<style>
+.language-card {
+	list-style: none;
+	display: flex;
+	justify-content: left;
+}
+.language-card > a {
+	text-decoration: none;
+	color: black;
+}
+authorDate {
+	display: block;
+	align-content: space-between;
+}
+
+</style>

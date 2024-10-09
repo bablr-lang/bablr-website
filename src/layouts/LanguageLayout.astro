@@ -1,0 +1,76 @@
+---
+import Layout from "./Layout.astro"
+
+const {frontmatter} = Astro.props
+
+const response = await fetch(`https://api.github.com/repos/bablr-lang/${frontmatter.language}`)
+
+const data = await response.json();
+
+const contributorsResponse = await fetch(data.contributors_url)
+
+const contributors = await contributorsResponse.json()
+
+---
+
+<Layout title={frontmatter.language}>
+	<main>
+		<titleBlock>
+			<h1>{frontmatter.language}</h1>
+		</titleBlock>
+		<content>
+			{data.description}
+			{contributors[0].login}
+			<slot />
+		</content>
+	</main>
+</Layout>
+
+<style>
+h1 {
+	font-size: 3rem;
+	font-weight: 700;
+	line-height: 1;
+	margin-bottom: .25em;
+}
+titleBlock {
+	text-align: left;
+	display: block;
+	margin: auto;
+}
+author {
+	font-style: italic;
+	color: #dc322f;
+}
+date {
+	padding-left: 0.5rem;
+	color: grey;
+}
+content {
+	margin: auto;
+	display: block;
+	text-align: left;
+}
+
+@media screen and (min-width: 636px) {
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		margin-bottom: .25em;
+	}
+	content { 
+		font-size: 18px;
+		margin: auto;
+		display: block;
+		text-align: left;
+		max-width: 75%;
+	}
+	titleBlock {
+		text-align: center;
+		display: block;
+		margin: auto;
+		max-width: 75%;
+	}
+}
+</style>
