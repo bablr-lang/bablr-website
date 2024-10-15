@@ -3,14 +3,12 @@ import {Image} from "astro:assets"
 import BABLRTransparent from '../images/BABLRTransparent.png'
 import "../styles/global.css"
 import Navigation from "./Navigation.astro"
-import Hamburger from "./Hamburger.astro"
 ---
 
 <header> 
 	<main>
 		<a href="/"><Image src={BABLRTransparent} alt="bablr logo"  height="60" loading="eager"></a>
 		<nav>
-			<Hamburger />
 			<Navigation />
 		</nav>
 	</main>
@@ -19,10 +17,15 @@ import Hamburger from "./Hamburger.astro"
 <style>
 main {
 	padding: 0em;
-	display: flex;
+	max-width: 100%;
 	width: 1040px;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	align-items: center;
+	flex-direction: row;
+}
+main a {
+	display: flex;
+	justify-content: center;
 }
 header {
 	display: flex;
@@ -30,7 +33,11 @@ header {
 	background: white;
 	justify-content: center;
 }
-nav {
-	float: right;
+
+@media screen and (min-width: 636px) {
+	main {
+		display: inline-flex;
+		justify-content: space-between;
+	}
 }
 </style>

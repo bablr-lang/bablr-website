@@ -4,7 +4,7 @@ import Card from "../components/Card.astro";
 import CTAButton from "../components/CTAButton.astro";
 ---
 
-<Layout title="Welcome">
+<Layout title="BABLR">
 	<h1>Welcome to &lt;<span class="text-gradient">BABLR</span>&gt;</h1>
 	<div class="link-container">
 		<ul role="list" class="link-card-grid">
@@ -41,10 +41,6 @@ import CTAButton from "../components/CTAButton.astro";
 </Layout>
 
 <style>
-	/*	main {
-		margin: auto;
-		width: 100%;
-	}*/
 	h1 {
 		font-size: 4rem;
 		font-weight: 700;
@@ -59,33 +55,12 @@ import CTAButton from "../components/CTAButton.astro";
 		background-size: 400%;
 		background-position: 0%;
 	}
-	.instructions {
-		margin-bottom: 2rem;
-		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(
-			rgba(var(--accent-dark), 66%),
-			rgba(var(--accent-dark), 33%)
-		);
-		padding: 1.5rem;
-		border-radius: 8px;
-	}
-	.instructions code {
-		font-size: 0.8em;
-		font-weight: bold;
-		background: rgba(var(--accent-light), 12%);
-		color: rgb(var(--accent-light));
-		border-radius: 4px;
-		padding: 0.3em 0.4em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent-light));
-	}
 	.link-card-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
 		gap: 2rem;
 		padding: 0;
-		max-width: 800px;
+		max-width: 760px;
 		margin: auto;
 	}
 	.link-container {
