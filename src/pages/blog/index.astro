@@ -2,12 +2,13 @@
 import Layout from '../../layouts/Layout.astro'
 import BlogCard from '../../components/BlogCard.astro'
 const allPosts = await Astro.glob('./*.md')
+const filteredPosts = allPosts.filter((post) => !post.frontmatter.draft)
 ---
 
 <Layout title="Blog">
 	<main>
 		<h1> BABLR Blog </h1>
-			{allPosts.map((post) => <BlogCard 
+			{filteredPosts.map((post) => <BlogCard 
 			href={post.url}
 			title={post.frontmatter.title} 
 			date={post.frontmatter.date}
