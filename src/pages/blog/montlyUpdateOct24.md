@@ -3,7 +3,7 @@ layout: "../../layouts/BlogLayout.astro"
 title: "Monthly Update 10/2024"
 author: "Stirling Hostetter"
 date: "10/31/2024"
-draft: true
+draft: false
 ---
 
 This will be the frist post in a series that is intended to keep everyone up
