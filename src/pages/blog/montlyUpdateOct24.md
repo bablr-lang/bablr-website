@@ -19,10 +19,7 @@ documenting the progress we are making outside of Github so that the
 information might be more readily available.
 
 While I have been off learning about the busniness, Conrad has been hard at
-work on product development and we are seeing very promising results. [agAST]
-(https://github.com/bablr-lang/agast-vm), [CSTML]
-(https://github.com/bablr-lang/language-en-cstml) and the [BABLR]
-(https://github.com/bablr-lang/bablr) engine itself, are all seeing heavy
+work on product development and we are seeing very promising results. [agAST](https://github.com/bablr-lang/agast-vm), [CSTML](https://github.com/bablr-lang/language-en-cstml) and the [BABLR](https://github.com/bablr-lang/bablr) engine itself, are all seeing heavy
 development, rapid iteration, and marked improvements.
 
 As of Tomorrow, I will be officially full-time at Silphium Labs (BABLR's for
