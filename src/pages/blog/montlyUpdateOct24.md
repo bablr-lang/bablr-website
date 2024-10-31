@@ -44,7 +44,6 @@ how to make use of all of BABLR's rich features, and informative blog posts
 detailing the engineering process right here at bablr.org.
 
 If you would like to contribute to the building of the website or any part of
-BABLR, feel free to hop into our [Discord]
-(https://discord.gg/pTbg4JGEZp). There is no shortage of work that needs
+BABLR, feel free to hop into our [Discord](https://discord.gg/pTbg4JGEZp). There is no shortage of work that needs
 doing and we have tasks that need doing at a wide array of skill levels. Any
 and all help is welcome!
