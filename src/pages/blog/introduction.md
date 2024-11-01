@@ -14,7 +14,7 @@ provide the most recent updates surrounding the development of BABLR.
 To catch you up on what has happened so far, BABLR started development in 2020
 as `cst-tokens`, intended as a successor to `recast`. Since then the scope of
 the project has grown considerably, and it now aims to be a new fully featured
-IDE, built from the ground up. Its development has also progress steadily over
+IDE, built from the ground up. Its development has also progressed steadily over
 the last four years, with Conrad (aka conartist6) working on the project full
 time.
 
