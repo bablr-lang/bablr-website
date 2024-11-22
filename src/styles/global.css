@@ -1,1 +1,30 @@
+#experiment-input {
+  margin: 20px 50px 50px 50px;
+  width: 400px;
+  display: flex;
+  height: 800px;
+}
 
+#experiment-output {
+  margin: 20px 50px 50px 50px;
+  width: 400px;
+  display: flex;
+  height: 800px;
+}
+
+#experiment-grammar {
+  margin: 20px 50px 50px 50px;
+  width: 400px;
+  display: flex;
+  height: 800px;
+}
+
+#form-eval {
+  width: 100px;
+}
+
+form {
+  flex-flow: row;
+  display: flex;
+  align-items: center;
+}
