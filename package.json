@@ -14,6 +14,8 @@
     "@astrojs/solid-js": "^4.4.3",
     "@astrojs/starlight": "^0.28.2",
     "@bablr/agast-vm-helpers": "^0.5.1",
+    "@bablr/boot": "^0.6.3",
+    "@bablr/helpers": "^0.20.4",
     "@bablr/eslint-config-base": "github:bablr-lang/eslint-config-base#49f5952efed27f94ee9b94340eb1563c440bf64e",
     "@bablr/io-vm-web": "^0.2.0",
     "@bablr/language-en-cstml": "^0.6.0",
