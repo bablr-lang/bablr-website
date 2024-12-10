@@ -3,6 +3,7 @@
   width: 400px;
   display: flex;
   height: 800px;
+  background: white;
 }
 
 #experiment-output {

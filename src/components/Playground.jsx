@@ -1,16 +1,42 @@
 import { streamParse, Context, AgastContext } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
 import { buildFullyQualifiedSpamMatcher } from "@bablr/helpers/builders";
-import { printPrettyCSTML } from "@bablr/helpers/stream";
+import { printTag } from "@bablr/agast-helpers/print";
 import { createSignal } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
 import { defaultLanguageInput } from "./language.js";
 import * as helpers from "@bablr/helpers";
+import {
+  getStreamIterator,
+  StreamIterable,
+  generatePrettyCSTML,
+} from "@bablr/agast-helpers/stream";
+import { Coroutine } from "@bablr/coroutine";
+
+function* __map(tags, fn) {
+  const co = new Coroutine(getStreamIterator(tags));
+
+  for (;;) {
+    co.advance();
+
+    if (co.current instanceof Promise) {
+      co.current = yield co.current;
+    }
+    if (co.done) break;
+
+    const tag = co.value;
+
+    yield fn(tag);
+  }
+}
+
+export const map = (tags, fn) => new StreamIterable(__map(tags, fn));
 
 export default function App() {
   const [input, setInput] = createSignal("<!0:cstml>");
   const [tags, setTags] = createSignal(null);
   const [matcherTag, setMatcherTag] = createSignal("DoctypeTag");
+  let outputArea;
 
   const matcher = () => {
     return buildFullyQualifiedSpamMatcher(
@@ -25,6 +51,17 @@ export default function App() {
       `return (helpers) => { ${languageInput()}; return {canonicalURL, dependencies, grammar, getCooked} }`,
     )()(helpers);
   };
+
+  const makeDeferred = () => {
+    const deferred = {};
+    deferred.promise = new Promise((resolve, reject) => {
+      deferred.resolve = resolve;
+      deferred.reject = reject;
+    });
+    return deferred;
+  };
+
+  let deferred;
 
   const [languageInput, setLanguageInput] = createSignal(null);
 
@@ -46,22 +83,9 @@ export default function App() {
             "align-items": "center",
           }}
         >
-          <form
+          <div
             id="input-form"
             style={{ display: "flex", "flex-flow": "column" }}
-            onSubmit={(e) => {
-              e.preventDefault();
-              console.log("submitting");
-              setTags(
-                streamParse(
-                  ctx(),
-                  matcher(),
-                  input(),
-                  {},
-                  { enhancers, emitEffects: true },
-                ),
-              );
-            }}
           >
             <label for="#experiment-input" style={{ "text-align": "center" }}>
               Input
@@ -82,36 +106,61 @@ export default function App() {
                 doctypetag
               </input>
             </div>
-            <textarea
+            <div
               id="experiment-input"
-              value={input()}
-              ref={(el) => setInput(el.value)}
-              onInput={(e) => setInput(e.currentTarget.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  let form = document.getElementById("input-form");
-                  form.requestSubmit();
-                }
-              }}
-            ></textarea>
-          </form>
-          <button id="form-eval" type="submit" form="input-form">
+              contentEditable="true"
+              onInput={(e) => setInput(e.currentTarget.innerText)}
+            >
+              {input()}
+            </div>
+          </div>
+          <button
+            id="form-eval"
+            onClick={async () => {
+              const tags = map(
+                evaluateIO(() =>
+                  getStreamIterator(
+                    streamParse(
+                      ctx(),
+                      matcher(),
+                      input(),
+                      {},
+                      { enhancers, emitEffects: true },
+                    ),
+                  ),
+                ),
+                (tag) => {
+                  debugger;
+                  const d = (deferred = makeDeferred());
+                  return d.promise.then(() => tag);
+                },
+              );
+
+              setTags(tags);
+
+              for await (const text of generatePrettyCSTML(tags)) {
+                debugger;
+                outputArea.appendChild(document.createTextNode(text));
+              }
+            }}
+          >
             eval
+          </button>
+
+          <button
+            id="form-step"
+            onClick={() => {
+              deferred.resolve();
+            }}
+          >
+            step
           </button>
         </div>
         <div id="output" style={{ display: "flex", "flex-flow": "column" }}>
           <label for="#experiment-output" style={{ "text-align": "center" }}>
             Output
           </label>
-          <textarea id="experiment-output">
-            {tags() != null
-              ? printPrettyCSTML(
-                  evaluateIO(() => tags()),
-                  { ctx: ctx() },
-                )
-              : null}
-          </textarea>
+          <textarea ref={outputArea} id="experiment-output"></textarea>
         </div>
 
         <div id="grammar" style={{ display: "flex", "flex-flow": "column" }}>
