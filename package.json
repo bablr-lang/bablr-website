@@ -14,20 +14,22 @@
     "@astrojs/solid-js": "^4.4.3",
     "@astrojs/starlight": "^0.28.2",
     "@bablr/agast-vm-helpers": "^0.5.1",
+    "@bablr/agast-helpers": "^0.5.2",
     "@bablr/boot": "^0.6.3",
-    "@bablr/helpers": "^0.20.4",
-    "@bablr/eslint-config-base": "github:bablr-lang/eslint-config-base#49f5952efed27f94ee9b94340eb1563c440bf64e",
+    "@bablr/helpers": "^0.20.5",
     "@bablr/io-vm-web": "^0.2.0",
     "@bablr/language-en-cstml": "^0.7.0",
     "astro": "^4.15.5",
     "bablr": "^0.6.1",
-    "eslint": "^8.32.0",
-    "eslint-import-resolver-enhanced-resolve": "^1.0.5",
-    "eslint-plugin-import": "^2.27.5",
     "solid-js": "^1.9.3"
   },
   "devDependencies": {
+    "@bablr/eslint-config-base": "github:bablr-lang/eslint-config-base#49f5952efed27f94ee9b94340eb1563c440bf64e",
+    "eslint": "^8.32.0",
+    "eslint-import-resolver-enhanced-resolve": "^1.0.5",
+    "eslint-plugin-import": "^2.27.5",
     "@flydotio/dockerfile": "^0.5.8",
+    "@babel/plugin-syntax-jsx": "^7.25",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1"
   }

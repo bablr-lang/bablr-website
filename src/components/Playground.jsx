@@ -1,9 +1,10 @@
 import { streamParse, Context, AgastContext } from "bablr/enhanceable";
-import { debugEnhancers } from "@bablr/helpers/enhancers";
+import { debugEnhancers, generateProductions } from "@bablr/helpers/enhancers";
 import { buildFullyQualifiedSpamMatcher } from "@bablr/helpers/builders";
 import { printPrettyCSTML } from "@bablr/helpers/stream";
-import { createSignal } from "solid-js";
+import { createSignal, For } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
+import { printType } from "@bablr/agast-helpers/print";
 import { defaultLanguageInput } from "./language.js";
 import * as helpers from "@bablr/helpers";
 
@@ -26,14 +27,23 @@ export default function App() {
     )()(helpers);
   };
 
-  const [languageInput, setLanguageInput] = createSignal(null);
+  const [languageInput, setLanguageInput] = createSignal(defaultLanguageInput);
+
+  const productions = () => {
+    return generateProductions(language().grammar);
+  };
 
   let enhancers = {};
 
   enhancers = { ...debugEnhancers, enhancers };
 
-  const ctx = () =>
-    Context.from(AgastContext.create(), language(), enhancers.bablrProduction);
+  const ctx = () => {
+    return Context.from(
+      AgastContext.create(),
+      language(),
+      enhancers.bablrProduction,
+    );
+  };
 
   return (
     <>
@@ -46,10 +56,69 @@ export default function App() {
             "align-items": "center",
           }}
         >
-          <form
+          <div
             id="input-form"
             style={{ display: "flex", "flex-flow": "column" }}
-            onSubmit={(e) => {
+          >
+            <label for="#experiment-input" style={{ "text-align": "center" }}>
+              Input
+            </label>
+            <div
+              id="matcher-tag-input"
+              style={{ display: "inline-flex", gap: "1rem", padding: "10px" }}
+            >
+              <label for="#matcher-tag">Matcher: </label>
+              <select
+                id="matcher-tag"
+                onInput={(e) => {
+                  setMatcherTag(e.currentTarget.value);
+                }}
+              >
+                <For
+                  each={[
+                    ...new Set(
+                      [...productions()]
+                        .filter(
+                          ({ 0: key }) => key !== Symbol.for("@bablr/fragment"),
+                        )
+                        .map(({ 0: key }) => {
+                          let string = key;
+                          if (typeof string === "symbol") {
+                            string = `[${printType(string)}]`;
+                          }
+                          return string;
+                        }),
+                    ),
+                  ].sort()}
+                >
+                  {(key) => {
+                    return (
+                      <option selected={key === matcherTag()} value={key}>
+                        {key}
+                      </option>
+                    );
+                  }}
+                </For>
+              </select>
+            </div>
+            <textarea
+              id="experiment-input"
+              value={input()}
+              onInput={(e) => setInput(e.currentTarget.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  let form = document.getElementById("input-form");
+                  form.requestSubmit();
+                }
+              }}
+            >
+              {input()}
+            </textarea>
+          </div>
+          <button
+            id="form-eval"
+            onClick={(e) => {
               e.preventDefault();
               console.log("submitting");
               setTags(
@@ -63,40 +132,6 @@ export default function App() {
               );
             }}
           >
-            <label for="#experiment-input" style={{ "text-align": "center" }}>
-              Input
-            </label>
-            <div
-              id="matcher-tag-input"
-              style={{ display: "inline-flex", gap: "1rem", padding: "10px" }}
-            >
-              <label for="#matcher-tag">Matcher: </label>
-              <input
-                id="matcher-tag"
-                ref={(el) => setMatcherTag(el.value)}
-                value={matcherTag()}
-                onInput={(e) => {
-                  setMatcherTag(e.currentTarget.value);
-                }}
-              >
-                doctypetag
-              </input>
-            </div>
-            <textarea
-              id="experiment-input"
-              value={input()}
-              ref={(el) => setInput(el.value)}
-              onInput={(e) => setInput(e.currentTarget.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  let form = document.getElementById("input-form");
-                  form.requestSubmit();
-                }
-              }}
-            ></textarea>
-          </form>
-          <button id="form-eval" type="submit" form="input-form">
             eval
           </button>
         </div>
@@ -120,11 +155,9 @@ export default function App() {
           </label>
           <textarea
             id="experiment-grammar"
-            value={languageInput()}
-            ref={(el) => setLanguageInput(el.value)}
             onInput={(e) => setLanguageInput(e.currentTarget.value)}
           >
-            {defaultLanguageInput}
+            {languageInput()}
           </textarea>
         </div>
       </div>
