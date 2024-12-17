@@ -9,41 +9,46 @@ LABEL fly_launch_runtime="Astro"
 # Astro app lives here
 WORKDIR /app
 
-# Set production environment
-ENV NODE_ENV="production"
+FROM base AS deps
 
+RUN corepack enable
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile --prod
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
+FROM base AS build
 
-# Install packages needed to build node modules
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
+RUN corepack enable
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile
+COPY . .
+RUN pnpm build
 
-# Install node modules
-COPY --link package-lock.json package.json ./
-RUN npm ci --include=dev
-
-# Copy application code
-COPY --link . .
-
-# Build application
-RUN npm run build
-
-# Remove development dependencies
-RUN npm prune --omit=dev
-
-
-# Final stage for app image
 FROM base
 
-# Copy built application
-COPY --from=build /app/node_modules /app/node_modules
+WORKDIR /app
+COPY --from=deps /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
-
+ENV NODE_ENV production
 ENV PORT=4321
 ENV HOST=0.0.0.0
-
-# Start the server by default, this can be overwritten at runtime
 EXPOSE 4321
-CMD [ "node", "./dist/server/entry.mjs" ]
+CMD ["node", "./dist/index.js"]
+
+# # Build application
+# RUN npm run build
+
+# # Remove development dependencies
+# RUN npm prune --omit=dev
+
+
+
+
+
+
+# # Start the server by default, this can be overwritten at runtime
+
+# CMD [ "node", "./dist/server/entry.mjs" ]
