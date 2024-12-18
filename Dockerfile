@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Adjust NODE_VERSION as desired
-ARG NODE_VERSION=22.7.0
+ARG NODE_VERSION=20.12.0
 FROM node:${NODE_VERSION}-slim as base
 
 LABEL fly_launch_runtime="Astro"
@@ -9,46 +9,45 @@ LABEL fly_launch_runtime="Astro"
 # Astro app lives here
 WORKDIR /app
 
-FROM base AS deps
+# Set production environment
+ENV NODE_ENV="production"
 
-RUN corepack enable
-WORKDIR /app
+# Install pnpm
+ARG PNPM_VERSION=9.11.0
+RUN npm install -g pnpm@$PNPM_VERSION
+
+
+# Throw-away build stage to reduce size of final image
+FROM base as build
+
+# Install packages needed to build node modules
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git node-gyp pkg-config python-is-python3
+
+# Install node modules
 COPY package.json pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile --prod
+RUN pnpm install --frozen-lockfile --prod=false
 
-FROM base AS build
-
-RUN corepack enable
-WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile
+# Copy application code
 COPY . .
-RUN pnpm build
 
+# Build application
+RUN pnpm run build
+
+# Remove development dependencies
+RUN pnpm prune --prod
+
+
+# Final stage for app image
 FROM base
 
-WORKDIR /app
-COPY --from=deps /app/node_modules /app/node_modules
+# Copy built application
+COPY --from=build /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
-ENV NODE_ENV production
+
 ENV PORT=4321
 ENV HOST=0.0.0.0
+
+# Start the server by default, this can be overwritten at runtime
 EXPOSE 4321
-CMD ["node", "./dist/index.js"]
-
-# # Build application
-# RUN npm run build
-
-# # Remove development dependencies
-# RUN npm prune --omit=dev
-
-
-
-
-
-
-# # Start the server by default, this can be overwritten at runtime
-
-# CMD [ "node", "./dist/server/entry.mjs" ]
+CMD [ "node", "./dist/server/entry.mjs" ]
