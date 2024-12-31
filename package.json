@@ -22,7 +22,8 @@
     "astro": "^5.0.9",
     "bablr": "^0.6.1",
     "sharp": "^0.33.5",
-    "solid-js": "^1.9.3"
+    "solid-js": "^1.9.3",
+    "solid-monaco": "^0.3.0"
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "^7.25",
