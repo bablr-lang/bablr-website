@@ -16,7 +16,7 @@
     "@bablr/agast-helpers": "^0.5.2",
     "@bablr/agast-vm-helpers": "^0.5.1",
     "@bablr/boot": "^0.6.3",
-    "@bablr/helpers": "^0.20.5",
+    "@bablr/helpers": "0.20.6",
     "@bablr/io-vm-web": "^0.2.0",
     "@bablr/language-en-cstml": "^0.7.0",
     "astro": "^5.0.9",

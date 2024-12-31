@@ -27,8 +27,8 @@ importers:
         specifier: ^0.6.3
         version: 0.6.3
       '@bablr/helpers':
-        specifier: ^0.20.5
-        version: 0.20.5
+        specifier: 0.20.6
+        version: 0.20.6
       '@bablr/io-vm-web':
         specifier: ^0.2.0
         version: 0.2.0
@@ -263,8 +263,8 @@ packages:
     version: 0.0.0
     engines: {node: '>=12.0.0'}
 
-  '@bablr/helpers@0.20.5':
-    resolution: {integrity: sha512-FjGtZnjyK7eaCze1LmFzXhgZ7os/qjDJ3uaVL5fduzG3AE314J/nh1f3DfrZqE4E0BYDK0w8hT47k8l1irlCTQ==}
+  '@bablr/helpers@0.20.6':
+    resolution: {integrity: sha512-NywT+cQvrRqWKcjvumk3SfLflIyoATJODqidxqGDzDuDe+2aMwR7zep/3X4tJAM6tESyluh6M3UOHjbYvln7FQ==}
 
   '@bablr/io-vm-web@0.2.0':
     resolution: {integrity: sha512-P718OUCYbZpBxc/f7U1WtTFuxbetUZjBpxO5amlWrNFxIdb7mJ5ZwUC3YhxkUi4ZGLmMm/ul+ga4iYNn+bIlDQ==}
@@ -3413,7 +3413,7 @@ snapshots:
       '@bablr/agast-helpers': 0.5.3
       '@bablr/agast-vm-helpers': 0.5.2
       '@bablr/coroutine': 0.1.0
-      '@bablr/helpers': 0.20.5
+      '@bablr/helpers': 0.20.6
       '@bablr/weak-stack': 0.1.0
       '@iter-tools/imm-stack': 1.1.0
       iter-tools-es: 7.5.3
@@ -3423,7 +3423,7 @@ snapshots:
       '@bablr/agast-helpers': 0.5.3
       '@bablr/agast-vm-helpers': 0.5.2
       '@bablr/coroutine': 0.1.0
-      '@bablr/helpers': 0.20.5
+      '@bablr/helpers': 0.20.6
       '@bablr/regex-vm': 0.9.0
       '@bablr/weak-stack': 0.1.0
       '@iter-tools/imm-stack': 1.1.0
@@ -3471,7 +3471,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  '@bablr/helpers@0.20.5':
+  '@bablr/helpers@0.20.6':
     dependencies:
       '@bablr/agast-helpers': 0.5.3
       '@bablr/agast-vm-helpers': 0.5.2
@@ -3493,14 +3493,14 @@ snapshots:
       '@babel/runtime': 7.26.0
       '@bablr/agast-helpers': 0.5.3
       '@bablr/agast-vm-helpers': 0.5.2
-      '@bablr/helpers': 0.20.5
+      '@bablr/helpers': 0.20.6
 
   '@bablr/language-en-cstml@0.7.0':
     dependencies:
       '@babel/runtime': 7.26.0
       '@bablr/agast-helpers': 0.5.3
       '@bablr/agast-vm-helpers': 0.5.2
-      '@bablr/helpers': 0.20.5
+      '@bablr/helpers': 0.20.6
       '@bablr/language-en-blank-space': 0.5.0
 
   '@bablr/language_enhancer-debug-log@0.7.1':
@@ -4274,7 +4274,7 @@ snapshots:
       '@bablr/agast-vm-helpers': 0.5.2
       '@bablr/bablr-vm': 0.18.1
       '@bablr/bablr-vm-strategy-parse': 0.6.3
-      '@bablr/helpers': 0.20.5
+      '@bablr/helpers': 0.20.6
       iter-tools-es: 7.5.3
 
   bail@2.0.2: {}
