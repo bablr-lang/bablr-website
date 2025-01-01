@@ -19,11 +19,16 @@
     "@bablr/helpers": "0.20.6",
     "@bablr/io-vm-web": "^0.2.0",
     "@bablr/language-en-cstml": "^0.7.0",
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/state": "^6.5.0",
+    "@codemirror/view": "^6.36.1",
     "astro": "^5.0.9",
     "bablr": "^0.6.1",
     "sharp": "^0.33.5",
+    "solid-codemirror": "^2.3.1",
     "solid-js": "^1.9.3",
-    "solid-monaco": "^0.3.0"
+    "solid-monaco": "^0.3.0",
+    "thememirror": "^2.0.1"
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "^7.25",

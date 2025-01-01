@@ -23,4 +23,10 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+  vite: {
+    optimizeDeps: {
+      // Add both @codemirror/state and @codemirror/view to included deps to optimize
+      include: ["@codemirror/state", "@codemirror/view"],
+    },
+  },
 });
