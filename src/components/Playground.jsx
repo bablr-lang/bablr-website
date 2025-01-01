@@ -6,6 +6,13 @@ import { createSignal, For } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
 import { printType } from "@bablr/agast-helpers/print";
 import { defaultLanguageInput } from "./language.js";
+import {
+  createCodeMirror,
+  createEditorControlledValue,
+} from "solid-codemirror";
+import { lineNumbers } from "@codemirror/view";
+import { javascript } from "@codemirror/lang-javascript";
+import { solarizedLight } from "thememirror";
 import * as helpers from "@bablr/helpers";
 
 export default function App() {
@@ -28,10 +35,18 @@ export default function App() {
   };
 
   const [languageInput, setLanguageInput] = createSignal(defaultLanguageInput);
+  const { ref, editorView, createExtension } = createCodeMirror({
+    onValueChange: setLanguageInput,
+  });
 
+  createEditorControlledValue(editorView, languageInput);
   const productions = () => {
     return generateProductions(language().grammar);
   };
+
+  createExtension(solarizedLight);
+  createExtension(lineNumbers);
+  createExtension(javascript);
 
   let enhancers = {};
 
@@ -105,13 +120,6 @@ export default function App() {
               id="experiment-input"
               value={input()}
               onInput={(e) => setInput(e.currentTarget.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  let form = document.getElementById("input-form");
-                  form.requestSubmit();
-                }
-              }}
             >
               {input()}
             </textarea>
@@ -153,12 +161,7 @@ export default function App() {
           <label for="#experiment-grammar" style={{ "text-align": "center" }}>
             Grammar
           </label>
-          <textarea
-            id="experiment-grammar"
-            onInput={(e) => setLanguageInput(e.currentTarget.value)}
-          >
-            {languageInput()}
-          </textarea>
+          <div id="experiment-grammar" ref={ref}></div>
         </div>
       </div>
     </>
