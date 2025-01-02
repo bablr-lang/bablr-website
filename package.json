@@ -19,6 +19,7 @@
     "@bablr/helpers": "0.20.6",
     "@bablr/io-vm-web": "^0.2.0",
     "@bablr/language-en-cstml": "^0.7.0",
+    "@codemirror/commands": "^6.7.1",
     "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/state": "^6.5.0",
     "@codemirror/view": "^6.36.1",
