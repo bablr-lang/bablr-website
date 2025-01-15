@@ -14,6 +14,7 @@ import { lineNumbers, keymap } from "@codemirror/view";
 import { javascript } from "@codemirror/lang-javascript";
 import { defaultKeymap } from "@codemirror/commands";
 import { solarizedLight } from "thememirror";
+import { makePersisted } from "@solid-primitives/storage";
 import * as helpers from "@bablr/helpers";
 
 export default function App() {
@@ -35,6 +36,9 @@ export default function App() {
     )()(helpers);
   };
 
+  const [localLanguageInput, setLocalLanguageInput] =
+    makePersisted(createSignal());
+  const [storageType, setStorageType] = createSignal("default");
   const [languageInput, setLanguageInput] = createSignal(defaultLanguageInput);
   const { ref, editorView, createExtension } = createCodeMirror({
     onValueChange: setLanguageInput,
@@ -178,6 +182,16 @@ export default function App() {
             <label for="#experiment-grammar" style={{ "text-align": "center" }}>
               Grammar
             </label>
+            <select
+              id="grammar-flag"
+              onInput={(e) => {
+                setStorageType(e.currentTarget.value);
+              }}
+              style={{ width: "200px" }}
+            >
+              <option value="default">Default CSTML</option>
+              <option value="local">Local Storage</option>
+            </select>
             <div id="experiment-grammar" ref={ref}></div>
           </div>
         </div>
