@@ -9,6 +9,7 @@ import { defaultLanguageInput } from "./language.js";
 import {
   createCodeMirror,
   createEditorControlledValue,
+  createEditorReadonly,
 } from "solid-codemirror";
 import { lineNumbers, keymap } from "@codemirror/view";
 import { javascript } from "@codemirror/lang-javascript";
@@ -31,28 +32,51 @@ export default function App() {
   };
 
   const language = () => {
-    return new Function(
-      `return (helpers) => { ${languageInput()}; return {canonicalURL, dependencies, grammar, getCooked} }`,
-    )()(helpers);
+    try {
+      return new Function(
+        `return (helpers) => { ${getLanguageTextForStorageType()}; return {canonicalURL, dependencies, grammar, getCooked} }`,
+      )()(helpers);
+    } catch (e) {}
   };
 
-  const [localLanguageInput, setLocalLanguageInput] =
-    makePersisted(createSignal());
+  const getLanguageTextForStorageType = () => {
+    if (storageType() === "local") {
+      return localLanguageInput();
+    } else if (storageType() === "default") {
+      return defaultLanguageInput;
+    } else {
+      throw new Error();
+    }
+  };
+
+  const [localLanguageInput, setLocalLanguageInput] = makePersisted(
+    createSignal(""),
+    { name: "languageInput" },
+  );
   const [storageType, setStorageType] = createSignal("default");
-  const [languageInput, setLanguageInput] = createSignal(defaultLanguageInput);
   const { ref, editorView, createExtension } = createCodeMirror({
-    onValueChange: setLanguageInput,
+    onValueChange: (value) => {
+      if (storageType() === "local") {
+        setLocalLanguageInput(value);
+      }
+    },
   });
 
-  createEditorControlledValue(editorView, languageInput);
-  const productions = () => {
-    return generateProductions(language().grammar);
-  };
+  createEditorReadonly(editorView, () => storageType() !== "local");
+  createEditorControlledValue(editorView, getLanguageTextForStorageType);
 
   createExtension(solarizedLight);
   createExtension(lineNumbers);
   createExtension(javascript);
   createExtension(keymap.of(defaultKeymap));
+
+  const productions = () => {
+    if (!language()) {
+      return [];
+    } else {
+      return generateProductions(language().grammar);
+    }
+  };
 
   let enhancers = {};
 
@@ -189,7 +213,7 @@ export default function App() {
               }}
               style={{ width: "200px" }}
             >
-              <option value="default">Default CSTML</option>
+              <option value="default">CSTML</option>
               <option value="local">Local Storage</option>
             </select>
             <div id="experiment-grammar" ref={ref}></div>

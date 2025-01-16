@@ -14,9 +14,8 @@
 
 #experiment-grammar {
   margin: 20px 50px 50px 50px;
-  max-width: 50%;
-  display: flex;
   max-height: 90vh;
+  overflow: auto;
 }
 
 #form-eval {
