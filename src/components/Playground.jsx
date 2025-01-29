@@ -1,6 +1,6 @@
-import { streamParse, Context, AgastContext } from "bablr/enhanceable";
+import { spam } from "@bablr/boot";
+import { streamParse, Context } from "bablr/enhanceable";
 import { debugEnhancers, generateProductions } from "@bablr/helpers/enhancers";
-import { buildFullyQualifiedSpamMatcher } from "@bablr/helpers/builders";
 import { printPrettyCSTML } from "@bablr/helpers/stream";
 import { createSignal, For } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
@@ -24,11 +24,7 @@ export default function App() {
   const [matcherTag, setMatcherTag] = createSignal("DoctypeTag");
 
   const matcher = () => {
-    return buildFullyQualifiedSpamMatcher(
-      {},
-      language().canonicalURL,
-      matcherTag(),
-    );
+    return spam`<${language().canonicalURL}:${matcherTag()} />`;
   };
 
   const language = () => {
@@ -83,11 +79,7 @@ export default function App() {
   enhancers = { ...debugEnhancers, enhancers };
 
   const ctx = () => {
-    return Context.from(
-      AgastContext.create(),
-      language(),
-      enhancers.bablrProduction,
-    );
+    return Context.from(language(), enhancers.bablrProduction);
   };
 
   return (
