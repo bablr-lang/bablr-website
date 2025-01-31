@@ -1,6 +1,8 @@
-import { spam } from "@bablr/boot";
+import { spam, i } from "@bablr/boot";
 import { streamParse, Context } from "bablr/enhanceable";
-import { debugEnhancers, generateProductions } from "@bablr/helpers/enhancers";
+import { debugEnhancers } from "@bablr/helpers/enhancers";
+import { buildString } from "@bablr/helpers/builders";
+import { generateProductions } from "@bablr/helpers/grammar";
 import { printPrettyCSTML } from "@bablr/helpers/stream";
 import { createSignal, For } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
@@ -22,10 +24,6 @@ export default function App() {
   const [input, setInput] = createSignal("<!0:cstml>");
   const [tags, setTags] = createSignal(null);
   const [matcherTag, setMatcherTag] = createSignal("DoctypeTag");
-
-  const matcher = () => {
-    return spam`<${language().canonicalURL}:${matcherTag()} />`;
-  };
 
   const language = () => {
     try {
@@ -65,6 +63,10 @@ export default function App() {
   createExtension(lineNumbers);
   createExtension(javascript);
   createExtension(keymap.of(defaultKeymap));
+
+  const matcher = () => {
+    return spam`<$${buildString(language().canonicalURL)}:${buildString(matcherTag())} />`;
+  };
 
   const productions = () => {
     if (!language()) {
@@ -162,13 +164,16 @@ export default function App() {
               onClick={(e) => {
                 e.preventDefault();
                 console.log("submitting");
+                debugger;
                 setTags(
-                  streamParse(
-                    ctx(),
-                    matcher(),
-                    input(),
-                    {},
-                    { enhancers, emitEffects: true },
+                  evaluateIO(() =>
+                    streamParse(
+                      ctx(),
+                      matcher(),
+                      input(),
+                      {},
+                      { enhancers, emitEffects: true },
+                    ),
                   ),
                 );
               }}
@@ -184,12 +189,7 @@ export default function App() {
               Output
             </label>
             <textarea id="experiment-output">
-              {tags() != null
-                ? printPrettyCSTML(
-                    evaluateIO(() => tags()),
-                    { ctx: ctx() },
-                  )
-                : null}
+              {tags() != null ? printPrettyCSTML(tags(), { ctx: ctx() }) : null}
             </textarea>
           </div>
         </div>
