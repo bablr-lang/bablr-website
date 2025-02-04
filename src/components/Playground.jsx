@@ -1,7 +1,7 @@
 import { spam, i } from "@bablr/boot";
 import { streamParse, Context } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
-import { buildString } from "@bablr/helpers/builders";
+import { buildString, buildIdentifier } from "@bablr/helpers/builders";
 import { generateProductions } from "@bablr/helpers/grammar";
 import { printPrettyCSTML } from "@bablr/helpers/stream";
 import { createSignal, For } from "solid-js";
@@ -65,7 +65,7 @@ export default function App() {
   createExtension(keymap.of(defaultKeymap));
 
   const matcher = () => {
-    return spam`<$${buildString(language().canonicalURL)}:${buildString(matcherTag())} />`;
+    return spam`<$${buildString(language().canonicalURL)}:${buildIdentifier(matcherTag())} />`;
   };
 
   const productions = () => {
@@ -164,7 +164,6 @@ export default function App() {
               onClick={(e) => {
                 e.preventDefault();
                 console.log("submitting");
-                debugger;
                 setTags(
                   evaluateIO(() =>
                     streamParse(
