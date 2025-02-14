@@ -8,6 +8,7 @@ import { createSignal, For } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
 import { printType } from "@bablr/agast-helpers/print";
 import { defaultLanguageInput } from "./language.js";
+import "solid-devtools";
 import {
   createCodeMirror,
   createEditorControlledValue,
@@ -18,12 +19,48 @@ import { javascript } from "@codemirror/lang-javascript";
 import { defaultKeymap } from "@codemirror/commands";
 import { solarizedLight } from "thememirror";
 import { makePersisted } from "@solid-primitives/storage";
+import {
+  getStreamIterator,
+  StreamIterable,
+  generatePrettyCSTML,
+} from "@bablr/agast-helpers/stream";
+import { Coroutine } from "@bablr/coroutine";
 import * as helpers from "@bablr/helpers";
+
+function* __map(tags, fn) {
+  const co = new Coroutine(getStreamIterator(tags));
+
+  for (;;) {
+    co.advance();
+
+    if (co.current instanceof Promise) {
+      co.current = yield co.current;
+    }
+    if (co.done) break;
+
+    const tag = co.value;
+
+    yield fn(tag);
+  }
+}
+
+export const map = (tags, fn) => new StreamIterable(__map(tags, fn));
 
 export default function App() {
   const [input, setInput] = createSignal("<!0:cstml>");
-  const [tags, setTags] = createSignal(null);
+  const [tags, setTags] = createSignal([]);
   const [matcherTag, setMatcherTag] = createSignal("DoctypeTag");
+
+  const makeDeferred = () => {
+    const deferred = {};
+    deferred.promise = new Promise((resolve, reject) => {
+      deferred.resolve = resolve;
+      deferred.reject = reject;
+    });
+    return deferred;
+  };
+
+  let deferred;
 
   const language = () => {
     try {
@@ -109,14 +146,14 @@ export default function App() {
                 height: "100%",
               }}
             >
-              <label for="#experiment-input" style={{ "text-align": "center" }}>
+              <label for="experiment-input" style={{ "text-align": "center" }}>
                 Input
               </label>
               <div
                 id="matcher-tag-input"
                 style={{ display: "inline-flex", gap: "1rem", padding: "10px" }}
               >
-                <label for="#matcher-tag">Matcher: </label>
+                <label for="matcher-tag">Matcher: </label>
                 <select
                   id="matcher-tag"
                   onInput={(e) => {
@@ -161,42 +198,73 @@ export default function App() {
             </div>
             <button
               id="form-eval"
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault();
                 console.log("submitting");
-                setTags(
+                const tags = map(
                   evaluateIO(() =>
-                    streamParse(
-                      ctx(),
-                      matcher(),
-                      input(),
-                      {},
-                      { enhancers, emitEffects: true },
+                    getStreamIterator(
+                      streamParse(
+                        ctx(),
+                        matcher(),
+                        input(),
+                        {},
+                        { enhancers, emitEffects: true },
+                      ),
                     ),
                   ),
+                  async (tag) => {
+                    debugger;
+                    const d = (deferred = makeDeferred());
+                    return d.promise.then(() => tag);
+                  },
                 );
+                setTags(tags);
+
+                for await (const text of generatePrettyCSTML(tags)) {
+                  debugger;
+                  setTags([...tags(), text]);
+                }
               }}
             >
               eval
+            </button>
+            <button
+              id="form-step"
+              onClick={() => {
+                try {
+                  deferred.resolve();
+                } catch (e) {
+                  console.log(e);
+                }
+              }}
+            >
+              step
             </button>
           </div>
           <div
             id="output"
             style={{ display: "flex", "flex-flow": "column", height: "50%" }}
           >
-            <label for="#experiment-output" style={{ "text-align": "center" }}>
+            <label for="experiment-output" style={{ "text-align": "center" }}>
               Output
             </label>
             <textarea id="experiment-output">
-              {tags() != null ? printPrettyCSTML(tags(), { ctx: ctx() }) : null}
+              <For each={tags()}>
+                {(line) => {
+                  <>
+                    {line}
+                    <br />
+                  </>;
+                }}
+              </For>
+              {/* {tags() != null ? printPrettyCSTML(tags(), { ctx: ctx() }) : null} */}
             </textarea>
           </div>
         </div>
         <div id="playground-right" style={{ width: "50%" }}>
           <div id="grammar" style={{ display: "flex", "flex-flow": "column" }}>
-            <label for="#experiment-grammar" style={{ "text-align": "center" }}>
-              Grammar
-            </label>
+            <h4 style={{ "text-align": "center" }}>Grammar</h4>
             <select
               id="grammar-flag"
               onInput={(e) => {

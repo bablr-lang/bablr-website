@@ -16,6 +16,7 @@
     "@bablr/agast-helpers": "^0.5.2",
     "@bablr/agast-vm-helpers": "^0.5.1",
     "@bablr/boot": "^0.6.3",
+    "@bablr/coroutine": "0.1.0",
     "@bablr/helpers": "0.20.6",
     "@bablr/io-vm-web": "^0.2.0",
     "@bablr/language-en-cstml": "^0.7.0",
@@ -39,6 +40,7 @@
     "eslint-import-resolver-enhanced-resolve": "^1.0.5",
     "eslint-plugin-import": "^2.27.5",
     "prettier": "^3.3.3",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "solid-devtools": "^0.33.0"
   }
 }

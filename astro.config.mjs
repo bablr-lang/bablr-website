@@ -18,7 +18,7 @@ export default defineConfig({
       prerender: false,
       favicon: "/favicon.ico",
     }),
-    solidJs(),
+    solidJs({ devtools: true }),
   ],
   server: { port: 8080 },
   site: "https://bablr.org",
