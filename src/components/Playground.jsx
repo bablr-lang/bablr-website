@@ -6,7 +6,7 @@ import { generateProductions } from "@bablr/helpers/grammar";
 import { printPrettyCSTML } from "@bablr/helpers/stream";
 import { createSignal, For } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
-import { printType } from "@bablr/agast-helpers/print";
+import { printType, printTag } from "@bablr/agast-helpers/print";
 import { defaultLanguageInput } from "./language.js";
 import "solid-devtools";
 import {
@@ -40,16 +40,25 @@ function* __map(tags, fn) {
 
     const tag = co.value;
 
-    yield fn(tag);
+    let result = fn(tag);
+    if (result instanceof Promise) {
+      result = yield result;
+    }
+    yield result;
   }
 }
 
 export const map = (tags, fn) => new StreamIterable(__map(tags, fn));
 
+const wait = (timeout) =>
+  new Promise((resolve) => setTimeout(resolve, timeout));
+
 export default function App() {
-  const [input, setInput] = createSignal("<!0:cstml>");
+  const [input, setInput] = createSignal("<!0:cstml><></>");
   const [tags, setTags] = createSignal([]);
-  const [matcherTag, setMatcherTag] = createSignal("DoctypeTag");
+  const [output, setOutput] = createSignal([]);
+  const [matcherTag, setMatcherTag] = createSignal("Document");
+  const [playing, setPlaying] = createSignal(false);
 
   const makeDeferred = () => {
     const deferred = {};
@@ -60,7 +69,7 @@ export default function App() {
     return deferred;
   };
 
-  let deferred;
+  let deferreds = [];
 
   const language = () => {
     try {
@@ -213,17 +222,19 @@ export default function App() {
                       ),
                     ),
                   ),
-                  async (tag) => {
-                    debugger;
-                    const d = (deferred = makeDeferred());
-                    return d.promise.then(() => tag);
+                  (tag) => {
+                    const d = makeDeferred();
+                    deferreds.push(d);
+                    if (playing()) {
+                      return wait(15).then(() => tag);
+                    } else {
+                      return d.promise.then(() => tag);
+                    }
                   },
                 );
-                setTags(tags);
 
-                for await (const text of generatePrettyCSTML(tags)) {
-                  debugger;
-                  setTags([...tags(), text]);
+                for await (const tag of tags) {
+                  setOutput([...output(), tag]);
                 }
               }}
             >
@@ -233,13 +244,32 @@ export default function App() {
               id="form-step"
               onClick={() => {
                 try {
-                  deferred.resolve();
+                  if (deferreds.length) {
+                    let deferred = deferreds.shift();
+                    deferred.resolve();
+                  }
                 } catch (e) {
                   console.log(e);
                 }
               }}
             >
-              step
+              Step
+            </button>
+            <button
+              id="form-play"
+              onClick={() => {
+                setPlaying(true);
+                try {
+                  if (deferreds.length) {
+                    let deferred = deferreds.shift();
+                    deferred.resolve();
+                  }
+                } catch (e) {
+                  console.log(e);
+                }
+              }}
+            >
+              Play
             </button>
           </div>
           <div
@@ -250,12 +280,9 @@ export default function App() {
               Output
             </label>
             <textarea id="experiment-output">
-              <For each={tags()}>
+              <For each={output()}>
                 {(line) => {
-                  <>
-                    {line}
-                    <br />
-                  </>;
+                  return <>{printTag(line) + "\n"}</>;
                 }}
               </For>
               {/* {tags() != null ? printPrettyCSTML(tags(), { ctx: ctx() }) : null} */}
