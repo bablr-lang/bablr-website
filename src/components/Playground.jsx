@@ -55,7 +55,6 @@ const wait = (timeout) =>
 
 export default function App() {
   const [input, setInput] = createSignal("<!0:cstml><></>");
-  const [tags, setTags] = createSignal([]);
   const [output, setOutput] = createSignal([]);
   const [matcherTag, setMatcherTag] = createSignal("Document");
   const [playing, setPlaying] = createSignal(false);
@@ -128,6 +127,37 @@ export default function App() {
 
   const ctx = () => {
     return Context.from(language(), enhancers.bablrProduction);
+  };
+
+  let tags = () =>
+    map(
+      evaluateIO(() =>
+        getStreamIterator(
+          streamParse(
+            ctx(),
+            matcher(),
+            input(),
+            {},
+            { enhancers, emitEffects: true },
+          ),
+        ),
+      ),
+      (tag) => {
+        const d = makeDeferred();
+        deferreds.push(d);
+        if (playing()) {
+          return wait(15).then(() => tag);
+        } else {
+          debugger;
+          return d.promise.then(() => tag);
+        }
+      },
+    );
+
+  const consume = async () => {
+    for await (const tag of tags()) {
+      setOutput([...output(), tag]);
+    }
   };
 
   return (
@@ -206,58 +236,17 @@ export default function App() {
               </textarea>
             </div>
             <button
-              id="form-eval"
-              onClick={async (e) => {
-                e.preventDefault();
-                console.log("submitting");
-                const tags = map(
-                  evaluateIO(() =>
-                    getStreamIterator(
-                      streamParse(
-                        ctx(),
-                        matcher(),
-                        input(),
-                        {},
-                        { enhancers, emitEffects: true },
-                      ),
-                    ),
-                  ),
-                  (tag) => {
-                    const d = makeDeferred();
-                    deferreds.push(d);
-                    if (playing()) {
-                      return wait(15).then(() => tag);
-                    } else {
-                      return d.promise.then(() => tag);
-                    }
-                  },
-                );
-
-                for await (const tag of tags) {
-                  setOutput([...output(), tag]);
-                }
-              }}
-            >
-              eval
-            </button>
-            <button
-              id="form-step"
+              id="form-pause"
               onClick={() => {
-                try {
-                  if (deferreds.length) {
-                    let deferred = deferreds.shift();
-                    deferred.resolve();
-                  }
-                } catch (e) {
-                  console.log(e);
-                }
+                setPlaying(false);
               }}
             >
-              Step
+              Pause
             </button>
             <button
               id="form-play"
-              onClick={() => {
+              onClick={async () => {
+                consume();
                 setPlaying(true);
                 try {
                   if (deferreds.length) {
@@ -270,6 +259,15 @@ export default function App() {
               }}
             >
               Play
+            </button>
+            <button
+              id="form-reset"
+              onClick={() => {
+                setPlaying(false);
+                setOutput([]);
+              }}
+            >
+              Reset
             </button>
           </div>
           <div
@@ -285,7 +283,6 @@ export default function App() {
                   return <>{printTag(line) + "\n"}</>;
                 }}
               </For>
-              {/* {tags() != null ? printPrettyCSTML(tags(), { ctx: ctx() }) : null} */}
             </textarea>
           </div>
         </div>
