@@ -10,30 +10,33 @@ importers:
     dependencies:
       '@astrojs/node':
         specifier: ^9.0.0
-        version: 9.0.1(astro@5.1.7)
+        version: 9.0.1(astro@5.1.7(rollup@4.30.1)(typescript@5.7.3))
       '@astrojs/solid-js':
         specifier: ^5.0.0
-        version: 5.0.3(solid-js@1.9.4)
+        version: 5.0.3(solid-devtools@0.33.0(solid-js@1.9.4)(vite@6.0.7))(solid-js@1.9.4)
       '@astrojs/starlight':
         specifier: ^0.30.2
-        version: 0.30.6(astro@5.1.7)
+        version: 0.30.6(astro@5.1.7(rollup@4.30.1)(typescript@5.7.3))
       '@bablr/agast-helpers':
-        specifier: ^0.5.2
+        specifier: 0.5.3
         version: 0.5.3
       '@bablr/agast-vm-helpers':
-        specifier: ^0.5.1
+        specifier: 0.5.2
         version: 0.5.2
       '@bablr/boot':
-        specifier: ^0.6.3
+        specifier: 0.6.3
         version: 0.6.3
+      '@bablr/coroutine':
+        specifier: 0.1.0
+        version: 0.1.0
       '@bablr/helpers':
-        specifier: 0.20.6
-        version: 0.20.6
+        specifier: 0.21.0
+        version: 0.21.0
       '@bablr/io-vm-web':
-        specifier: ^0.2.0
+        specifier: 0.2.0
         version: 0.2.0
       '@bablr/language-en-cstml':
-        specifier: ^0.7.0
+        specifier: 0.7.0
         version: 0.7.0
       '@codemirror/commands':
         specifier: ^6.7.1
@@ -52,7 +55,7 @@ importers:
         version: 4.2.1(solid-js@1.9.4)
       astro:
         specifier: ^5.0.9
-        version: 5.1.7(typescript@5.7.3)
+        version: 5.1.7(rollup@4.30.1)(typescript@5.7.3)
       bablr:
         specifier: ^0.6.1
         version: 0.6.1
@@ -65,9 +68,6 @@ importers:
       solid-js:
         specifier: ^1.9.3
         version: 1.9.4
-      solid-monaco:
-        specifier: ^0.3.0
-        version: 0.3.0(monaco-editor@0.48.0)(solid-js@1.9.4)
       thememirror:
         specifier: ^2.0.1
         version: 2.0.1(@codemirror/language@6.10.8)(@codemirror/state@6.5.1)(@codemirror/view@6.36.2)
@@ -96,6 +96,9 @@ importers:
       prettier-plugin-astro:
         specifier: ^0.14.1
         version: 0.14.1
+      solid-devtools:
+        specifier: ^0.33.0
+        version: 0.33.0(solid-js@1.9.4)(vite@6.0.7)
 
 packages:
 
@@ -227,6 +230,12 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
+  '@babel/plugin-syntax-typescript@7.25.9':
+    resolution: {integrity: sha512-hjMgRy5hb8uJJjUcdWunWVcoi9bGpJp8p5Ol1229PoN6aytsLwNMgmdftO23wnCLMfVmTwZDWMPNq/D1SY60JQ==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+
   '@babel/runtime@7.26.0':
     resolution: {integrity: sha512-FDSOghenHTiToteC/QRlv2q3DhPZ/oOXTBoirfWNx1Cx3TMVcGWQtMMmQcSvb/JjpNeGzx8Pq/b4fKEJuWm1sw==}
     engines: {node: '>=6.9.0'}
@@ -284,12 +293,14 @@ packages:
 
   '@bablr/eslint-config-base@https://codeload.github.com/bablr-lang/eslint-config-base/tar.gz/49f5952efed27f94ee9b94340eb1563c440bf64e':
     resolution: {tarball: https://codeload.github.com/bablr-lang/eslint-config-base/tar.gz/49f5952efed27f94ee9b94340eb1563c440bf64e}
-    name: '@bablr/eslint-config-base'
     version: 0.0.0
     engines: {node: '>=12.0.0'}
 
   '@bablr/helpers@0.20.6':
     resolution: {integrity: sha512-NywT+cQvrRqWKcjvumk3SfLflIyoATJODqidxqGDzDuDe+2aMwR7zep/3X4tJAM6tESyluh6M3UOHjbYvln7FQ==}
+
+  '@bablr/helpers@0.21.0':
+    resolution: {integrity: sha512-OddBmpQDAr9uShpLiX5gObCaIAaab+/GY2qPwoxz1SwIIuNyi0eoTRCeA8aGaT8B3qFNkTuyidGW/9C4+lqIVw==}
 
   '@bablr/io-vm-web@0.2.0':
     resolution: {integrity: sha512-P718OUCYbZpBxc/f7U1WtTFuxbetUZjBpxO5amlWrNFxIdb7mJ5ZwUC3YhxkUi4ZGLmMm/ul+ga4iYNn+bIlDQ==}
@@ -753,11 +764,6 @@ packages:
   '@mdx-js/mdx@3.1.0':
     resolution: {integrity: sha512-/QxEhPAvGwbQmy1Px8F899L5Uc2KZ6JtXwlCgJmjSTBedwOZkByYcBG4GceIGPXRDsmfxhHazuS+hlOShRLeDw==}
 
-  '@monaco-editor/loader@1.4.0':
-    resolution: {integrity: sha512-00ioBig0x642hytVspPl7DbQyaSWRaolYie/UFNjoTdvoKPzo6xrXLhTk9ixgIKcLH5b5vDOjVNiGyY+uDCUlg==}
-    peerDependencies:
-      monaco-editor: '>= 0.21.0 < 1'
-
   '@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1':
     resolution: {integrity: sha512-54/JRvkLIzzDWshCWfuhadfrfZVPiElY8Fcgmg1HroEly/EDSszzhBAsarCux+D/kOslTRquNzuyGSmUSTTHGg==}
 
@@ -772,6 +778,9 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@nothing-but/utils@0.17.0':
+    resolution: {integrity: sha512-TuCHcHLOqDL0SnaAxACfuRHBNRgNJcNn9X0GiH5H3YSDBVquCr3qEIG3FOQAuMyZCbu9w8nk2CHhOsn7IvhIwQ==}
 
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
@@ -935,6 +944,76 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
+  '@solid-devtools/debugger@0.26.0':
+    resolution: {integrity: sha512-36QxZ+s/lY60E+Pb9q0eTsdqgaog4c823WIj5dC2LFdGrGXbVGBQEj6k7CgvMnEETdwndrd0Fm72fQyYPlZrVA==}
+    peerDependencies:
+      solid-js: ^1.9.0
+
+  '@solid-devtools/shared@0.19.0':
+    resolution: {integrity: sha512-OGo6l84f9X5YEAqSEM4Xl94+xKXSqmACMzKWsAqO0BStLBMVL0vIVu286AQk5XkNxn11/EB9wrdkZc9GUzKlxA==}
+    peerDependencies:
+      solid-js: ^1.9.0
+
+  '@solid-primitives/bounds@0.0.122':
+    resolution: {integrity: sha512-kUq/IprOdFr/rg2upon5lQGOoTnDAmxQS4ASKK2l+VwoKSctdPwgu/4qJxEITZikL+nB0myYZzBZWptySV0cRg==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/cursor@0.0.115':
+    resolution: {integrity: sha512-8nEmUN/sacXPChwuJOAi6Yi6VnxthW/Jk8VGvvcF38AenjUvOA6FHI6AkJILuFXjQw1PGxia1YbH/Mn77dPiOA==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/event-listener@2.4.0':
+    resolution: {integrity: sha512-TSfR1PNTfojFEYGSxSMCnUhXsaYWBo4p+cm73QmWODa9YnaQAk6PB7VjzG2bOT2D817VlvuOqTj0Qdq+MZrdGg==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/keyboard@1.3.0':
+    resolution: {integrity: sha512-0QX9O3eUaQorNNmXZn8a4efSByayIScVq+iGSwheD7m3SL/ACLM5oZlCNpTPLcemnVVfUPAHFiViEj86XpN5qw==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/media@2.3.0':
+    resolution: {integrity: sha512-7+C3wfbWnGE/WPoNsqcp/EeOP2aNNB92RCpsWhBth8E5lZo/J+rK6jMb7umVsK0zguT8HBpeXp1pFyFbcsHStA==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/platform@0.1.2':
+    resolution: {integrity: sha512-sSxcZfuUrtxcwV0vdjmGnZQcflACzMfLriVeIIWXKp8hzaS3Or3tO6EFQkTd3L8T5dTq+kTtLvPscXIpL0Wzdg==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/refs@1.1.0':
+    resolution: {integrity: sha512-QJ3bTSQOlPdHBP2m6llrT13FvVzAwZfx41lTN8lQrRwwcZoWb7kfCAjhaohPnwkAsQ6nJpLjtGfT5GOyuCA4tA==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/resize-observer@2.1.0':
+    resolution: {integrity: sha512-tO9MDAc2pNjpcRd5B8LWbiR1qzIgvGZ5BtTuO98N7CLwd+fnuyGwtlQtJpz5hcLcTnoawpQYLpiRGNgaYW+YzQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/rootless@1.5.0':
+    resolution: {integrity: sha512-YJ+EveQeDv9DLqfDKfsPAAGy2x3vBruoD23yn+nD2dT84QjoBxWT1T0qA0TMFjek6/xuN3flqnHtQ4r++4zdjg==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/scheduled@1.5.0':
+    resolution: {integrity: sha512-RVw24IRNh1FQ4DCMb3OahB70tXIwc5vH8nhR4nNPsXwUPQeuOkLsDI5BlxaPk0vyZgqw9lDpufgI3HnPwplgDw==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/static-store@0.0.8':
+    resolution: {integrity: sha512-ZecE4BqY0oBk0YG00nzaAWO5Mjcny8Fc06CdbXadH9T9lzq/9GefqcSe/5AtdXqjvY/DtJ5C6CkcjPZO0o/eqg==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/static-store@0.1.0':
+    resolution: {integrity: sha512-6Coau0Kv/dF83UQpbBzc+gnJafOQAPe2jCbB4jmTK5UocsR5cWmFBVRm3kin+nZFVaO4WkuELw0cKANWgTVh8Q==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
   '@solid-primitives/storage@4.2.1':
     resolution: {integrity: sha512-1XUJeaSlizH9Eam/+IbIpslHEnggJMNZXzfsr06AlbG6tJtQENMu0+94ZIvooxt4Cyw46wPzcnHYbSK7LzoQAA==}
     peerDependencies:
@@ -947,8 +1026,18 @@ packages:
       solid-start:
         optional: true
 
+  '@solid-primitives/styles@0.0.114':
+    resolution: {integrity: sha512-SFXr16mgr6LvZAIj6L7i59HHg+prAmIF8VP/U3C6jSHz68Eh1G71vaWr9vlJVpy/j6bh1N8QUzu5CgtvIC92OQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
   '@solid-primitives/utils@6.2.3':
     resolution: {integrity: sha512-CqAwKb2T5Vi72+rhebSsqNZ9o67buYRdEJrIFzRXz3U59QqezuuxPsyzTSVCacwS5Pf109VRsgCJQoxKRoECZQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/utils@6.3.0':
+    resolution: {integrity: sha512-e7hTlJ1Ywh2+g/Qug+n4L1mpfxsikoIS4/sHE2EK9WatQt8UJqop/vE6bsLnXlU1xuhb/jo94Ah5Y27rd4wP7A==}
     peerDependencies:
       solid-js: ^1.6.12
 
@@ -2437,9 +2526,6 @@ packages:
   minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
-  monaco-editor@0.48.0:
-    resolution: {integrity: sha512-goSDElNqFfw7iDHMg8WDATkfcyeLTNpBHQpO8incK6p5qZt5G/1j41X0xdGzpIkGojGXM+QiRQyLjnfDVvrpwA==}
-
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -2963,15 +3049,17 @@ packages:
       '@codemirror/view': ^6.12.0
       solid-js: ^1.7.0
 
+  solid-devtools@0.33.0:
+    resolution: {integrity: sha512-xRB4Jhgns3dBuM/s0j70BpXKy77sNjISud9xXBv60qC4cnJ/TcuVHI1t+05luj1BEKJVQSokqIaVoZWcjqA9yw==}
+    peerDependencies:
+      solid-js: ^1.9.0
+      vite: ^2.2.3 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+    peerDependenciesMeta:
+      vite:
+        optional: true
+
   solid-js@1.9.4:
     resolution: {integrity: sha512-ipQl8FJ31bFUoBNScDQTG3BjN6+9Rg+Q+f10bUbnO6EOTTf5NGerJeHc7wyu5I4RMHEl/WwZwUmy/PTRgxxZ8g==}
-
-  solid-monaco@0.3.0:
-    resolution: {integrity: sha512-MsJLrCWysv5ONdOjC4kShNoBXJWuwjP6JplJLQWG7pL00XSfvqBEKUF0wLVdaKfntf50Qz8NAd7Yx7dq67bjPA==}
-    engines: {node: '>=18', pnpm: '>=8.6.0'}
-    peerDependencies:
-      monaco-editor: ^0.48.0
-      solid-js: ^1.8.0
 
   solid-refresh@0.6.3:
     resolution: {integrity: sha512-F3aPsX6hVw9ttm5LYlth8Q15x6MlI/J3Dn+o3EQyRTtTxidepSTwAYdozt01/YA+7ObcciagGEyXIopGZzQtbA==}
@@ -2994,9 +3082,6 @@ packages:
 
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
-
-  state-local@1.0.7:
-    resolution: {integrity: sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==}
 
   statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
@@ -3487,12 +3572,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.0.6(astro@5.1.7)':
+  '@astrojs/mdx@4.0.6(astro@5.1.7(rollup@4.30.1)(typescript@5.7.3))':
     dependencies:
       '@astrojs/markdown-remark': 6.0.2
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
       acorn: 8.14.0
-      astro: 5.1.7(typescript@5.7.3)
+      astro: 5.1.7(rollup@4.30.1)(typescript@5.7.3)
       es-module-lexer: 1.6.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.4
@@ -3506,9 +3591,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/node@9.0.1(astro@5.1.7)':
+  '@astrojs/node@9.0.1(astro@5.1.7(rollup@4.30.1)(typescript@5.7.3))':
     dependencies:
-      astro: 5.1.7(typescript@5.7.3)
+      astro: 5.1.7(rollup@4.30.1)(typescript@5.7.3)
       send: 1.1.0
       server-destroy: 1.0.1
     transitivePeerDependencies:
@@ -3524,11 +3609,13 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.24.1
 
-  '@astrojs/solid-js@5.0.3(solid-js@1.9.4)':
+  '@astrojs/solid-js@5.0.3(solid-devtools@0.33.0(solid-js@1.9.4)(vite@6.0.7))(solid-js@1.9.4)':
     dependencies:
       solid-js: 1.9.4
       vite: 6.0.7
       vite-plugin-solid: 2.11.0(solid-js@1.9.4)(vite@6.0.7)
+    optionalDependencies:
+      solid-devtools: 0.33.0(solid-js@1.9.4)(vite@6.0.7)
     transitivePeerDependencies:
       - '@testing-library/jest-dom'
       - '@types/node'
@@ -3544,16 +3631,16 @@ snapshots:
       - tsx
       - yaml
 
-  '@astrojs/starlight@0.30.6(astro@5.1.7)':
+  '@astrojs/starlight@0.30.6(astro@5.1.7(rollup@4.30.1)(typescript@5.7.3))':
     dependencies:
-      '@astrojs/mdx': 4.0.6(astro@5.1.7)
+      '@astrojs/mdx': 4.0.6(astro@5.1.7(rollup@4.30.1)(typescript@5.7.3))
       '@astrojs/sitemap': 3.2.1
       '@pagefind/default-ui': 1.3.0
       '@types/hast': 3.0.4
       '@types/js-yaml': 4.0.9
       '@types/mdast': 4.0.4
-      astro: 5.1.7(typescript@5.7.3)
-      astro-expressive-code: 0.38.3(astro@5.1.7)
+      astro: 5.1.7(rollup@4.30.1)(typescript@5.7.3)
+      astro-expressive-code: 0.38.3(astro@5.1.7(rollup@4.30.1)(typescript@5.7.3))
       bcp-47: 2.1.0
       hast-util-from-html: 2.0.3
       hast-util-select: 6.0.3
@@ -3685,6 +3772,11 @@ snapshots:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.26.5
 
+  '@babel/plugin-syntax-typescript@7.25.9(@babel/core@7.26.0)':
+    dependencies:
+      '@babel/core': 7.26.0
+      '@babel/helper-plugin-utils': 7.26.5
+
   '@babel/runtime@7.26.0':
     dependencies:
       regenerator-runtime: 0.14.1
@@ -3792,7 +3884,6 @@ snapshots:
   '@bablr/coroutine@0.1.0': {}
 
   '@bablr/eslint-config-base@https://codeload.github.com/bablr-lang/eslint-config-base/tar.gz/49f5952efed27f94ee9b94340eb1563c440bf64e(eslint@8.57.1)':
-    id: '@bablr/eslint-config-base@https://codeload.github.com/bablr-lang/eslint-config-base/tar.gz/49f5952efed27f94ee9b94340eb1563c440bf64e'
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.26.5(@babel/core@7.26.0)(eslint@8.57.1)
@@ -3807,6 +3898,16 @@ snapshots:
       - supports-color
 
   '@bablr/helpers@0.20.6':
+    dependencies:
+      '@bablr/agast-helpers': 0.5.3
+      '@bablr/agast-vm-helpers': 0.5.2
+      '@bablr/coroutine': 0.1.0
+      '@bablr/language_enhancer-debug-log': 0.7.1
+      '@bablr/strategy_enhancer-debug-log': 0.6.0
+      '@iter-tools/imm-stack': 1.1.0
+      iter-tools-es: 7.5.3
+
+  '@bablr/helpers@0.21.0':
     dependencies:
       '@bablr/agast-helpers': 0.5.3
       '@bablr/agast-vm-helpers': 0.5.2
@@ -4365,11 +4466,6 @@ snapshots:
       - acorn
       - supports-color
 
-  '@monaco-editor/loader@1.4.0(monaco-editor@0.48.0)':
-    dependencies:
-      monaco-editor: 0.48.0
-      state-local: 1.0.7
-
   '@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1':
     dependencies:
       eslint-scope: 5.1.1
@@ -4385,6 +4481,8 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.18.0
+
+  '@nothing-but/utils@0.17.0': {}
 
   '@oslojs/encoding@1.1.0': {}
 
@@ -4405,11 +4503,13 @@ snapshots:
   '@pagefind/windows-x64@1.3.0':
     optional: true
 
-  '@rollup/pluginutils@5.1.4':
+  '@rollup/pluginutils@5.1.4(rollup@4.30.1)':
     dependencies:
       '@types/estree': 1.0.6
       estree-walker: 2.0.2
       picomatch: 4.0.2
+    optionalDependencies:
+      rollup: 4.30.1
 
   '@rollup/rollup-android-arm-eabi@4.30.1':
     optional: true
@@ -4507,12 +4607,119 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
+  '@solid-devtools/debugger@0.26.0(solid-js@1.9.4)':
+    dependencies:
+      '@nothing-but/utils': 0.17.0
+      '@solid-devtools/shared': 0.19.0(solid-js@1.9.4)
+      '@solid-primitives/bounds': 0.0.122(solid-js@1.9.4)
+      '@solid-primitives/cursor': 0.0.115(solid-js@1.9.4)
+      '@solid-primitives/event-listener': 2.4.0(solid-js@1.9.4)
+      '@solid-primitives/keyboard': 1.3.0(solid-js@1.9.4)
+      '@solid-primitives/platform': 0.1.2(solid-js@1.9.4)
+      '@solid-primitives/rootless': 1.5.0(solid-js@1.9.4)
+      '@solid-primitives/scheduled': 1.5.0(solid-js@1.9.4)
+      '@solid-primitives/static-store': 0.0.8(solid-js@1.9.4)
+      '@solid-primitives/utils': 6.2.3(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-devtools/shared@0.19.0(solid-js@1.9.4)':
+    dependencies:
+      '@nothing-but/utils': 0.17.0
+      '@solid-primitives/event-listener': 2.4.0(solid-js@1.9.4)
+      '@solid-primitives/media': 2.3.0(solid-js@1.9.4)
+      '@solid-primitives/refs': 1.1.0(solid-js@1.9.4)
+      '@solid-primitives/rootless': 1.5.0(solid-js@1.9.4)
+      '@solid-primitives/scheduled': 1.5.0(solid-js@1.9.4)
+      '@solid-primitives/static-store': 0.0.8(solid-js@1.9.4)
+      '@solid-primitives/styles': 0.0.114(solid-js@1.9.4)
+      '@solid-primitives/utils': 6.2.3(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-primitives/bounds@0.0.122(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/event-listener': 2.4.0(solid-js@1.9.4)
+      '@solid-primitives/resize-observer': 2.1.0(solid-js@1.9.4)
+      '@solid-primitives/static-store': 0.0.8(solid-js@1.9.4)
+      '@solid-primitives/utils': 6.2.3(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-primitives/cursor@0.0.115(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-primitives/event-listener@2.4.0(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/utils': 6.3.0(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-primitives/keyboard@1.3.0(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/event-listener': 2.4.0(solid-js@1.9.4)
+      '@solid-primitives/rootless': 1.5.0(solid-js@1.9.4)
+      '@solid-primitives/utils': 6.3.0(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-primitives/media@2.3.0(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/event-listener': 2.4.0(solid-js@1.9.4)
+      '@solid-primitives/rootless': 1.5.0(solid-js@1.9.4)
+      '@solid-primitives/static-store': 0.1.0(solid-js@1.9.4)
+      '@solid-primitives/utils': 6.3.0(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-primitives/platform@0.1.2(solid-js@1.9.4)':
+    dependencies:
+      solid-js: 1.9.4
+
+  '@solid-primitives/refs@1.1.0(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/utils': 6.3.0(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-primitives/resize-observer@2.1.0(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/event-listener': 2.4.0(solid-js@1.9.4)
+      '@solid-primitives/rootless': 1.5.0(solid-js@1.9.4)
+      '@solid-primitives/static-store': 0.1.0(solid-js@1.9.4)
+      '@solid-primitives/utils': 6.3.0(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-primitives/rootless@1.5.0(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/utils': 6.3.0(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-primitives/scheduled@1.5.0(solid-js@1.9.4)':
+    dependencies:
+      solid-js: 1.9.4
+
+  '@solid-primitives/static-store@0.0.8(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.9.4)
+      solid-js: 1.9.4
+
+  '@solid-primitives/static-store@0.1.0(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/utils': 6.3.0(solid-js@1.9.4)
+      solid-js: 1.9.4
+
   '@solid-primitives/storage@4.2.1(solid-js@1.9.4)':
     dependencies:
       '@solid-primitives/utils': 6.2.3(solid-js@1.9.4)
       solid-js: 1.9.4
 
+  '@solid-primitives/styles@0.0.114(solid-js@1.9.4)':
+    dependencies:
+      '@solid-primitives/rootless': 1.5.0(solid-js@1.9.4)
+      '@solid-primitives/utils': 6.2.3(solid-js@1.9.4)
+      solid-js: 1.9.4
+
   '@solid-primitives/utils@6.2.3(solid-js@1.9.4)':
+    dependencies:
+      solid-js: 1.9.4
+
+  '@solid-primitives/utils@6.3.0(solid-js@1.9.4)':
     dependencies:
       solid-js: 1.9.4
 
@@ -4686,19 +4893,19 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-expressive-code@0.38.3(astro@5.1.7):
+  astro-expressive-code@0.38.3(astro@5.1.7(rollup@4.30.1)(typescript@5.7.3)):
     dependencies:
-      astro: 5.1.7(typescript@5.7.3)
+      astro: 5.1.7(rollup@4.30.1)(typescript@5.7.3)
       rehype-expressive-code: 0.38.3
 
-  astro@5.1.7(typescript@5.7.3):
+  astro@5.1.7(rollup@4.30.1)(typescript@5.7.3):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.2
       '@astrojs/markdown-remark': 6.0.2
       '@astrojs/telemetry': 3.2.0
       '@oslojs/encoding': 1.1.0
-      '@rollup/pluginutils': 5.1.4
+      '@rollup/pluginutils': 5.1.4(rollup@4.30.1)
       '@types/cookie': 0.6.0
       acorn: 8.14.0
       aria-query: 5.3.2
@@ -5263,6 +5470,7 @@ snapshots:
   eslint-module-utils@2.12.0(eslint-import-resolver-node@0.3.9)(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
+    optionalDependencies:
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
     transitivePeerDependencies:
@@ -6623,8 +6831,6 @@ snapshots:
 
   minimist@1.2.8: {}
 
-  monaco-editor@0.48.0: {}
-
   mri@1.2.0: {}
 
   mrmime@2.0.0: {}
@@ -7306,17 +7512,24 @@ snapshots:
       '@codemirror/view': 6.36.2
       solid-js: 1.9.4
 
+  solid-devtools@0.33.0(solid-js@1.9.4)(vite@6.0.7):
+    dependencies:
+      '@babel/core': 7.26.0
+      '@babel/plugin-syntax-typescript': 7.25.9(@babel/core@7.26.0)
+      '@babel/types': 7.26.5
+      '@solid-devtools/debugger': 0.26.0(solid-js@1.9.4)
+      '@solid-devtools/shared': 0.19.0(solid-js@1.9.4)
+      solid-js: 1.9.4
+    optionalDependencies:
+      vite: 6.0.7
+    transitivePeerDependencies:
+      - supports-color
+
   solid-js@1.9.4:
     dependencies:
       csstype: 3.1.3
       seroval: 1.2.0
       seroval-plugins: 1.2.0(seroval@1.2.0)
-
-  solid-monaco@0.3.0(monaco-editor@0.48.0)(solid-js@1.9.4):
-    dependencies:
-      '@monaco-editor/loader': 1.4.0(monaco-editor@0.48.0)
-      monaco-editor: 0.48.0
-      solid-js: 1.9.4
 
   solid-refresh@0.6.3(solid-js@1.9.4):
     dependencies:
@@ -7339,8 +7552,6 @@ snapshots:
       signal-exit: 4.1.0
 
   sprintf-js@1.0.3: {}
-
-  state-local@1.0.7: {}
 
   statuses@2.0.1: {}
 
@@ -7445,7 +7656,7 @@ snapshots:
   trough@2.2.0: {}
 
   tsconfck@3.1.4(typescript@5.7.3):
-    dependencies:
+    optionalDependencies:
       typescript: 5.7.3
 
   tsconfig-paths@3.15.0:
@@ -7642,7 +7853,7 @@ snapshots:
       fsevents: 2.3.3
 
   vitefu@1.0.5(vite@6.0.7):
-    dependencies:
+    optionalDependencies:
       vite: 6.0.7
 
   w3c-keyname@2.2.8: {}
