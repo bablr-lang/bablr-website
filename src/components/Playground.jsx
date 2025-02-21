@@ -148,7 +148,6 @@ export default function App() {
         if (playing()) {
           return wait(15).then(() => tag);
         } else {
-          debugger;
           return d.promise.then(() => tag);
         }
       },

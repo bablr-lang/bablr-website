@@ -16,6 +16,7 @@
     "@bablr/agast-helpers": "^0.6.0",
     "@bablr/agast-vm-helpers": "^0.6.0",
     "@bablr/boot": "^0.7.0",
+    "@bablr/coroutine": "^0.1.0",
     "@bablr/helpers": "^0.21.1",
     "@bablr/io-vm-web": "^0.3.0",
     "@bablr/language-en-cstml": "^0.8.0",
