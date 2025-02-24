@@ -1,0 +1,53 @@
+---
+import { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  href: string;
+  alt: string;
+  thumbnail: ImageMetadata;
+}
+
+const { href, title, alt, thumbnail } = Astro.props;
+---
+
+<div class="thumbnail">
+  <a href={href}>
+    <div class="image-container">
+      <Image src={thumbnail} alt={alt} height="250" />
+    </div>
+
+    <h3>
+      {title}
+      <span>&rarr;</span>
+    </h3>
+  </a>
+</div>
+
+<style>
+  .thumbnail {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: left;
+    max-width: 100%;
+  }
+  .thumbnail a {
+    text-decoration: none;
+  }
+  .image-container {
+    max-width: 100%;
+  }
+  h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    padding: 1rem;
+    color: black;
+  }
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+</style>

@@ -2,6 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import CTAButton from "../components/CTAButton.astro";
+import Thumbnail from "../components/Thumbnail.astro";
+import playgroundThumb from "../images/thumbnails/playground.png";
+import paneditorThumb from "../images/thumbnails/paneditor.png";
 ---
 
 <Layout title="BABLR">
@@ -23,10 +26,30 @@ import CTAButton from "../components/CTAButton.astro";
         title="Playground"
         body="Check out bablr's features and write your first grammar!"
       />
-      <Card href="/philosophy" title="Philosophy" body="The Bablr philosophy." />
+      <Card
+        href="/philosophy"
+        title="Philosophy"
+        body="The Bablr philosophy."
+      />
     </ul>
   </div>
-
+  <div class="experiments">
+    <h2>Experiments</h2>
+    <div class="thumb-container">
+      <Thumbnail
+        href="/playground"
+        title="Playground"
+        alt="A thumbnail of the playground"
+        thumbnail={playgroundThumb}
+      />
+      <Thumbnail
+        href="https://paned.it/"
+        title="Paneditor"
+        alt="A thumbnail of paneditor"
+        thumbnail={paneditorThumb}
+      />
+    </div>
+  </div>
   <roadmap>
     <div class="content">
       <div class="text-space">
@@ -68,9 +91,27 @@ import CTAButton from "../components/CTAButton.astro";
     max-width: calc(100% - 2rem);
     margin: auto;
   }
+
+  .thumb-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    margin: auto;
+    padding: 2rem 0rem 2rem;
+    gap: 3rem;
+  }
+
+  .experiments {
+    background: var(--background02);
+    text-align: center;
+    padding: 2rem 0rem 2rem;
+  }
+  .experiments h2 {
+    font-size: 3rem;
+  }
+
   roadmap {
     padding: 4rem 0;
-    background: var(--background02);
     color: #268bd2;
     text-align: center;
     display: block;
@@ -93,9 +134,17 @@ import CTAButton from "../components/CTAButton.astro";
   }
 
   @media screen and (min-width: 636px) {
+    .thumb-container {
+      display: flex;
+      flex-flow: row;
+      background: var(--background02);
+      justify-content: center;
+      margin: auto;
+      padding: 2rem 0rem 2rem;
+    }
+
     roadmap {
       padding: 4rem 0;
-      background: #eee8d5;
       color: #268bd2;
       display: flex;
       width: 100%;
