@@ -67,7 +67,6 @@ export default function App() {
     });
     return deferred;
   };
-
   let deferreds = [];
 
   const language = () => {
@@ -148,6 +147,7 @@ export default function App() {
         if (playing()) {
           return wait(15).then(() => tag);
         } else {
+          console.log("else");
           return d.promise.then(() => tag);
         }
       },
@@ -236,7 +236,8 @@ export default function App() {
             </div>
             <button
               id="form-pause"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 setPlaying(false);
               }}
             >
@@ -244,9 +245,10 @@ export default function App() {
             </button>
             <button
               id="form-play"
-              onClick={async () => {
-                consume();
+              onClick={(e) => {
+                e.preventDefault();
                 setPlaying(true);
+                consume();
                 try {
                   if (deferreds.length) {
                     let deferred = deferreds.shift();
@@ -261,9 +263,10 @@ export default function App() {
             </button>
             <button
               id="form-reset"
-              onClick={() => {
-                setPlaying(false);
+              onClick={(e) => {
+                e.preventDefault();
                 setOutput([]);
+                deferreds = [];
               }}
             >
               Reset

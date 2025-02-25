@@ -18,23 +18,23 @@ importers:
         specifier: ^0.30.2
         version: 0.30.6(astro@5.1.7(rollup@4.30.1)(typescript@5.7.3))
       '@bablr/agast-helpers':
-        specifier: ^0.6.0
-        version: 0.6.0
+        specifier: ^0.6.1
+        version: 0.6.1
       '@bablr/agast-vm-helpers':
-        specifier: ^0.6.0
-        version: 0.6.0
+        specifier: ^0.6.1
+        version: 0.6.1
       '@bablr/boot':
-        specifier: ^0.7.0
-        version: 0.7.0
+        specifier: ^0.7.2
+        version: 0.7.2
       '@bablr/coroutine':
         specifier: ^0.1.0
         version: 0.1.0
       '@bablr/helpers':
-        specifier: ^0.21.1
-        version: 0.21.1
+        specifier: ^0.21.4
+        version: 0.21.4
       '@bablr/io-vm-web':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.3.1
+        version: 0.3.1
       '@bablr/language-en-cstml':
         specifier: ^0.8.0
         version: 0.8.0
@@ -57,11 +57,8 @@ importers:
         specifier: ^5.0.9
         version: 5.1.7(rollup@4.30.1)(typescript@5.7.3)
       bablr:
-        specifier: ^0.6.1
-        version: 0.6.1
-      paneditor:
-        specifier: github:silphium-labs/paneditor#b66775efaaf549f73f8555fef4cd58fba6b8b5c5
-        version: https://codeload.github.com/silphium-labs/paneditor/tar.gz/b66775efaaf549f73f8555fef4cd58fba6b8b5c5
+        specifier: ^0.7.1
+        version: 0.7.1
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
@@ -255,45 +252,34 @@ packages:
     resolution: {integrity: sha512-L6mZmwFDK6Cjh1nRCLXpa6no13ZIioJDz7mdkzHv399pThrTa/k0nUlNaenOeh2kWu/iaOQYElEpKPUswUa9Vg==}
     engines: {node: '>=6.9.0'}
 
-  '@bablr/agast-helpers@0.5.0':
-    resolution: {integrity: sha512-BQz4hwmyWLsiPaaLTHyoEDjfLtNolL00EF9tag7/ze+iT80RnOpJyQ0Ul25AsO6pL3MqAK1KRGJgpvN3/pajLg==}
-
-  '@bablr/agast-helpers@0.5.3':
-    resolution: {integrity: sha512-gpS/YBPoavr/hJYt4qU5sa8DHrs0Z3dQ8hNJKAmIa/95vedppvooU/GpQOY+E0dGrqYVVfe0m+dmGF6eirnCGw==}
-
   '@bablr/agast-helpers@0.6.0':
     resolution: {integrity: sha512-X96eRp/HUEDIcyOw9PpTUBmNn6FSPer6J3v0Jpd1ucU6tW+FTYrr5DVQkGhL3t49SjgWNSgnjtfPGr4tJFSEVA==}
 
-  '@bablr/agast-vm-helpers@0.5.2':
-    resolution: {integrity: sha512-ITIm6baSX3vk9uNkxk87rrGbJDOgsMRPAzU0pTQCii6LNeUV+DsMNThh4HpbHotytNDIDN6TPA8XZk5Co9uLpg==}
+  '@bablr/agast-helpers@0.6.1':
+    resolution: {integrity: sha512-v4snumIYnLvoZrbr8vqYeBCT9QqMt76iQP2ub97OyTLD2L5v7m50dIggNBGRtZd93u63YxqzuAV+aIgoX9D6hQ==}
 
   '@bablr/agast-vm-helpers@0.6.0':
     resolution: {integrity: sha512-y1V5HolTENK35MHaRIxQE5MO5HLmMPBlx1K1mAPchBgVsprbix5mYdJuQZqb6189iDrzhKhn1sBghWybnf+aXg==}
 
-  '@bablr/agast-vm@0.6.1':
-    resolution: {integrity: sha512-oZZcuqRWD4UkccrWCDIHQCWa/CTHmTR9Wysdz91clwj+lzA7QXpJXkjbUPhg+ZQUnCuZX5z6Ez3mx9Md2V8UvQ==}
+  '@bablr/agast-vm-helpers@0.6.1':
+    resolution: {integrity: sha512-U2QFwL4maa720qFURGfyCKSaTqL3/YqJkFJO3L0E/vFL5GP9bANhxJmYwziwHCzo+js92ab2Gqh+KP5g9BnSrg==}
 
-  '@bablr/agast-vm@0.7.0':
-    resolution: {integrity: sha512-jEPPDwxpxjvxir/G012lQsmE6jCeVmGYEbhXgRH5nyLxKBDekN4LnXm+oxUNQSihKLQV6VGxpLch/vK9aDwY0w==}
+  '@bablr/agast-vm@0.7.1':
+    resolution: {integrity: sha512-2XYXtoEN63yadG7L/x3Tcz6kv36IeI8+cVF5RJJZBQOFvA+/eVXmHjoO0OhLLSLkWCaJtou2OzQM5gR63L8mbg==}
 
-  '@bablr/bablr-vm-strategy-parse@0.6.3':
-    resolution: {integrity: sha512-6wvfcTFVFTdUfB3Lx8P+Dl5lQQzqMsr/TBcttPzf12bQVPJIcALmP2E+SLTeVlbuWfxe9rQ2GfYHhnDaSETvUA==}
+  '@bablr/bablr-vm-strategy-parse@0.7.1':
+    resolution: {integrity: sha512-Re7HLQC48w27oGoPkR30k1JCcIyQt80jqq6zyDKywYwyMM2PFx8VxJ8PFW+blWPj4ImEzj4AkPme87WQVbPe9A==}
 
-  '@bablr/bablr-vm-strategy-parse@0.7.0':
-    resolution: {integrity: sha512-dgbp7jZd7jQaQume/SmEvUvmDUpnIJeArh095qgQOJDtSvwjYoB38cSuSxqgXbGwMeb2CiebxvZtw/mF5t1SYw==}
-
-  '@bablr/bablr-vm@0.18.1':
-    resolution: {integrity: sha512-+8LSp4clPJnup5r4XAJlXWjz9Mkx4wJtdndtSoJ0xlgBJ6UhqGQNw3ZP+pk2djBQydnKGEP9Hfr/Cwt4d5ixlw==}
-
-  '@bablr/bablr-vm@0.19.0':
-    resolution: {integrity: sha512-byQD0E1fj37xg9YLTFFwd+ONd4/CRA7zb0LmdiamYwhHzwL94RMNdYOQ6j15otqkaMT+9vgFjZYB6ViUsLjdJQ==}
+  '@bablr/bablr-vm@0.19.1':
+    resolution: {integrity: sha512-LqOg/aYb9bcafyfHLiYnDx8q4TE1gUTbOMINhTi9Hf6oPGJ9almyonnTHAbv8+5MNmxIsWP+tqrqomHQHVp9Jg==}
 
   '@bablr/boot@0.7.0':
     resolution: {integrity: sha512-G5DJVZRtQ0zRnDm6d13+VrGxWz8I4d5w0ZcCEiCaMMiBtgxKFM6OPzegaoJpLwkZLIin2Gn1Vkt3lPDqnoq0fg==}
     engines: {node: '>=12.0.0'}
 
-  '@bablr/btree@0.1.0':
-    resolution: {integrity: sha512-KqW1MBriN9o9I7S8kMSJw4j7Rd1Hq/m86jQPyHa7idhuuttCxM1Z9f3VA7jCmQOm/x7WR53E5Xfcd+N4uux19g==}
+  '@bablr/boot@0.7.2':
+    resolution: {integrity: sha512-k6xaRNgMfarxfhXqAihfRkMsUOoFgb+FbR5S+8BpYtklOL3HjP4DeWFQL7GN8fEjoq9GUDTgzqtWVQkjbCFfbQ==}
+    engines: {node: '>=12.0.0'}
 
   '@bablr/btree@0.1.1':
     resolution: {integrity: sha512-EoWvmtFDex/VK8FT1F9P5psyVRWLIgP192ui3QoK+fXZmrklMZyQcfv9gdaKbI3wf7xd/YYDhVfJpVDyRDbQWQ==}
@@ -306,14 +292,14 @@ packages:
     version: 0.0.0
     engines: {node: '>=12.0.0'}
 
-  '@bablr/helpers@0.20.6':
-    resolution: {integrity: sha512-NywT+cQvrRqWKcjvumk3SfLflIyoATJODqidxqGDzDuDe+2aMwR7zep/3X4tJAM6tESyluh6M3UOHjbYvln7FQ==}
-
   '@bablr/helpers@0.21.1':
     resolution: {integrity: sha512-N7Z6L+8nr6dpSnekCWpVVzzExJSW1ptbYQsr1gKA3huwe4JDj5U/xAnTFAWvXlihLIQcabQRw4Q5h08a4IHCfg==}
 
-  '@bablr/io-vm-web@0.3.0':
-    resolution: {integrity: sha512-We3+33vWxKrmUBAGLJ0hBd/ji8/+I6KI+7vvu07gv6ZiYQmPlw33j5UbqKhFuYi0Toxb1n2koHW6q8hrXzVlUA==}
+  '@bablr/helpers@0.21.4':
+    resolution: {integrity: sha512-q9cW4IxryrpBzZDJ9JKqyvXuDrFuS1KZEzdO+XhiNo8k2bW9llT+N55M02Hf3WOlpITmTmCw0EeuF0Pu28EZ/A==}
+
+  '@bablr/io-vm-web@0.3.1':
+    resolution: {integrity: sha512-ETENA32tV+R9mUOFlAJwUgYA/Kz0miBnaVjGgi1++/Lb/ltI8nVCIWptoU9Ysm/0DnOCdt3cBLiOV6xUPSXm2g==}
 
   '@bablr/language-en-blank-space@0.6.0':
     resolution: {integrity: sha512-nMTPUVULMD1pO7xD5K2ls378zxVgWPZGoRRAFz+Wj52EA+hWBtWe/SYr6wOcb3BeuP7jKUjP7KlQ0ymZJneAzg==}
@@ -331,31 +317,30 @@ packages:
     resolution: {integrity: sha512-lkM2u1O+WfnBi3POKcFM+o0SqpapXCATWKV0Te7T6MSmoreCS5+D0RCAs7O402T1jL7Vp2jKT/d6GuTm+L4oiQ==}
     engines: {node: '>=12.0.0'}
 
-  '@bablr/language_enhancer-debug-log@0.7.1':
-    resolution: {integrity: sha512-Mi8YiIu63z7PUmjHJwiynp1Cxgq5CqFqfNf+uqyPufu7AXI7NRsd5Alp/egIjCysKOzKgURtJ2MD+O8atnOtXA==}
-
   '@bablr/language_enhancer-debug-log@0.8.0':
     resolution: {integrity: sha512-8tOp1cetSmyVBIYpBcev5XV9IvYeLop/vU8oQp/Xt5hfRvRglJQRa7CCVJpx1zh/lhLTueUD+4P83JgQYImilA==}
+
+  '@bablr/language_enhancer-debug-log@0.8.1':
+    resolution: {integrity: sha512-GNJIKYiCnLz4PLVLZ6/gSDP3TpCVUszysMJzp7+Zgx2RJEPCr0+b3EAGKxZowbUMMap1PcVNMouD+Q6HXfsYZg==}
 
   '@bablr/pattern-engine@0.1.0':
     resolution: {integrity: sha512-mD/Rmeu+NE9aTDQVkwlrr2qczvC9mPSek0iksC46F1NclsPgOUCRx4HGH+EV5tWDmSljD6Erx+FpQIGnJnHz/Q==}
 
-  '@bablr/regex-vm@0.10.0':
-    resolution: {integrity: sha512-Hq88Vj6JACqXIhj6LTRqSKl8RYrVNcf+zibJHG828kwcRv/z7XjOyuxA1tEep8JTRFqHzREcKFWhtWtBnMXiLw==}
+  '@bablr/regex-vm@0.10.1':
+    resolution: {integrity: sha512-1tROdALPMrzAHfkITaGBloHpLGeU2XPPWm27+lLRfBx6O0zmcJXlZgS32LZn/3JuMdroJa7cqwLqDU2oL69ueQ==}
     engines: {node: '>=12.0.0'}
-
-  '@bablr/regex-vm@0.9.0':
-    resolution: {integrity: sha512-px1CzqzBd5mQ1Ked+OVMPiPc4L2o5GzqMXayf4jHUgTbsq/hI8l1Z+szrfGb+RJpouODlcp3eSCAXz8v7/qLtw==}
-    engines: {node: '>=12.0.0'}
-
-  '@bablr/strategy_enhancer-debug-log@0.6.0':
-    resolution: {integrity: sha512-QLxM2xxsTnm4b9kxK6HxGhRge/4/2/7V710zSxVlP5u9elgLXPiHBeMJFxyn4dtM/xSPCxI8z8+nRUtZ3Mum+g==}
 
   '@bablr/strategy_enhancer-debug-log@0.7.0':
     resolution: {integrity: sha512-aKT7yvqfBzVu8UOB6nYVi7rPEGL7ESGfuxgJqhC7EDu5m107ZdzRbToPK7Uml75iRNupRB2HTEv+A0qqiIZ9rQ==}
 
+  '@bablr/strategy_enhancer-debug-log@0.7.2':
+    resolution: {integrity: sha512-/GCLKEdvaRgY+5IZSmEJcjBySovARpA4J/gH01XPcHBDwMA1oiEZjX7isJ4CRRBW+SlJSEuC0S1ESIfTGqbvpw==}
+
   '@bablr/weak-stack@0.1.0':
     resolution: {integrity: sha512-i/TGQ30yZkH2IQHXV73sA6utdi8aExG3YUT2OliJqagc+4cpd4UTAgY9+PUdG21yyIfIAk1p13TxRUDqvyLEUw==}
+
+  '@bablr/weak-stack@1.0.0':
+    resolution: {integrity: sha512-mbt0WcHJxqjwGbJRZBw9ip91wRfbBEVCV+2llk9tjONkLz7YnWGXb644eY/MYemk+fxHakNHPcgybCKSxct8dQ==}
 
   '@changesets/apply-release-plan@7.0.7':
     resolution: {integrity: sha512-qnPOcmmmnD0MfMg9DjU1/onORFyRpDXkMMl2IJg9mECY6RnxL3wN0TCCc92b2sXt1jt8DgjAUUsZYGUGTdYIXA==}
@@ -1247,11 +1232,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0
 
-  bablr@0.6.1:
-    resolution: {integrity: sha512-B98p/8hsfm7RhpaYzCKwNA/ciu6fK1E6LAowHcZ4+jLM7GbToFQNWXo1mRk5G6OE4ccDC38saJwpseXKXBrcEg==}
-
-  bablr@0.7.0:
-    resolution: {integrity: sha512-0w7oLDos9TVG5yrmmSDTsegch60u+QKSKt5QU05oUh4osKG9+rU1hIjZNPONx8lQbS4xFirZo1LziJVM7SQnfw==}
+  bablr@0.7.1:
+    resolution: {integrity: sha512-63n+LgRQhkjsSL56Tt2Gl76JuARH7GmQtpk1TOuc1/0AqUMmUlP7WFriVyQOaBQJH41695mP1iIKml8GafmdPg==}
 
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
@@ -1358,9 +1340,6 @@ packages:
   ci-info@4.1.0:
     resolution: {integrity: sha512-HutrvTNsF48wnxkzERIXOe5/mlcfFcbfCmwcg6CJnizbSue78AbDt+1cgl26zwn61WFxhcPykPfZrbqjGmBb4A==}
     engines: {node: '>=8'}
-
-  classnames@2.5.1:
-    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
 
   cli-boxes@3.0.0:
     resolution: {integrity: sha512-/lzGpEWL/8PfI0BmBOPRwp0c/wFNX1RdUML3jK/RcSBA9T8mZDdQpqYBKtCFTOfQbwPqWEOpjqW+Fnayc0969g==}
@@ -1536,10 +1515,6 @@ packages:
   doctrine@3.0.0:
     resolution: {integrity: sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==}
     engines: {node: '>=6.0.0'}
-
-  drag-drop-touch@https://codeload.github.com/drag-drop-touch-js/dragdroptouch/tar.gz/07edc6d96c029dd83e98c09b8128816bf1438511:
-    resolution: {tarball: https://codeload.github.com/drag-drop-touch-js/dragdroptouch/tar.gz/07edc6d96c029dd83e98c09b8128816bf1438511}
-    version: 2.0.0
 
   dset@3.1.4:
     resolution: {integrity: sha512-2QF/g9/zTaPDc3BjNcVTGoBbXBgYfMTTceLaYcFJ/W9kggFUkhxD/hMEeuLKbugyef9SqAx8cpgwlIP/jinUTA==}
@@ -2685,10 +2660,6 @@ packages:
     resolution: {integrity: sha512-8KPLGT5g9s+olKMRTU9LFekLizkVIu9tes90O1/aigJ0T5LmyPqTzGJrETnSw3meSYg58YH7JTzhTTW/3z6VAw==}
     hasBin: true
 
-  paneditor@https://codeload.github.com/silphium-labs/paneditor/tar.gz/b66775efaaf549f73f8555fef4cd58fba6b8b5c5:
-    resolution: {tarball: https://codeload.github.com/silphium-labs/paneditor/tar.gz/b66775efaaf549f73f8555fef4cd58fba6b8b5c5}
-    version: 0.0.0
-
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -3072,9 +3043,6 @@ packages:
     peerDependenciesMeta:
       vite:
         optional: true
-
-  solid-js@1.8.18:
-    resolution: {integrity: sha512-cpkxDPvO/AuKBugVv6xKFd1C9VC0XZMu4VtF56IlHoux8HgyW44uqNSWbozMnVcpIzHIhS3vVXPAVZYM26jpWw==}
 
   solid-js@1.9.4:
     resolution: {integrity: sha512-ipQl8FJ31bFUoBNScDQTG3BjN6+9Rg+Q+f10bUbnO6EOTTf5NGerJeHc7wyu5I4RMHEl/WwZwUmy/PTRgxxZ8g==}
@@ -3818,18 +3786,6 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@bablr/agast-helpers@0.5.0':
-    dependencies:
-      '@bablr/btree': 0.1.0
-      '@bablr/coroutine': 0.1.0
-      '@iter-tools/imm-stack': 1.1.0
-
-  '@bablr/agast-helpers@0.5.3':
-    dependencies:
-      '@bablr/btree': 0.1.1
-      '@bablr/coroutine': 0.1.0
-      '@iter-tools/imm-stack': 1.1.0
-
   '@bablr/agast-helpers@0.6.0':
     dependencies:
       '@bablr/btree': 0.1.1
@@ -3837,70 +3793,48 @@ snapshots:
       '@bablr/weak-stack': 0.1.0
       '@iter-tools/imm-stack': 1.1.0
 
-  '@bablr/agast-vm-helpers@0.5.2':
+  '@bablr/agast-helpers@0.6.1':
     dependencies:
-      '@bablr/agast-helpers': 0.5.3
+      '@bablr/btree': 0.1.1
+      '@bablr/coroutine': 0.1.0
+      '@bablr/weak-stack': 1.0.0
+      '@iter-tools/imm-stack': 1.1.0
 
   '@bablr/agast-vm-helpers@0.6.0':
     dependencies:
       '@bablr/agast-helpers': 0.6.0
 
-  '@bablr/agast-vm@0.6.1':
+  '@bablr/agast-vm-helpers@0.6.1':
     dependencies:
-      '@bablr/agast-helpers': 0.5.3
-      '@bablr/agast-vm-helpers': 0.5.2
+      '@bablr/agast-helpers': 0.6.1
+
+  '@bablr/agast-vm@0.7.1':
+    dependencies:
+      '@bablr/agast-helpers': 0.6.1
+      '@bablr/agast-vm-helpers': 0.6.1
       '@bablr/coroutine': 0.1.0
-      '@bablr/weak-stack': 0.1.0
+      '@bablr/weak-stack': 1.0.0
       '@iter-tools/imm-stack': 1.1.0
 
-  '@bablr/agast-vm@0.7.0':
+  '@bablr/bablr-vm-strategy-parse@0.7.1':
     dependencies:
-      '@bablr/agast-helpers': 0.6.0
-      '@bablr/agast-vm-helpers': 0.6.0
+      '@bablr/agast-helpers': 0.6.1
+      '@bablr/agast-vm-helpers': 0.6.1
       '@bablr/coroutine': 0.1.0
-      '@bablr/weak-stack': 0.1.0
-      '@iter-tools/imm-stack': 1.1.0
-
-  '@bablr/bablr-vm-strategy-parse@0.6.3':
-    dependencies:
-      '@bablr/agast-helpers': 0.5.3
-      '@bablr/agast-vm-helpers': 0.5.2
-      '@bablr/coroutine': 0.1.0
-      '@bablr/helpers': 0.20.6
-      '@bablr/weak-stack': 0.1.0
+      '@bablr/helpers': 0.21.4
+      '@bablr/weak-stack': 1.0.0
       '@iter-tools/imm-stack': 1.1.0
       iter-tools-es: 7.5.3
 
-  '@bablr/bablr-vm-strategy-parse@0.7.0':
+  '@bablr/bablr-vm@0.19.1':
     dependencies:
-      '@bablr/agast-helpers': 0.6.0
-      '@bablr/agast-vm-helpers': 0.6.0
+      '@bablr/agast-helpers': 0.6.1
+      '@bablr/agast-vm': 0.7.1
+      '@bablr/agast-vm-helpers': 0.6.1
       '@bablr/coroutine': 0.1.0
-      '@bablr/helpers': 0.21.1
-      '@bablr/weak-stack': 0.1.0
-      '@iter-tools/imm-stack': 1.1.0
-      iter-tools-es: 7.5.3
-
-  '@bablr/bablr-vm@0.18.1':
-    dependencies:
-      '@bablr/agast-helpers': 0.5.3
-      '@bablr/agast-vm-helpers': 0.5.2
-      '@bablr/coroutine': 0.1.0
-      '@bablr/helpers': 0.20.6
-      '@bablr/regex-vm': 0.9.0
-      '@bablr/weak-stack': 0.1.0
-      '@iter-tools/imm-stack': 1.1.0
-      iter-tools-es: 7.5.3
-
-  '@bablr/bablr-vm@0.19.0':
-    dependencies:
-      '@bablr/agast-helpers': 0.6.0
-      '@bablr/agast-vm': 0.7.0
-      '@bablr/agast-vm-helpers': 0.6.0
-      '@bablr/coroutine': 0.1.0
-      '@bablr/helpers': 0.21.1
-      '@bablr/regex-vm': 0.10.0
-      '@bablr/weak-stack': 0.1.0
+      '@bablr/helpers': 0.21.4
+      '@bablr/regex-vm': 0.10.1
+      '@bablr/weak-stack': 1.0.0
       '@iter-tools/imm-stack': 1.1.0
       iter-tools-es: 7.5.3
 
@@ -3912,9 +3846,13 @@ snapshots:
       escape-string-regexp: 5.0.0
       iter-tools: 7.5.3
 
-  '@bablr/btree@0.1.0':
+  '@bablr/boot@0.7.2':
     dependencies:
+      '@bablr/agast-helpers': 0.6.1
+      '@bablr/agast-vm-helpers': 0.6.1
       '@iter-tools/imm-stack': 1.1.0
+      escape-string-regexp: 5.0.0
+      iter-tools: 7.5.3
 
   '@bablr/btree@0.1.1':
     dependencies:
@@ -3936,16 +3874,6 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  '@bablr/helpers@0.20.6':
-    dependencies:
-      '@bablr/agast-helpers': 0.5.3
-      '@bablr/agast-vm-helpers': 0.5.2
-      '@bablr/coroutine': 0.1.0
-      '@bablr/language_enhancer-debug-log': 0.7.1
-      '@bablr/strategy_enhancer-debug-log': 0.6.0
-      '@iter-tools/imm-stack': 1.1.0
-      iter-tools-es: 7.5.3
-
   '@bablr/helpers@0.21.1':
     dependencies:
       '@bablr/agast-helpers': 0.6.0
@@ -3956,10 +3884,20 @@ snapshots:
       '@iter-tools/imm-stack': 1.1.0
       iter-tools-es: 7.5.3
 
-  '@bablr/io-vm-web@0.3.0':
+  '@bablr/helpers@0.21.4':
     dependencies:
-      '@bablr/agast-helpers': 0.6.0
-      '@bablr/agast-vm-helpers': 0.6.0
+      '@bablr/agast-helpers': 0.6.1
+      '@bablr/agast-vm-helpers': 0.6.1
+      '@bablr/coroutine': 0.1.0
+      '@bablr/language_enhancer-debug-log': 0.8.1
+      '@bablr/strategy_enhancer-debug-log': 0.7.2
+      '@iter-tools/imm-stack': 1.1.0
+      iter-tools-es: 7.5.3
+
+  '@bablr/io-vm-web@0.3.1':
+    dependencies:
+      '@bablr/agast-helpers': 0.6.1
+      '@bablr/agast-vm-helpers': 0.6.1
       '@bablr/coroutine': 0.1.0
       '@iter-tools/imm-stack': 1.1.0
 
@@ -3996,40 +3934,24 @@ snapshots:
       '@bablr/helpers': 0.21.1
       '@bablr/language-en-blank-space': 0.6.0
 
-  '@bablr/language_enhancer-debug-log@0.7.1':
-    dependencies:
-      '@bablr/agast-helpers': 0.5.3
-      '@bablr/agast-vm-helpers': 0.5.2
-
   '@bablr/language_enhancer-debug-log@0.8.0':
     dependencies:
       '@bablr/agast-helpers': 0.6.0
 
+  '@bablr/language_enhancer-debug-log@0.8.1':
+    dependencies:
+      '@bablr/agast-helpers': 0.6.1
+
   '@bablr/pattern-engine@0.1.0': {}
 
-  '@bablr/regex-vm@0.10.0':
+  '@bablr/regex-vm@0.10.1':
     dependencies:
-      '@bablr/agast-helpers': 0.6.0
+      '@bablr/agast-helpers': 0.6.1
       '@bablr/coroutine': 0.1.0
       '@bablr/pattern-engine': 0.1.0
       '@iter-tools/imm-stack': 1.1.0
       functional-red-black-tree: 1.0.1
       iter-tools-es: 7.0.2
-
-  '@bablr/regex-vm@0.9.0':
-    dependencies:
-      '@bablr/agast-helpers': 0.5.0
-      '@bablr/coroutine': 0.1.0
-      '@bablr/pattern-engine': 0.1.0
-      '@iter-tools/imm-stack': 1.1.0
-      functional-red-black-tree: 1.0.1
-      iter-tools-es: 7.5.3
-
-  '@bablr/strategy_enhancer-debug-log@0.6.0':
-    dependencies:
-      '@bablr/agast-helpers': 0.5.3
-      '@bablr/agast-vm-helpers': 0.5.2
-      '@bablr/coroutine': 0.1.0
 
   '@bablr/strategy_enhancer-debug-log@0.7.0':
     dependencies:
@@ -4037,7 +3959,14 @@ snapshots:
       '@bablr/agast-vm-helpers': 0.6.0
       '@bablr/coroutine': 0.1.0
 
+  '@bablr/strategy_enhancer-debug-log@0.7.2':
+    dependencies:
+      '@bablr/agast-helpers': 0.6.1
+      '@bablr/coroutine': 0.1.0
+
   '@bablr/weak-stack@0.1.0': {}
+
+  '@bablr/weak-stack@1.0.0': {}
 
   '@changesets/apply-release-plan@7.0.7':
     dependencies:
@@ -5086,24 +5015,14 @@ snapshots:
       '@babel/core': 7.26.0
       babel-plugin-jsx-dom-expressions: 0.39.5(@babel/core@7.26.0)
 
-  bablr@0.6.1:
+  bablr@0.7.1:
     dependencies:
-      '@bablr/agast-helpers': 0.5.3
-      '@bablr/agast-vm': 0.6.1
-      '@bablr/agast-vm-helpers': 0.5.2
-      '@bablr/bablr-vm': 0.18.1
-      '@bablr/bablr-vm-strategy-parse': 0.6.3
-      '@bablr/helpers': 0.20.6
-      iter-tools-es: 7.5.3
-
-  bablr@0.7.0:
-    dependencies:
-      '@bablr/agast-helpers': 0.6.0
-      '@bablr/agast-vm': 0.7.0
-      '@bablr/agast-vm-helpers': 0.6.0
-      '@bablr/bablr-vm': 0.19.0
-      '@bablr/bablr-vm-strategy-parse': 0.7.0
-      '@bablr/helpers': 0.21.1
+      '@bablr/agast-helpers': 0.6.1
+      '@bablr/agast-vm': 0.7.1
+      '@bablr/agast-vm-helpers': 0.6.1
+      '@bablr/bablr-vm': 0.19.1
+      '@bablr/bablr-vm-strategy-parse': 0.7.1
+      '@bablr/helpers': 0.21.4
       iter-tools-es: 7.5.3
 
   bail@2.0.2: {}
@@ -5216,8 +5135,6 @@ snapshots:
   ci-info@3.9.0: {}
 
   ci-info@4.1.0: {}
-
-  classnames@2.5.1: {}
 
   cli-boxes@3.0.0: {}
 
@@ -5364,8 +5281,6 @@ snapshots:
   doctrine@3.0.0:
     dependencies:
       esutils: 2.0.3
-
-  drag-drop-touch@https://codeload.github.com/drag-drop-touch-js/dragdroptouch/tar.gz/07edc6d96c029dd83e98c09b8128816bf1438511: {}
 
   dset@3.1.4: {}
 
@@ -7049,21 +6964,6 @@ snapshots:
       '@pagefind/linux-x64': 1.3.0
       '@pagefind/windows-x64': 1.3.0
 
-  paneditor@https://codeload.github.com/silphium-labs/paneditor/tar.gz/b66775efaaf549f73f8555fef4cd58fba6b8b5c5:
-    dependencies:
-      '@bablr/agast-helpers': 0.6.0
-      '@bablr/agast-vm-helpers': 0.6.0
-      '@bablr/boot': 0.7.0
-      '@bablr/helpers': 0.21.1
-      '@bablr/io-vm-web': 0.3.0
-      '@bablr/language-en-cstml-json': 0.1.0
-      '@iter-tools/imm-stack': 1.1.0
-      bablr: 0.7.0
-      classnames: 2.5.1
-      drag-drop-touch: https://codeload.github.com/drag-drop-touch-js/dragdroptouch/tar.gz/07edc6d96c029dd83e98c09b8128816bf1438511
-      iter-tools-es: 7.5.3
-      solid-js: 1.8.18
-
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -7604,12 +7504,6 @@ snapshots:
       vite: 6.0.7
     transitivePeerDependencies:
       - supports-color
-
-  solid-js@1.8.18:
-    dependencies:
-      csstype: 3.1.3
-      seroval: 1.2.0
-      seroval-plugins: 1.2.0(seroval@1.2.0)
 
   solid-js@1.9.4:
     dependencies:
