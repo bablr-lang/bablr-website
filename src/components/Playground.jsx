@@ -3,8 +3,8 @@ import { streamParse, Context } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
 import { buildString, buildIdentifier } from "@bablr/helpers/builders";
 import { generateProductions } from "@bablr/helpers/grammar";
-import { printPrettyCSTML } from "@bablr/helpers/stream";
-import { createSignal, For } from "solid-js";
+import { printPrettyCSTML, resolveTags } from "@bablr/helpers/stream";
+import { createMemo, createSignal, For, Match, Switch } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
 import { printType, printTag } from "@bablr/agast-helpers/print";
 import { defaultLanguageInput } from "./language.js";
@@ -17,13 +17,14 @@ import {
 import { lineNumbers, keymap } from "@codemirror/view";
 import { javascript } from "@codemirror/lang-javascript";
 import { defaultKeymap } from "@codemirror/commands";
-import { solarizedLight } from "thememirror";
+import { clouds } from "thememirror";
 import { makePersisted } from "@solid-primitives/storage";
 import {
   getStreamIterator,
   StreamIterable,
   generatePrettyCSTML,
 } from "@bablr/agast-helpers/stream";
+import * as btree from "@bablr/agast-helpers/btree";
 import { Coroutine } from "@bablr/coroutine";
 import * as helpers from "@bablr/helpers";
 
@@ -58,6 +59,7 @@ export default function App() {
   const [output, setOutput] = createSignal([]);
   const [matcherTag, setMatcherTag] = createSignal("Document");
   const [playing, setPlaying] = createSignal(false);
+  const [paused, setPaused] = createSignal(false);
 
   const makeDeferred = () => {
     const deferred = {};
@@ -103,7 +105,7 @@ export default function App() {
   createEditorReadonly(editorView, () => storageType() !== "local");
   createEditorControlledValue(editorView, getLanguageTextForStorageType);
 
-  createExtension(solarizedLight);
+  createExtension(clouds);
   createExtension(lineNumbers);
   createExtension(javascript);
   createExtension(keymap.of(defaultKeymap));
@@ -130,23 +132,26 @@ export default function App() {
 
   let tags = () =>
     map(
-      evaluateIO(() =>
-        getStreamIterator(
-          streamParse(
-            ctx(),
-            matcher(),
-            input(),
-            {},
-            { enhancers, emitEffects: true },
+      resolveTags(
+        ctx(),
+        evaluateIO(() =>
+          getStreamIterator(
+            streamParse(
+              ctx(),
+              matcher(),
+              input(),
+              {},
+              { enhancers, emitEffects: true },
+            ),
           ),
         ),
       ),
       (tag) => {
-        const d = makeDeferred();
-        deferreds.push(d);
         if (playing()) {
           return wait(15).then(() => tag);
         } else {
+          const d = makeDeferred();
+          deferreds.push(d);
           console.log("else");
           return d.promise.then(() => tag);
         }
@@ -155,7 +160,7 @@ export default function App() {
 
   const consume = async () => {
     for await (const tag of tags()) {
-      setOutput([...output(), tag]);
+      setOutput(btree.push(output(), tag));
     }
   };
 
@@ -189,7 +194,11 @@ export default function App() {
               </label>
               <div
                 id="matcher-tag-input"
-                style={{ display: "inline-flex", gap: "1rem", padding: "10px" }}
+                style={{
+                  display: "inline-flex",
+                  gap: "1rem",
+                  padding: "10px",
+                }}
               >
                 <label for="matcher-tag">Matcher: </label>
                 <select
@@ -225,6 +234,74 @@ export default function App() {
                     }}
                   </For>
                 </select>
+
+                <Switch>
+                  <Match when={paused()}>
+                    <button
+                      id="form-resume"
+                      onClick={() => {
+                        setPlaying(true);
+                        setPaused(false);
+                        deferreds[0].resolve();
+                      }}
+                    >
+                      Resume
+                    </button>
+                  </Match>
+                  <Match when={!paused()}>
+                    <button
+                      id="form-pause"
+                      onClick={() => {
+                        setPlaying(false);
+                        setPaused(true);
+                      }}
+                    >
+                      Pause
+                    </button>
+                  </Match>
+                </Switch>
+                <button
+                  id="form-play"
+                  onClick={() => {
+                    setPlaying(true);
+                    consume();
+                    /* try { */
+                    /*   while (deferreds.length) { */
+                    /*     let deferred = deferreds.shift(); */
+                    /*     deferred.resolve(); */
+                    /*   } */
+                    /* } catch (e) { */
+                    /*   console.log(e); */
+                    /* } */
+                  }}
+                >
+                  Play
+                </button>
+                <button
+                  id="form-step"
+                  onClick={() => {
+                    try {
+                      if (deferreds.length) {
+                        let deferred = deferreds.shift();
+                        deferred.resolve();
+                      }
+                    } catch (e) {
+                      console.log(e);
+                    }
+                  }}
+                >
+                  Step
+                </button>
+                <button
+                  id="form-reset"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOutput([]);
+                    deferreds = [];
+                  }}
+                >
+                  Reset
+                </button>
               </div>
               <textarea
                 id="experiment-input"
@@ -234,58 +311,71 @@ export default function App() {
                 {input()}
               </textarea>
             </div>
-            <button
-              id="form-pause"
-              onClick={(e) => {
-                e.preventDefault();
-                setPlaying(false);
-              }}
-            >
-              Pause
-            </button>
-            <button
-              id="form-play"
-              onClick={(e) => {
-                e.preventDefault();
-                setPlaying(true);
-                consume();
-                try {
-                  if (deferreds.length) {
-                    let deferred = deferreds.shift();
-                    deferred.resolve();
-                  }
-                } catch (e) {
-                  console.log(e);
-                }
-              }}
-            >
-              Play
-            </button>
-            <button
-              id="form-reset"
-              onClick={(e) => {
-                e.preventDefault();
-                setOutput([]);
-                deferreds = [];
-              }}
-            >
-              Reset
-            </button>
           </div>
           <div
             id="output"
-            style={{ display: "flex", "flex-flow": "column", height: "50%" }}
+            style={{ display: "flex", "flex-flow": "column", height: "50vh" }}
           >
             <label for="experiment-output" style={{ "text-align": "center" }}>
               Output
             </label>
-            <textarea id="experiment-output">
-              <For each={output()}>
-                {(line) => {
-                  return <>{printTag(line) + "\n"}</>;
-                }}
-              </For>
-            </textarea>
+            <div
+              id="experiment-output"
+              style={{
+                "overflow-y": "auto",
+                background: "white",
+                height: "100%",
+                border: "1px solid black",
+                padding: "2px",
+              }}
+            >
+              {() =>
+                (function renderBtree(btree, depth = 0) {
+                  let startIndex = Number.isFinite(btree[0]) ? 1 : 0;
+                  let result = <></>;
+                  for (let i = startIndex; i < btree.length; i++) {
+                    let value = btree[i];
+                    if (Array.isArray(value)) {
+                      let tree;
+                      ({ tree, depth } = renderBtree(value, depth));
+                      result = (
+                        <>
+                          {result}
+                          {tree}
+                        </>
+                      );
+                    } else {
+                      if (value.type === Symbol.for("CloseNodeTag")) {
+                        depth--;
+                      }
+                      let indent = (depth) => {
+                        let result = <></>;
+                        for (let i = 0; i < depth; i++) {
+                          result = (
+                            <>
+                              &nbsp;&nbsp;&nbsp;&nbsp;
+                              {result}
+                            </>
+                          );
+                        }
+                        return result;
+                      };
+                      result = (
+                        <div>
+                          {result}
+                          {indent(depth)}
+                          {printTag(value)}
+                        </div>
+                      );
+                      if (value.type === Symbol.for("OpenNodeTag")) {
+                        depth++;
+                      }
+                    }
+                  }
+                  return { tree: <div>{result}</div>, depth: depth };
+                })(output()).tree
+              }
+            </div>
           </div>
         </div>
         <div id="playground-right" style={{ width: "50%" }}>
@@ -301,7 +391,11 @@ export default function App() {
               <option value="default">CSTML</option>
               <option value="local">Local Storage</option>
             </select>
-            <div id="experiment-grammar" ref={ref}></div>
+            <div
+              id="experiment-grammar"
+              ref={ref}
+              style={{ background: "white" }}
+            ></div>
           </div>
         </div>
       </div>
