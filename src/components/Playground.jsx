@@ -321,12 +321,14 @@ export default function App() {
             </label>
             <div
               id="experiment-output"
+              contentEditable
               style={{
                 "overflow-y": "auto",
                 background: "white",
                 height: "100%",
                 border: "1px solid black",
                 padding: "2px",
+                "font-family": "monospace",
               }}
             >
               {() =>
@@ -353,7 +355,7 @@ export default function App() {
                         for (let i = 0; i < depth; i++) {
                           result = (
                             <>
-                              &nbsp;&nbsp;&nbsp;&nbsp;
+                              &nbsp;&nbsp;
                               {result}
                             </>
                           );
@@ -361,18 +363,21 @@ export default function App() {
                         return result;
                       };
                       result = (
-                        <div>
-                          {result}
-                          {indent(depth)}
-                          {printTag(value)}
-                        </div>
+                        <>
+                          <span>
+                            {result}
+                            {indent(depth)}
+                            {printTag(value)}
+                          </span>
+                          <br />
+                        </>
                       );
                       if (value.type === Symbol.for("OpenNodeTag")) {
                         depth++;
                       }
                     }
                   }
-                  return { tree: <div>{result}</div>, depth: depth };
+                  return { tree: <span>{result}</span>, depth: depth };
                 })(output()).tree
               }
             </div>
