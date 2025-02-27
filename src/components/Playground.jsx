@@ -290,6 +290,7 @@ export default function App() {
                   id="form-play"
                   onClick={() => {
                     setPlaying(true);
+                    document.getElementById("experiment-output").innerHTML = "";
                     consume();
                   }}
                 >
@@ -310,6 +311,8 @@ export default function App() {
                   id="form-reset"
                   onClick={(e) => {
                     e.preventDefault();
+                    setPlaying(false);
+                    setPaused(false);
                     document.getElementById("experiment-output").innerHTML = "";
                     deferreds = [];
                   }}
