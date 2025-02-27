@@ -1,3 +1,4 @@
+/* global setTimeout document */
 import { spam, i } from "@bablr/boot";
 import { streamParse, Context } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
@@ -56,7 +57,6 @@ const wait = (timeout) =>
 
 export default function App() {
   const [input, setInput] = createSignal("<!0:cstml><></>");
-  const [output, setOutput] = createSignal([]);
   const [matcherTag, setMatcherTag] = createSignal("Document");
   const [playing, setPlaying] = createSignal(false);
   const [paused, setPaused] = createSignal(false);
@@ -114,6 +114,8 @@ export default function App() {
     return spam`<$${buildString(language().canonicalURL)}:${buildIdentifier(matcherTag())} />`;
   };
 
+  const treeNodes = new WeakMap();
+
   const productions = () => {
     if (!language()) {
       return [];
@@ -148,19 +150,43 @@ export default function App() {
       ),
       (tag) => {
         if (playing()) {
-          return wait(15).then(() => tag);
+          return wait(0).then(() => tag);
+          // return wait(15).then(() => tag);
         } else {
           const d = makeDeferred();
           deferreds.push(d);
-          console.log("else");
           return d.promise.then(() => tag);
         }
       },
     );
 
   const consume = async () => {
+    let depth = 0;
+    let el = document.getElementById("experiment-output");
+    let height = 0;
     for await (const tag of tags()) {
-      setOutput(btree.push(output(), tag));
+      if (tag.type === Symbol.for("OpenNodeTag")) {
+        depth++;
+      } else if (tag.type === Symbol.for("CloseNodeTag")) {
+        depth--;
+      }
+      let sp = (
+        <span
+          style={{
+            position: "absolute",
+            top: `${height}px`,
+            width: "100%",
+            display: "block",
+          }}
+        >
+          {"\u00a0".repeat(depth * 2) + printTag(tag) + "\n"}
+          <br />
+        </span>
+      );
+      el.append(sp);
+
+      height += sp.scrollHeight;
+      el.scrollTop = el.scrollHeight;
     }
   };
 
@@ -265,14 +291,6 @@ export default function App() {
                   onClick={() => {
                     setPlaying(true);
                     consume();
-                    /* try { */
-                    /*   while (deferreds.length) { */
-                    /*     let deferred = deferreds.shift(); */
-                    /*     deferred.resolve(); */
-                    /*   } */
-                    /* } catch (e) { */
-                    /*   console.log(e); */
-                    /* } */
                   }}
                 >
                   Play
@@ -280,13 +298,9 @@ export default function App() {
                 <button
                   id="form-step"
                   onClick={() => {
-                    try {
-                      if (deferreds.length) {
-                        let deferred = deferreds.shift();
-                        deferred.resolve();
-                      }
-                    } catch (e) {
-                      console.log(e);
+                    if (deferreds.length) {
+                      let deferred = deferreds.shift();
+                      deferred.resolve();
                     }
                   }}
                 >
@@ -296,7 +310,7 @@ export default function App() {
                   id="form-reset"
                   onClick={(e) => {
                     e.preventDefault();
-                    setOutput([]);
+                    document.getElementById("experiment-output").innerHTML = "";
                     deferreds = [];
                   }}
                 >
@@ -327,60 +341,11 @@ export default function App() {
                 background: "white",
                 height: "100%",
                 border: "1px solid black",
+                position: "relative",
                 padding: "2px",
                 "font-family": "monospace",
               }}
-            >
-              {() =>
-                (function renderBtree(btree, depth = 0) {
-                  let startIndex = Number.isFinite(btree[0]) ? 1 : 0;
-                  let result = <></>;
-                  for (let i = startIndex; i < btree.length; i++) {
-                    let value = btree[i];
-                    if (Array.isArray(value)) {
-                      let tree;
-                      ({ tree, depth } = renderBtree(value, depth));
-                      result = (
-                        <>
-                          {result}
-                          {tree}
-                        </>
-                      );
-                    } else {
-                      if (value.type === Symbol.for("CloseNodeTag")) {
-                        depth--;
-                      }
-                      let indent = (depth) => {
-                        let result = <></>;
-                        for (let i = 0; i < depth; i++) {
-                          result = (
-                            <>
-                              &nbsp;&nbsp;
-                              {result}
-                            </>
-                          );
-                        }
-                        return result;
-                      };
-                      result = (
-                        <>
-                          <span>
-                            {result}
-                            {indent(depth)}
-                            {printTag(value)}
-                          </span>
-                          <br />
-                        </>
-                      );
-                      if (value.type === Symbol.for("OpenNodeTag")) {
-                        depth++;
-                      }
-                    }
-                  }
-                  return { tree: <span>{result}</span>, depth: depth };
-                })(output()).tree
-              }
-            </div>
+            ></div>
           </div>
         </div>
         <div id="playground-right" style={{ width: "50%" }}>
