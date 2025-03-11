@@ -1,15 +1,14 @@
 /* global setTimeout document */
-import { spam, i } from "@bablr/boot";
+import { spam } from "@bablr/boot";
 import { streamParse, Context } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
 import { buildString, buildIdentifier } from "@bablr/helpers/builders";
 import { generateProductions } from "@bablr/helpers/grammar";
-import { printPrettyCSTML, resolveTags } from "@bablr/helpers/stream";
-import { createMemo, createSignal, For, Match, Switch } from "solid-js";
+import { resolveTags } from "@bablr/helpers/stream";
+import { createSignal, For, Match, Switch } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
 import { printType, printTag } from "@bablr/agast-helpers/print";
 import { defaultLanguageInput } from "./language.js";
-import "solid-devtools";
 import {
   createCodeMirror,
   createEditorControlledValue,
@@ -20,14 +19,10 @@ import { javascript } from "@codemirror/lang-javascript";
 import { defaultKeymap } from "@codemirror/commands";
 import { clouds } from "thememirror";
 import { makePersisted } from "@solid-primitives/storage";
-import {
-  getStreamIterator,
-  StreamIterable,
-  generatePrettyCSTML,
-} from "@bablr/agast-helpers/stream";
-import * as btree from "@bablr/agast-helpers/btree";
+import { getStreamIterator, StreamIterable } from "@bablr/agast-helpers/stream";
 import { Coroutine } from "@bablr/coroutine";
 import * as helpers from "@bablr/helpers";
+import "./Playground.css";
 
 function* __map(tags, fn) {
   const co = new Coroutine(getStreamIterator(tags));
@@ -265,50 +260,64 @@ export default function App() {
                   <Match when={paused()}>
                     <button
                       id="form-resume"
+                      class="icon-button"
+                      title="Resume"
                       onClick={() => {
                         setPlaying(true);
                         setPaused(false);
                         deferreds[0].resolve();
                       }}
+                      style={{ height: "100%" }}
                     >
-                      Resume
+                      <img src="/src/icons/resume.svg" />
                     </button>
                   </Match>
                   <Match when={!paused()}>
                     <button
                       id="form-pause"
+                      class="icon-button"
+                      title="Pause"
                       onClick={() => {
                         setPlaying(false);
                         setPaused(true);
                       }}
+                      style={{ height: "100%" }}
                     >
-                      Pause
+                      <img src="/src/icons/pause.svg" />
                     </button>
                   </Match>
                 </Switch>
                 <button
                   id="form-play"
+                  class="icon-button"
+                  title="Play"
                   onClick={() => {
                     setPlaying(true);
                     document.getElementById("experiment-output").innerHTML = "";
                     consume();
                   }}
+                  style={{ height: "100%" }}
                 >
-                  Play
+                  <img src="/src/icons/play.svg" />
                 </button>
                 <button
                   id="form-step"
+                  class="icon-button"
+                  title="Step"
                   onClick={() => {
                     if (deferreds.length) {
                       let deferred = deferreds.shift();
                       deferred.resolve();
                     }
                   }}
+                  style={{ height: "100%" }}
                 >
-                  Step
+                  <img src="/src/icons/step.svg" />
                 </button>
                 <button
                   id="form-reset"
+                  class="icon-button"
+                  title="Reset"
                   onClick={(e) => {
                     e.preventDefault();
                     setPlaying(false);
@@ -316,8 +325,9 @@ export default function App() {
                     document.getElementById("experiment-output").innerHTML = "";
                     deferreds = [];
                   }}
+                  style={{ height: "100%" }}
                 >
-                  Reset
+                  <img src="/src/icons/reset.svg" />
                 </button>
               </div>
               <textarea

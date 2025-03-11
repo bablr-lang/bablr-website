@@ -1,10 +1,10 @@
 ---
 import ExperimentsLayout from "../layouts/ExperimentsLayout.astro";
-import App from "../components/Playground.jsx";
+import App from "../components/solid/Playground.jsx";
 ---
 
 <ExperimentsLayout title="Playground">
   <div id="app">
-    <App client:only />
+    <App client:only="solid-js" />
   </div>
 </ExperimentsLayout>
