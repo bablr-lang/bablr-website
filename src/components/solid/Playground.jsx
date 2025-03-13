@@ -269,7 +269,17 @@ export default function App() {
                       }}
                       style={{ height: "100%" }}
                     >
-                      <img src="/src/icons/resume.svg" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M17 6v12h-2V6zm-4 6l-6 6V6z"
+                        />
+                      </svg>
                     </button>
                   </Match>
                   <Match when={!paused()}>
@@ -283,7 +293,17 @@ export default function App() {
                       }}
                       style={{ height: "100%" }}
                     >
-                      <img src="/src/icons/pause.svg" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M6 3h2v18H6zm10 0h2v18h-2z"
+                        />
+                      </svg>
                     </button>
                   </Match>
                 </Switch>
@@ -298,7 +318,17 @@ export default function App() {
                   }}
                   style={{ height: "100%" }}
                 >
-                  <img src="/src/icons/play.svg" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M6 20.196V3.804a1 1 0 0 1 1.53-.848l13.113 8.196a1 1 0 0 1 0 1.696L7.53 21.044A1 1 0 0 1 6 20.196"
+                    />
+                  </svg>
                 </button>
                 <button
                   id="form-step"
@@ -312,7 +342,17 @@ export default function App() {
                   }}
                   style={{ height: "100%" }}
                 >
-                  <img src="/src/icons/step.svg" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M12.172 11L7.515 6.343L8.929 4.93l7.07 7.07l-7.07 7.072l-1.414-1.414L12.17 13H3v-2zM18 19V5h2v14z"
+                    />
+                  </svg>
                 </button>
                 <button
                   id="form-reset"
@@ -327,7 +367,17 @@ export default function App() {
                   }}
                   style={{ height: "100%" }}
                 >
-                  <img src="/src/icons/reset.svg" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 5.135 1.865L15 8V2h6l-2.447 2.447A9.98 9.98 0 0 1 22 12"
+                    />
+                  </svg>
                 </button>
               </div>
               <textarea
