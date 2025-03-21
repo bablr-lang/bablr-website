@@ -26,7 +26,7 @@
     "@codemirror/view": "^6.36.1",
     "@solid-primitives/storage": "^4.2.1",
     "astro": "^5.0.9",
-    "bablr": "^0.7.1",
+    "bablr": "^0.7.2",
     "sharp": "^0.33.5",
     "solid-codemirror": "^2.3.1",
     "solid-js": "^1.9.3",
