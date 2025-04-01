@@ -35,6 +35,7 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
     </ul>
   </div>
   <div class="tpl-table">
+    <h2>Something for everyone...</h2>
     <div class="table-container">
       <TableCard
         title="Tools"
@@ -49,9 +50,22 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
       />
       <TableCard title="Platform" audience="IDE Developers" items={[]}>
         <ul slot="special-list-early">
-          <li><b>Existing platforms:</b> LSP, ANTLR, Tree-sitter, TextMate</li>
           <li>
-            <b>Supports different UX modes:</b>
+            Existing platforms use a mix of tooling like: LSP, ANTLR,
+            Tree-sitter, TextMate
+          </li>
+          <li><b>Our platform consists of:</b></li>
+          <ul>
+            <li><b>CSTML:</b> An untyped document format akin to XML/JSON</li>
+            <li>
+              <b>BABLR:</b> A parser-based schema validator for CSTML documents
+            </li>
+            <li>
+              <b>Paneditor:</b> A web UI for semantic coding built on BABLR
+            </li>
+          </ul>
+          <li>
+            <b>So we can support multiple UX modes:</b>
             <ul>
               <li>Voice gesture</li>
               <li>Terminal editing</li>
@@ -72,14 +86,14 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
         <ul slot="special-list-late">
           <li><b>Designing tools that make it easy to:</b></li>
           <ul>
-            <li>LR parsing (like people do)</li>
-            <li>Arbitrary lookahead</li>
-            <li>Balanced spans</li>
-            <li>Helpful parse errors</li>
+            <li>Parse left to right (like people do)</li>
+            <li>Perform arbitrary lookahead</li>
+            <li>Maintain balanced spans</li>
+            <li>Generate helpful parse errors</li>
             <li>Regex matching</li>
             <li>Just-in-time tokenization</li>
-            <li>No build step</li>
-            <li>Devtools/breakpoints</li>
+            <li>Skip the build step</li>
+            <li>Get the most out of Devtools</li>
           </ul>
         </ul>
       </TableCard>
@@ -158,7 +172,7 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
     text-align: center;
     padding: 2rem 0rem 2rem;
   }
-  .experiments h2 {
+  h2 {
     font-size: 3rem;
   }
 
@@ -203,15 +217,17 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
       text-align: left;
     }
     .roadmap .content {
-      margin: auto;
       font-size: x-large;
-      width: 1060px;
+      width: 1080px;
       display: flex;
     }
     .roadmap .text-space {
-      margin: auto;
+      display: flex;
+      flex-direction: column;
     }
     .roadmap .button-space {
+      display: flex;
+      align-items: right;
     }
 
     .table-container {
@@ -222,6 +238,7 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
     .tpl-table {
       margin: auto;
       justify-items: center;
+      display: grid;
     }
   }
 </style>
