@@ -7,7 +7,7 @@ const { title, audience, items } = Astro.props;
     <h3>{title}</h3>
   </div>
   <div class="card-body">
-    <h4>{audience}</h4>
+    <span>{audience}</span>
     <slot name="special-list-early" />
     <ul>
       {
@@ -27,8 +27,6 @@ const { title, audience, items } = Astro.props;
     border-radius: 7px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-items: center;
     margin: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
@@ -38,9 +36,14 @@ const { title, audience, items } = Astro.props;
     color: var(--accent-text);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    justify-items: center;
+  }
+  h3 {
+    padding-left: 1rem;
   }
   .card-body {
     padding: 1rem;
+  }
+  .card-body span {
+    font-weight: 600;
   }
 </style>
