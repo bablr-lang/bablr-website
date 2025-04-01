@@ -6,14 +6,17 @@ const { title, audience, items } = Astro.props;
   <div class="header">
     <h3>{title}</h3>
   </div>
-  <h4>{audience}</h4>
-  <ul>
-    {
-      items.map((item) => {
-        return <li>{item}</li>;
-      })
-    }
-  </ul>
+  <div class="card-body">
+    <h4>{audience}</h4>
+    <slot name="special-list" />
+    <ul>
+      {
+        items.map((item) => {
+          return <li>{item}</li>;
+        })
+      }
+    </ul>
+  </div>
 </div>
 
 <style>
@@ -31,5 +34,8 @@ const { title, audience, items } = Astro.props;
     color: var(--accent-text);
     width: 100%;
     justify-items: center;
+  }
+  .card-body {
+    padding: 1rem;
   }
 </style>
