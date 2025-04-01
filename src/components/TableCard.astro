@@ -1,0 +1,35 @@
+---
+const { title, audience, items } = Astro.props;
+---
+
+<div class="table-card">
+  <div class="header">
+    <h3>{title}</h3>
+  </div>
+  <h4>{audience}</h4>
+  <ul>
+    {
+      items.map((item) => {
+        return <li>{item}</li>;
+      })
+    }
+  </ul>
+</div>
+
+<style>
+  .table-card {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    border: solid 1px #ccc;
+    margin: 1rem;
+  }
+  .header {
+    background: white;
+    color: var(--accent-text);
+    width: 100%;
+    justify-items: center;
+  }
+</style>

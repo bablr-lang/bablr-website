@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TableCard from "../components/TableCard.astro";
 import Card from "../components/Card.astro";
 import CTAButton from "../components/CTAButton.astro";
 import Thumbnail from "../components/Thumbnail.astro";
@@ -33,6 +34,38 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
       />
     </ul>
   </div>
+  <div class="tpl-table">
+    <div class="table-container">
+      <TableCard
+        title="Tools"
+        audience="Tool Authors"
+        items={[
+          "Want to be able to support new languages after the fact",
+          "Want to be able to define custom tools, e.g. type-aware linting",
+          "Want to be able to define tools that can work on infinite inputs and those larger than system memory",
+          "Want to be able to interoperate naturally e.g. `format(fixLintErrors(code))`",
+          "Developers want to use trusted tools when working on new languages",
+        ]}
+      />
+      <TableCard
+        title="Platform"
+        audience="IDE Developers"
+        items={[
+          "Existing platforms: LSP, ANTLR, Tree-sitter, TextMate",
+          "Supports different UX modes: voice coding, gesture coding, terminal editing, online collab, interactive devtools, etc",
+          "",
+        ]}
+      />
+      <TableCard
+        title="Languages"
+        audience="Language Authors"
+        items={[
+          "Want to define languages in a way that supports tools that haven’t been made yet",
+          "Want to be able to create new languages by extending existing ones",
+        ]}
+      />
+    </div>
+  </div>
   <div class="experiments">
     <h2>Experiments</h2>
     <div class="thumb-container">
@@ -50,7 +83,7 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
       />
     </div>
   </div>
-  <roadmap>
+  <div class="roadmap">
     <div class="content">
       <div class="text-space">
         <h2>Roadmap</h2>
@@ -60,7 +93,7 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
         <CTAButton href="/roadmap" text="explore" />
       </div>
     </div>
-  </roadmap>
+  </div>
 </Layout>
 
 <style>
@@ -110,25 +143,25 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
     font-size: 3rem;
   }
 
-  roadmap {
+  .roadmap {
     padding: 4rem 0;
     color: #268bd2;
     text-align: center;
     display: block;
   }
-  roadmap .content {
+  .roadmap .content {
     margin: auto;
     font-size: x-large;
     max-width: calc(100% - 2rem);
   }
-  roadmap .text-space {
+  .roadmap .text-space {
     margin: auto;
   }
-  roadmap .button-space {
+  .roadmap .button-space {
     align-content: center;
     margin: auto;
   }
-  roadmap h2 {
+  .roadmap h2 {
     font-size: 3rem;
     margin: 0;
   }
@@ -143,23 +176,33 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
       padding: 2rem 0rem 2rem;
     }
 
-    roadmap {
+    .roadmap {
       padding: 4rem 0;
       color: #268bd2;
       display: flex;
       width: 100%;
       text-align: left;
     }
-    roadmap .content {
+    .roadmap .content {
       margin: auto;
       font-size: x-large;
       width: 1060px;
       display: flex;
     }
-    roadmap .text-space {
+    .roadmap .text-space {
       margin: auto;
     }
-    roadmap .button-space {
+    .roadmap .button-space {
+    }
+
+    .table-container {
+      display: flex;
+      flex-flow: row;
+      padding-bottom: 2rem;
+    }
+    .tpl-table {
+      margin: auto;
+      justify-items: center;
     }
   }
 </style>
