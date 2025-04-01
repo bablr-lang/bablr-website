@@ -1,5 +1,5 @@
 ---
-const { title, audience, items } = Astro.props;
+const { title, items } = Astro.props;
 ---
 
 <div class="table-card">
@@ -7,7 +7,6 @@ const { title, audience, items } = Astro.props;
     <h3>{title}</h3>
   </div>
   <div class="card-body">
-    <span>{audience}</span>
     <slot name="special-list-early" />
     <ul>
       {
