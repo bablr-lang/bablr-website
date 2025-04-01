@@ -48,15 +48,15 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
         ]}
       />
       <TableCard title="Platform" audience="IDE Developers" items={[]}>
-        <ul slot="special-list">
+        <ul slot="special-list-early">
           <li><b>Existing platforms:</b> LSP, ANTLR, Tree-sitter, TextMate</li>
           <li>
             <b>Supports different UX modes:</b>
             <ul>
-              <li>voice gesture</li>
-              <li>terminal editing</li>
-              <li>online collab</li>
-              <li>interactive devtools</li>
+              <li>Voice gesture</li>
+              <li>Terminal editing</li>
+              <li>Online collaboration</li>
+              <li>Interactive devtools</li>
             </ul>
           </li>
         </ul>
@@ -68,7 +68,21 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
           "Define languages in a way that supports tools that haven’t been made yet",
           "Create new languages by extending existing ones",
         ]}
-      />
+      >
+        <ul slot="special-list-late">
+          <li><b>Designing tools that make it easy to:</b></li>
+          <ul>
+            <li>LR parsing (like people do)</li>
+            <li>Arbitrary lookahead</li>
+            <li>Balanced spans</li>
+            <li>Helpful parse errors</li>
+            <li>Regex matching</li>
+            <li>Just-in-time tokenization</li>
+            <li>No build step</li>
+            <li>Devtools/breakpoints</li>
+          </ul>
+        </ul>
+      </TableCard>
     </div>
   </div>
   <div class="experiments">
