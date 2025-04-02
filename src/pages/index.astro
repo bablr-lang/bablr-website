@@ -6,6 +6,7 @@ import CTAButton from "../components/CTAButton.astro";
 import Thumbnail from "../components/Thumbnail.astro";
 import playgroundThumb from "../images/thumbnails/playground.png";
 import paneditorThumb from "../images/thumbnails/paneditor.png";
+import openCollective from "../images/icons/open-collective.svg";
 ---
 
 <Layout title="BABLR">
@@ -32,6 +33,11 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
         title="Philosophy"
         body="The Bablr philosophy."
       />
+      <Card
+        href="https://opencollective.com/bablr"
+        title="Open Collective"
+        body="Support BABLR financially."
+      />
     </ul>
   </div>
   <div class="tpl-table">
@@ -43,7 +49,7 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
           "Support new languages after the fact",
           "Define custom tools, e.g. type-aware linting",
           "Define tools that can work on infinite inputs and those larger than system memory",
-          "Interoperate naturally.",
+          "Interoperate naturally",
           "Developers want to use trusted tools when working on new languages",
         ]}
       />
@@ -143,11 +149,13 @@ import paneditorThumb from "../images/thumbnails/paneditor.png";
     background-position: 0%;
   }
   .link-card-grid {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
     gap: 2rem;
     padding: 0;
-    max-width: 700px;
+    max-width: 1080px;
     margin: auto;
   }
   .link-container {
