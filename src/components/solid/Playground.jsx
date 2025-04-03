@@ -51,7 +51,7 @@ const wait = (timeout) =>
   new Promise((resolve) => setTimeout(resolve, timeout));
 
 export default function App() {
-  const [input, setInput] = createSignal("<!0:cstml><></>");
+  const [input, setInput] = createSignal("<!0:cstml><_></>");
   const [matcherTag, setMatcherTag] = createSignal("Document");
   const [playing, setPlaying] = createSignal(false);
   const [paused, setPaused] = createSignal(false);
