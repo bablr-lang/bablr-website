@@ -9,15 +9,6 @@ import { createSignal, For, Match, Switch } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
 import { printType, printTag } from "@bablr/agast-helpers/print";
 import { defaultLanguageInput } from "./language.js";
-import {
-  createCodeMirror,
-  createEditorControlledValue,
-  createEditorReadonly,
-} from "solid-codemirror";
-import { lineNumbers, keymap } from "@codemirror/view";
-import { javascript } from "@codemirror/lang-javascript";
-import { defaultKeymap } from "@codemirror/commands";
-import { clouds } from "thememirror";
 import { makePersisted } from "@solid-primitives/storage";
 import { getStreamIterator, StreamIterable } from "@bablr/agast-helpers/stream";
 import { Coroutine } from "@bablr/coroutine";
@@ -89,27 +80,10 @@ export default function App() {
     { name: "languageInput" },
   );
   const [storageType, setStorageType] = createSignal("default");
-  const { ref, editorView, createExtension } = createCodeMirror({
-    onValueChange: (value) => {
-      if (storageType() === "local") {
-        setLocalLanguageInput(value);
-      }
-    },
-  });
-
-  createEditorReadonly(editorView, () => storageType() !== "local");
-  createEditorControlledValue(editorView, getLanguageTextForStorageType);
-
-  createExtension(clouds);
-  createExtension(lineNumbers);
-  createExtension(javascript);
-  createExtension(keymap.of(defaultKeymap));
 
   const matcher = () => {
     return spam`<$${buildString(language().canonicalURL)}:${buildIdentifier(matcherTag())} />`;
   };
-
-  const treeNodes = new WeakMap();
 
   const productions = () => {
     if (!language()) {
@@ -426,9 +400,22 @@ export default function App() {
             </select>
             <div
               id="experiment-grammar"
-              ref={ref}
-              style={{ background: "white" }}
-            ></div>
+              /* ref={ref} */
+              style={{
+                background: "white",
+                "white-space": "pre",
+                "font-family": "monospace",
+              }}
+              spellcheck="false"
+              contentEditable
+              onInput={(e) => {
+                if (storageType() === "local") {
+                  setLocalLanguageInput(e.currentTarget.innerText);
+                }
+              }}
+            >
+              {getLanguageTextForStorageType()}
+            </div>
           </div>
         </div>
       </div>

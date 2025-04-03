@@ -27,9 +27,6 @@ export default defineConfig({
     mode: "standalone",
   }),
   vite: {
-    optimizeDeps: {
-      // Add both @codemirror/state and @codemirror/view to included deps to optimize
-      include: ["@codemirror/state", "@codemirror/view"],
-    },
+    optimizeDeps: {},
   },
 });
