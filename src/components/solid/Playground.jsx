@@ -46,6 +46,11 @@ export default function App() {
   const [matcherTag, setMatcherTag] = createSignal("Document");
   const [playing, setPlaying] = createSignal(false);
   const [paused, setPaused] = createSignal(false);
+  const [storageType, setStorageType] = createSignal("default");
+  const [localLanguageInput, setLocalLanguageInput] = makePersisted(
+    createSignal(""),
+    { name: "languageInput" },
+  );
 
   const makeDeferred = () => {
     const deferred = {};
@@ -76,12 +81,6 @@ export default function App() {
       throw new Error();
     }
   };
-
-  const [localLanguageInput, setLocalLanguageInput] = makePersisted(
-    createSignal(""),
-    { name: "languageInput" },
-  );
-  const [storageType, setStorageType] = createSignal("default");
 
   const matcher = () => {
     return spam`<$${buildString(language().canonicalURL)}:${buildIdentifier(matcherTag())} />`;
@@ -150,7 +149,7 @@ export default function App() {
             display: "block",
           }}
         >
-          {"\u00a0".repeat(depth * 2) + printTag(tag) + "\n"}
+          {/*@once*/ "\u00a0".repeat(depth * 2) + printTag(tag) + "\n"}
           <br />
         </span>
       );
@@ -358,6 +357,7 @@ export default function App() {
               </div>
               <textarea
                 id="experiment-input"
+                spellcheck="false"
                 value={input()}
                 onInput={(e) => setInput(e.currentTarget.value)}
               >
@@ -375,6 +375,7 @@ export default function App() {
             <div
               id="experiment-output"
               contentEditable
+              spellcheck="false"
               style={{
                 "overflow-y": "auto",
                 background: "white",

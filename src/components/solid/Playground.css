@@ -1,36 +1,39 @@
 #experiment-input {
-	margin: 20px 30px 30px 30px;
-	width: auto;
-	display: flex;
-	height: 100%;
+  margin: 20px 30px 30px 30px;
+  width: auto;
+  display: flex;
+  height: 100%;
 }
 
 #experiment-output {
-	margin: 20px 0px 30px 30px;
-	width: auto;
-	display: flex;
-	height: 100%;
+  border: 1px solid;
+  margin: 20px 0px 30px 30px;
+  width: auto;
+  display: flex;
+  height: 100%;
 }
 
 #experiment-grammar {
-	margin: 20px 50px 50px 50px;
-	max-height: 90vh;
-	overflow: auto;
+  border: 1px solid;
+  margin: 20px 50px 50px 50px;
+  min-height: 90vh;
+  max-height: 90vh;
+  overflow: auto;
 }
 
 #form-eval {
-	width: 100px;
+  width: 100px;
 }
 
 .icon-button {
-	background: none;
-	border: none;
+  background: none;
+  border: none;
 }
 
 .icon-button:hover {
-	transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .icon-button img {
-	margin: auto;
+  margin: auto;
 }
