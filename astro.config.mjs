@@ -2,8 +2,6 @@ import { defineConfig } from "astro/config";
 
 import node from "@astrojs/node";
 
-import starlight from "@astrojs/starlight";
-
 import solidJs from "@astrojs/solid-js";
 
 import mdx from "@astrojs/mdx";

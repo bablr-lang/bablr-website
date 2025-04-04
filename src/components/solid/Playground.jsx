@@ -60,9 +60,11 @@ export default function App() {
   const language = () => {
     try {
       return new Function(
-        `return (helpers) => { ${getLanguageTextForStorageType()}; return {canonicalURL, dependencies, grammar, getCooked} }`,
+        `return (helpers) => { ${getLanguageTextForStorageType()}; return {canonicalURL, grammar, getCooked} }`,
       )()(helpers);
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const getLanguageTextForStorageType = () => {
@@ -408,7 +410,7 @@ export default function App() {
               }}
               spellcheck="false"
               contentEditable
-              onInput={(e) => {
+              onBlur={(e) => {
                 if (storageType() === "local") {
                   setLocalLanguageInput(e.currentTarget.innerText);
                 }
