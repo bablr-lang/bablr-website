@@ -10,15 +10,15 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
+  i18n: {
+    prefixDefaultLocale: false,
+    locales: ["en"],
+    defaultLocale: "en",
+  },
   redirects: {
     "/experiments/playground": "/playground",
   },
-  integrations: [starlight({
-    title: "DOCS",
-    logo: { src: "./src/images/BABLRTransparent.png" },
-    prerender: false,
-    favicon: "/favicon.ico",
-  }), solidJs(), mdx()],
+  integrations: [solidJs(), mdx()],
   server: { port: 8080 },
   site: "https://bablr.org",
   output: "server",
