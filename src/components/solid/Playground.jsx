@@ -403,7 +403,6 @@ export default function App() {
             </select>
             <div
               id="experiment-grammar"
-              /* ref={ref} */
               style={{
                 background: "white",
                 "white-space": "pre",
