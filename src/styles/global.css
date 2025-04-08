@@ -3,10 +3,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 @import url("https://fonts.cdnfonts.com/css/kronika");
 
+@font-face {
+  font-family: 'Kronika';
+  src: url('/fonts/KRONIKA_.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-    margin: 0;
-    font-family: "Plus Jakarta Sans", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-kronika {
+  font-family: 'Kronika', sans-serif;
+}
