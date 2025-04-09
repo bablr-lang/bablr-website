@@ -360,7 +360,7 @@ export default function App() {
                 spellcheck="false"
                 value={input()}
                 onInput={(e) => setInput(e.currentTarget.value)}
-                class="bg-white border-black"
+                class="border rounded-md p-2 w-full text-base text-black bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {input()}
               </textarea>
