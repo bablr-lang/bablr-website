@@ -1,43 +1,65 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const philosophyHeader = `The BABLR team believes that great software is built on strong principles. When engineering choices create trade-offs, a system of philosophy is needed to ensure that "why" is captured in addition to "what". Philosophy also provides context for past choices in a way that can empower new contributors and new leaders to pursue the BABLR mission in a decentralized manner.`;
+const philosophyData = [
+  {
+    title: "Have a philosophy.",
+    content:
+      "Consider what is unique about your system of values. Your philosophy should be useful in informing your choices, but it should not be gospel: your philosophy should change and grow with you as you reflect on your experiences and instincts. Record your philosophy and the reasoning behind shifts in it: growth comes from reflection, and progress requires understanding."
+  },
+  {
+    title: "Software should serve people.",
+    content:
+      "People should not become servants to software. Developers should seek empathy with their users so that they can design software that enhances users’ creativity and autonomy."
+  },
+  {
+    title: "Be curious.",
+    content:
+      "Ask open-ended questions, and make a good-faith attempt to find answers. Embrace the hardest questions: those without obvious answers."
+  },
+  {
+    title: "Use plain language.",
+    content:
+      "Seek simplicity through the creation of a unified and consistent terminology and symbology that aids new users’ comprehension and minimizes the cognitive overhead associated with using our tools."
+  },
+  {
+    title: "Build living software.",
+    content:
+      "Supported by sustainable communities. Pay down tech debt. Create new tech debt. Embrace forks. Value resilience over purity, and the Bazaar over the Cathedral."
+  },
+  {
+    title: "Support the long tail of use cases.",
+    content:
+      "Seek to create a playing field that is level for the most niche needs and the most generic needs of current or future users."
+  },
+  {
+    title: "Prioritize developer agency.",
+    content:
+      "Allow developers to optimize their environment for their own process."
+  },
+  {
+    title: "Value stability in infrastructure.",
+    content:
+      "Seek to create a durable foundation on top of which a variety of creative endeavors can thrive."
+  }
+];
 ---
-
 <Layout title="Philosophy">
-	<main>
-		<h1>Philosophy</h1>
-		<p>
-			The BABLR team believes that great software is built on strong principles. When engineering choices create trade-offs, a system of philosophy is needed to ensure that "why" is captured in addition to "what". Philosophy also provides context for past choices in a way that can empower new contributors and new leaders to pursue the BABLR mission in a decentralized manner. 
-		</p>
-		<ul>
-			<li>Have a philosophy. Consider what is unique about your system of values. Your philosophy should be useful in informing your choices, but it should not be gospel: your philosophy should change and grow with you as you reflect on your experiences and instincts. Record your philosophy and the reasoning behind shifts in it: growth comes from reflection, and progress requires understanding. </li>
-			<li>Software should serve people; people should not become servants to software. Developers should seek empathy with their users so that they can design software that enhances users’ creativity and autonomy.</li>
-			<li>Be curious. Ask open-ended questions, and make a good-faith attempt to find answers. Embrace the hardest questions: those without obvious answers.</li>
-			<li>Use plain language when possible. Seek simplicity through the creation of a unified and consistent terminology and symbology that aids new users’ comprehension and minimizes the cognitive overhead associated with using our tools.</li>
-			<li>Build living software supported by sustainable communities. Pay down tech debt. Create new tech debt. Embrace forks. Value resilience over purity, and the Bazaar over the Cathedral.</li>
-			<li>Aggressively support the long tail of use cases: seek to create a playing field that is level for the most niche needs and the most generic needs of current or future users.</li>
-			<li>Prioritize developer agency, e.g. by allowing developers to optimize their environment for their own process.</li>
-			<li>Value stability in infrastructure. Seek to create a durable foundation on top of which a variety of creative endeavors can thrive.</li>
-		</ul>
-	</main>
+  <div class="max-w-5xl mx-auto px-4 py-16">
+    <h1 class="text-6xl font-extrabold text-center mb-12 tracking-tight">Philosophy</h1>
+    <p class="text-lg md:text-xl leading-relaxed mb-12 text-center max-w-3xl mx-auto">
+      {philosophyHeader}
+    </p>
+    <ul class="space-y-8 text-base md:text-lg leading-relaxed">
+      {philosophyData.map((item, idx) => (
+        <li
+          class="bg-white shadow-lg rounded-2xl p-6 border border-orange-200 opacity-0 translate-y-6 animate-fade-in-slide"
+          style={`animation-delay: ${idx * 100}ms`}
+        >
+          <span class="font-semibold text-orange-600">{item.title}</span> {item.content}
+        </li>
+      ))}
+    </ul>
+  </div>
 </Layout>
-
-<style>
-	h1 {
-		font-size: 3rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
-		margin-top: 1em;
-	}
-	h2 {
-		text-align: center;
-	}
-	p, ul {
-		max-width: 700px;
-		margin: auto;
-	}
-	li {
-		margin: 20px ;
-	}
-</style>

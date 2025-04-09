@@ -2,7 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
-
+import Navbar from "../components/solid/Navbar";
 const { title } = Astro.props;
 ---
 
@@ -16,14 +16,14 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
-    <Header />
+  <body class="min-h-screen bg-gradient-to-b from-orange-50 to-orange-100 font-jakarta">
+    <Navbar client:only="solid"/>
     <slot />
     <Footer />
   </body>
 </html>
 
-<style is:global>
+<!-- <style is:global>
   :root {
     --accent: #e28743;
     /*		--accent-light: #e0ccfa;*/
@@ -68,4 +68,5 @@ const { title } = Astro.props;
     padding: 0px 5px;
     border-radius: 10px;
   }
-</style>
+</style> -->
+

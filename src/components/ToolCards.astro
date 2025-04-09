@@ -1,0 +1,67 @@
+---
+import { Code, Terminal, Braces } from "lucide-react";
+
+const cards = [
+  {
+    id: 1,
+    title: "Tool Authors",
+    description:
+      "Create and maintain tools with powerful abstractions and simplified workflows.",
+    icon: Code,
+    color: "bg-purple-100 text-purple-600",
+    borderColor: "border-purple-200",
+    shadowColor: "shadow-purple-100",
+  },
+  {
+    id: 2,
+    title: "IDE Developers",
+    description:
+      "Build rich editing experiences with comprehensive language support.",
+    icon: Terminal,
+    color: "bg-blue-100 text-blue-600",
+    borderColor: "border-blue-200",
+    shadowColor: "shadow-blue-100",
+  },
+  {
+    id: 3,
+    title: "Language Authors",
+    description:
+      "Design and implement languages with sophisticated parsing capabilities.",
+    icon: Braces,
+    color: "bg-orange-100 text-orange-600",
+    borderColor: "border-orange-200",
+    shadowColor: "shadow-orange-200",
+  },
+];
+---
+
+<div class="w-full max-w-6xl mx-auto py-12 px-4 text-center">
+  <h2 class="text-4xl font-bold text-gray-900 py-2">
+    Your Role. Your Power. Your Platform.
+  </h2>
+  <p class="text-gray-600 mt-2">
+    Pick your path. BABLR adapts to you—whether you're building tools,
+    languages, or editor features.
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+    {cards.map((card) => {
+      const IconComponent = card.icon;
+      return (
+        <div
+          class={`bg-white rounded-xl border ${card.borderColor} ${card.shadowColor} shadow-lg p-6 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:translate-y-1 cursor-pointer`}
+        >
+          <div class={`p-4 rounded-full ${card.color} mb-4`}>
+            <IconComponent size={48} />
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 text-center">
+            {card.title}
+          </h3>
+          <p class="mt-2 text-gray-600 text-center text-sm">
+            {card.description}
+          </p>
+        </div>
+      );
+    })}
+  </div>
+</div>
+
