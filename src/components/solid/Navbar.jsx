@@ -2,9 +2,8 @@ import { createSignal } from "solid-js";
 
 const LINKS = [
   { label: "ABOUT", path: "/about" },
-  { label: "DOCS", path: "/docs.bablr.org" },
+  { label: "DOCS", path: "https://docs.bablr.org/" },
   { label: "BLOG", path: "/blog" },
-  { label: "TUTORIALS", path: "/tutorials" },
   { label: "LANGUAGES", path: "/languages" },
   { label: "PHILOSOPHY", path: "/philosophy" },
 ];
@@ -16,7 +15,9 @@ const Navbar = () => {
     <header class="flex items-center justify-between p-6 relative">
       {/* Logo */}
       <div class="flex items-center space-x-2 flex-1">
-        <img src="/bablr_logo.png" alt="Bablr Logo" class="h-16 w-16" />
+        <a href="/" class="block">
+          <img src="/bablr_logo.png" alt="Bablr Logo" class="h-16 w-16"/>
+        </a>
       </div>
 
       {/* Hamburger Button */}
