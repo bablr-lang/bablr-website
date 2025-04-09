@@ -42,6 +42,9 @@ dependencies:
   '@bablr/language-en-cstml':
     specifier: ^0.9.0
     version: 0.9.0
+  '@fontsource/plus-jakarta-sans':
+    specifier: ^5.2.5
+    version: 5.2.5
   '@solid-primitives/storage':
     specifier: ^4.2.1
     version: 4.3.1(solid-js@1.9.5)
@@ -913,6 +916,10 @@ packages:
       shell-quote: 1.8.2
       yargs: 17.7.2
     dev: true
+
+  /@fontsource/plus-jakarta-sans@5.2.5:
+    resolution: {integrity: sha512-2QBEymhsrpomwXrDygLwolOPOjRGDLDT+Pezo+SsnapcQ1z0n4qXzhC+EVmTZ0yxrQvqdc0kcb9EUd0eWmj9Jw==}
+    dev: false
 
   /@humanwhocodes/config-array@0.13.0:
     resolution: {integrity: sha512-DZLEEqFWQFiyK6h5YIeynKx7JlvCYWL0cImfSRXZ9l4Sg2efkFGTuFf6vzXjK1cq6IYkU+Eg/JizXw+TD2vRNw==}
