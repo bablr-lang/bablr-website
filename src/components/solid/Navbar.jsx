@@ -6,6 +6,7 @@ const LINKS = [
   { label: "BLOG", path: "/blog" },
   { label: "TUTORIALS", path: "/tutorials" },
   { label: "LANGUAGES", path: "/languages" },
+  { label: "PHILOSOPHY", path: "/philosophy" },
 ];
 
 const Navbar = () => {
