@@ -1,0 +1,25 @@
+span[openspan],
+span[closespan] {
+  font-size: 0.85em;
+  position: relative;
+  padding: 0.1em;
+  bottom: 0.05em;
+  color: #edde34;
+  text-shadow:
+    -0.06em 0 0 #000,
+    0 -0.06em 0 #000,
+    0.06em 0 0 #000,
+    0 0.06em 0 #000,
+    -0.04em -0.04em 0 #000,
+    0.04em -0.04em 0 #000,
+    0.04em 0.04em 0 #000,
+    -0.04em 0.04em 0 #000;
+}
+
+span[openspan] {
+  margin-right: 0.04em;
+}
+
+span[closespan] {
+  margin-left: 0.04em;
+}

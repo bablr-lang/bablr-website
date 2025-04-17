@@ -1,31 +1,34 @@
 ---
-import RoadmapItem from './RoadmapItem.astro';
-import { CheckCircle } from 'lucide-react';
+import RoadmapItem from "./RoadmapItem.astro";
+import { CheckCircle } from "lucide-astro";
 
 interface Props {
   title: string;
   items: Array<{ title: string; description: string }>;
-  status: 'completed' | 'in-progress' | 'planned';
+  status: "completed" | "in-progress" | "planned";
 }
 
 const { title, items, status } = Astro.props;
 ---
+
 <div class="space-y-6">
   <h3 class="text-xl font-bold text-gray-800 flex items-center">
-    {status === 'completed' ? (
-      <div class="text-green-500 mr-2">
-        <CheckCircle size={24} />
-      </div>
-    ) : (
-      <div class={`w-6 h-6 rounded-full ${
-        status === 'in-progress' ? 'bg-blue-500' : 'bg-gray-300'
-      } mr-2`} />
-    )}
+    {
+      status === "completed" ? (
+        <div class="text-green-500 mr-2">
+          <CheckCircle size={24} />
+        </div>
+      ) : (
+        <div
+          class={`w-6 h-6 rounded-full ${
+            status === "in-progress" ? "bg-blue-500" : "bg-gray-300"
+          } mr-2`}
+        />
+      )
+    }
     {title}
   </h3>
   <div class="space-y-4">
-    {items.map(item => (
-      <RoadmapItem {...item} status={status} />
-    ))}
+    {items.map((item) => <RoadmapItem {...item} status={status} />)}
   </div>
-</div> 
+</div>

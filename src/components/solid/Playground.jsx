@@ -36,6 +36,38 @@ function* __map(tags, fn) {
   }
 }
 
+const fixupSelection = () => {
+  let selection = document.getSelection();
+  let { focusNode, focusOffset } = selection;
+
+  if (!focusNode) return;
+
+  let wrapperNode = ["BR", "#text"].includes(focusNode.nodeName)
+    ? focusNode.parentNode
+    : focusNode.firstChild?.nodeName === "DIV"
+      ? focusNode.firstChild
+      : focusNode;
+
+  let empty =
+    !wrapperNode.previousSibling &&
+    !wrapperNode.textContent.slice(0, focusOffset);
+
+  // if (empty) {
+  //   selection.getRangeAt(0).selectNodeContents(wrapperNode);
+  //   selection.getRangeAt(0)?.collapse();
+  // }
+
+  if (empty || selection.containsNode(wrapperNode)) {
+    selection.getRangeAt(0).setStart(wrapperNode.firstChild, 0);
+    selection
+      .getRangeAt(0)
+      .setEnd(wrapperNode.lastChild, wrapperNode.lastChild.length);
+    // return true;
+  }
+
+  return empty;
+};
+
 export const map = (tags, fn) => new StreamIterable(__map(tags, fn));
 
 const wait = (timeout) =>
@@ -65,7 +97,12 @@ export default function App() {
   const language = () => {
     try {
       return new Function(
-        `return (helpers) => { ${getLanguageTextForStorageType()}; return {canonicalURL, grammar, getCooked} }`,
+        `return (helpers) => { ${getLanguageTextForStorageType()};
+        let _return_ = {};
+        if (typeof canonicalURL !== 'undefined') _return_.canonicalURL = canonicalURL;
+        if (typeof grammar !== 'undefined') _return_.grammar = grammar;
+        if (typeof getCooked !== 'undefined') _return_.getCooked = getCooked;
+       return _return_; }`,
       )()(helpers);
     } catch (e) {
       console.error(e);
@@ -133,18 +170,16 @@ export default function App() {
   const consume = async () => {
     let depth = 0;
     let el = document.getElementById("experiment-output");
-    let height = 0;
+    let height = 4;
     for await (const tag of tags()) {
-      if (tag.type === Symbol.for("OpenNodeTag")) {
-        depth++;
-      } else if (tag.type === Symbol.for("CloseNodeTag")) {
+      if (tag.type === Symbol.for("CloseNodeTag")) {
         depth--;
       }
       let sp = (
         <span
           style={{
             position: "absolute",
-            top: `${height}px`,
+            top: `${height + 4}px`,
             width: "100%",
             display: "block",
           }}
@@ -154,6 +189,10 @@ export default function App() {
         </span>
       );
       el.append(sp);
+
+      if (tag.type === Symbol.for("OpenNodeTag")) {
+        depth++;
+      }
 
       height += sp.scrollHeight;
       el.scrollTop = el.scrollHeight;
@@ -165,7 +204,13 @@ export default function App() {
       <div id="playground" style={{ display: "flex", "flex-flow": "row" }}>
         <div
           id="playground-left"
-          style={{ display: "flex", "flex-flow": "column", width: "50%" }}
+          style={{
+            display: "flex",
+            "flex-flow": "column",
+            width: "50%",
+            height: "100%",
+            position: "relative",
+          }}
         >
           <div
             id="input"
@@ -173,7 +218,7 @@ export default function App() {
               display: "flex",
               "flex-flow": "row",
               "align-items": "center",
-              height: "50%",
+              "flex-grow": "1",
             }}
           >
             <div
@@ -185,17 +230,10 @@ export default function App() {
                 height: "100%",
               }}
             >
-              <label for="experiment-input" style={{ "text-align": "center" }}>
+              <label class="section" for="experiment-input">
                 Input
               </label>
-              <div
-                id="matcher-tag-input"
-                style={{
-                  display: "inline-flex",
-                  gap: "1rem",
-                  padding: "10px",
-                }}
-              >
+              <div class="controls">
                 <label for="matcher-tag">Matcher: </label>
                 <select
                   id="matcher-tag"
@@ -359,7 +397,9 @@ export default function App() {
                 id="experiment-input"
                 spellcheck="false"
                 value={input()}
-                onInput={(e) => setInput(e.currentTarget.value)}
+                onInput={(e) => {
+                  setInput(e.currentTarget.value);
+                }}
                 class="border rounded-md p-2 w-full text-base text-black bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {input()}
@@ -368,22 +408,34 @@ export default function App() {
           </div>
           <div
             id="output"
-            style={{ display: "flex", "flex-flow": "column", height: "50vh" }}
+            style={{ display: "flex", "flex-flow": "column", "flex-grow": 1.5 }}
           >
-            <label for="experiment-output" style={{ "text-align": "center" }}>
+            <label
+              class="section"
+              for="experiment-output"
+              style={{ margin: "10px 0" }}
+            >
               Output
             </label>
             <div
               id="experiment-output"
-              contentEditable
               spellcheck="false"
+              onClick={(e) => {
+                if (e.detail % 3 === 0) {
+                  let range = document.createRange();
+                  range.selectNodeContents(e.target.parentElement);
+                  let sel = window.getSelection();
+                  sel.removeAllRanges();
+                  sel.addRange(range);
+                }
+              }}
               style={{
                 "overflow-y": "auto",
                 background: "white",
                 height: "100%",
                 border: "1px solid black",
                 position: "relative",
-                padding: "2px",
+                padding: "8px",
                 "font-family": "monospace",
               }}
             ></div>
@@ -391,33 +443,105 @@ export default function App() {
         </div>
         <div id="playground-right" style={{ width: "50%" }}>
           <div id="grammar" style={{ display: "flex", "flex-flow": "column" }}>
-            <h4 style={{ "text-align": "center" }}>Grammar</h4>
-            <select
-              id="grammar-flag"
-              onInput={(e) => {
-                setStorageType(e.currentTarget.value);
-              }}
-              style={{ width: "200px" }}
-            >
-              <option value="default">CSTML</option>
-              <option value="local">Local Storage</option>
-            </select>
+            <label class="section">Parser</label>
+            <div class="controls">
+              <label for="grammar-flag">Grammar: </label>
+              <select
+                id="grammar-flag"
+                onInput={(e) => {
+                  setStorageType(e.currentTarget.value);
+                }}
+                style={{ width: "200px" }}
+              >
+                <option value="default">🔒 CSTML</option>
+                <option value="local">My grammar</option>
+              </select>
+            </div>
             <div
               id="experiment-grammar"
               style={{
                 background: "white",
                 "white-space": "pre",
                 "font-family": "monospace",
+                color: storageType() !== "local" ? "gray" : null,
               }}
               spellcheck="false"
               contentEditable
+              onKeyDown={(e) => {
+                if (
+                  (storageType() !== "local" &&
+                    !(e.metaKey || e.ctrlKey || e.altKey || e.fnKey) &&
+                    ![
+                      "ArrowLeft",
+                      "ArrowRight",
+                      "ArrowUp",
+                      "ArrowDown",
+                    ].includes(e.key)) ||
+                  (e.key === "Backspace" && fixupSelection())
+                ) {
+                  e.preventDefault();
+                }
+
+                if (
+                  ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(
+                    e.key,
+                  )
+                ) {
+                  fixupSelection();
+                }
+              }}
+              onClick={(e) => {
+                if (e.detail % 3 === 0) {
+                  let range = document.createRange();
+                  range.selectNodeContents(e.target);
+                  let sel = window.getSelection();
+                  sel.removeAllRanges();
+                  sel.addRange(range);
+                }
+              }}
+              onPaste={(e) => {
+                e.preventDefault();
+                if (storageType() !== "local") return;
+
+                if (document.getSelection().focusNode.tagName === "DIV") {
+                  let range = document.createRange();
+                  range.selectNodeContents(
+                    document.getSelection().focusNode.firstChild,
+                  );
+                  let sel = window.getSelection();
+                  sel.removeAllRanges();
+                  sel.addRange(range);
+                }
+
+                let clipboardData = e.clipboardData || window.clipboardData;
+
+                fixupSelection();
+
+                let wasEmpty = e.target.innerText === "\n";
+
+                if (wasEmpty) {
+                  e.target.innerText = clipboardData.getData("Text").toString();
+
+                  fixupSelection();
+                } else {
+                  document.getSelection().deleteFromDocument();
+                  document
+                    .getSelection()
+                    .getRangeAt(0)
+                    .insertNode(
+                      document.createTextNode(clipboardData.getData("Text")),
+                    );
+                }
+
+                document.getSelection().getRangeAt(0).collapse();
+              }}
               onBlur={(e) => {
                 if (storageType() === "local") {
                   setLocalLanguageInput(e.currentTarget.innerText);
                 }
               }}
             >
-              {getLanguageTextForStorageType()}
+              <div id="grammar-wrapper">{getLanguageTextForStorageType()}</div>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 ---
-import { Code, Terminal, Braces } from "lucide-react";
+import { Code, Terminal, Braces } from "lucide-astro";
 
 const cards = [
   {
@@ -44,24 +44,25 @@ const cards = [
     languages, or editor features.
   </p>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-    {cards.map((card) => {
-      const IconComponent = card.icon;
-      return (
-        <div
-          class={`bg-white rounded-xl border ${card.borderColor} ${card.shadowColor} shadow-lg p-6 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:translate-y-1 cursor-pointer`}
-        >
-          <div class={`p-4 rounded-full ${card.color} mb-4`}>
-            <IconComponent size={48} />
+    {
+      cards.map((card) => {
+        const IconComponent = card.icon;
+        return (
+          <div
+            class={`bg-white rounded-xl border ${card.borderColor} ${card.shadowColor} shadow-lg p-6 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:translate-y-1 cursor-pointer`}
+          >
+            <div class={`p-4 rounded-full ${card.color} mb-4`}>
+              <IconComponent size={48} />
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800 text-center">
+              {card.title}
+            </h3>
+            <p class="mt-2 text-gray-600 text-center text-sm">
+              {card.description}
+            </p>
           </div>
-          <h3 class="text-xl font-semibold text-gray-800 text-center">
-            {card.title}
-          </h3>
-          <p class="mt-2 text-gray-600 text-center text-sm">
-            {card.description}
-          </p>
-        </div>
-      );
-    })}
+        );
+      })
+    }
   </div>
 </div>
-

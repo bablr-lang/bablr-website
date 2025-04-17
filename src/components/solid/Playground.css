@@ -1,24 +1,64 @@
+label.section {
+  font-weight: bold;
+  text-align: center;
+}
+
+select {
+  background-color: white;
+  padding: 3px;
+  border: 1px solid black;
+  margin: -3px;
+}
+
+.controls {
+  display: inline-flex;
+  gap: 1rem;
+  padding: 10px 0;
+}
+
+#playground {
+  gap: 20px;
+  padding: 10px 20px;
+  height: 100vh;
+  position: relative;
+}
+
 #experiment-input {
-  margin: 20px 30px 30px 30px;
   width: auto;
   display: flex;
   height: 100%;
+  margin: 2px;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 13px;
 }
 
 #experiment-output {
   border: 1px solid;
-  margin: 20px 0px 30px 30px;
   width: auto;
   display: flex;
   height: 100%;
+  margin: 2px;
 }
 
 #experiment-grammar {
+  background-color: white;
   border: 1px solid;
-  margin: 20px 50px 50px 50px;
-  min-height: 90vh;
-  max-height: 90vh;
   overflow: auto;
+  flex-grow: 1;
+  margin: 2px;
+}
+
+#grammar-wrapper {
+  padding: 8px;
+}
+
+#output {
+  overflow: hidden;
+}
+
+#grammar {
+  height: 100%;
 }
 
 #form-eval {

@@ -6,8 +6,6 @@ import solidJs from "@astrojs/solid-js";
 
 import mdx from "@astrojs/mdx";
 
-import react from "@astrojs/react";
-
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
@@ -20,13 +18,12 @@ export default defineConfig({
   redirects: {
     "/experiments/playground": "/playground",
   },
-  integrations: [mdx(), 
-    react({
-    include: ['**/react/*'],
-  }),
-  solidJs({
-    include: ['**/solid/*'],
-  })],
+  integrations: [
+    mdx(),
+    solidJs({
+      include: ["**/solid/*"],
+    }),
+  ],
   server: { port: 8080 },
   site: "https://bablr.org",
   output: "server",
