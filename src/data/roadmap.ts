@@ -18,9 +18,9 @@ export const roadmapData: RoadmapCategory[] = [
     status: "planned",
     items: [
       {
-        title: "isValid cache",
-        description: "...for both typed and untyped trees",
-        audienceTypes: ["tool"],
+        title: "1.0.0",
+        description: "The first production-grade release",
+        audienceTypes: ["tool", "ide", "lang"],
       },
       {
         title: "Broader language support",
@@ -33,9 +33,9 @@ export const roadmapData: RoadmapCategory[] = [
         audienceTypes: ["lang"],
       },
       {
-        title: "1.0.0",
-        description: "The first production-grade release",
-        audienceTypes: ["tool", "ide", "lang"],
+        title: "isValid cache",
+        description: "...for both typed and untyped trees",
+        audienceTypes: ["tool"],
       },
     ],
   },
