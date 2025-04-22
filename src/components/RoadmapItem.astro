@@ -1,25 +1,52 @@
 ---
+import type { AudienceType } from "../data/audiences";
+import { audiences } from "../data/audiences";
+
 interface Props {
   title: string;
   description: string;
-  status: 'completed' | 'in-progress' | 'planned';
+  audienceTypes: Array<AudienceType>;
+  status: "completed" | "in-progress" | "planned";
 }
-const { title, description, status } = Astro.props;
+const { title, description, status, audienceTypes } = Astro.props;
 ---
 
-<div class={`p-4 rounded-lg border ${
-  status === 'completed' ? 'bg-green-50 border-green-200' :
-  status === 'in-progress' ? 'bg-blue-50 border-blue-200' :
-  'bg-gray-50 border-gray-200'
-}`}>
-  <h4 class={`font-semibold ${
-    status === 'completed' ? 'text-green-700' :
-    status === 'in-progress' ? 'text-blue-700' :
-    'text-gray-700'
-  }`}>
+<div
+  class={`p-4 rounded-lg border relative ${
+    status === "completed"
+      ? "bg-green-50 border-green-200"
+      : status === "in-progress"
+        ? "bg-blue-50 border-blue-200"
+        : "bg-gray-50 border-gray-200"
+  }`}
+>
+  <h4
+    class={`font-semibold ${
+      status === "completed"
+        ? "text-green-700"
+        : status === "in-progress"
+          ? "text-blue-700"
+          : "text-gray-700"
+    }`}
+  >
     {title}
   </h4>
   <p class="text-sm text-gray-600">
     {description}
   </p>
-</div> 
+  <div class="flex absolute top-2 right-2">
+    {
+      audienceTypes.map((tagType) => {
+        let { icon: Icon, color, borderColor } = audiences[tagType];
+        return (
+          Icon && (
+            <Icon
+              size={24}
+              class={`roadmap-icon rounded-full p-1 mx-1 border ${color} ${borderColor}`}
+            />
+          )
+        );
+      })
+    }
+  </div>
+</div>

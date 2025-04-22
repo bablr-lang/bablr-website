@@ -1,7 +1,9 @@
+import type { AudienceType } from "./audiences";
+
 interface RoadmapItem {
   title: string;
   description: string;
-  tags: Array<"tool" | "lang" | "ide">;
+  audienceTypes: Array<AudienceType>;
 }
 
 interface RoadmapCategory {
@@ -18,22 +20,22 @@ export const roadmapData: RoadmapCategory[] = [
       {
         title: "Shift operation",
         description: "Enables LR parsing of expressions like 2+2",
-        tags: ["lang"],
+        audienceTypes: ["lang"],
       },
       {
         title: "Unicode support",
         description: "CSTML identifiers may now contain unicode",
-        tags: ["lang", "tool"],
+        audienceTypes: ["tool", "lang"],
       },
       {
         title: "Immutable btrees",
         description: "Amortized-cost changes to wide nodes",
-        tags: ["tool"],
+        audienceTypes: ["tool"],
       },
       {
         title: "Language embedding",
         description: "Languages can refer to and extend each other",
-        tags: ["lang"],
+        audienceTypes: ["lang"],
       },
     ],
   },
@@ -44,22 +46,22 @@ export const roadmapData: RoadmapCategory[] = [
       {
         title: "Javascript language support",
         description: "Our tools should parse our own source code",
-        tags: ["tool"],
+        audienceTypes: ["tool"],
       },
       {
         title: "Spamex",
         description: "Structural Pattern Matcher EXpressions",
-        tags: ["tool"],
+        audienceTypes: ["tool"],
       },
       {
         title: "Syntax highlighting",
         description: "A CSS-like system for styling code",
-        tags: ["ide"],
+        audienceTypes: ["ide"],
       },
       {
         title: "Documentation",
         description: "API docs, guides, architecture and more",
-        tags: ["ide", "tool", "lang"],
+        audienceTypes: ["tool", "ide", "lang"],
       },
     ],
   },
@@ -70,22 +72,22 @@ export const roadmapData: RoadmapCategory[] = [
       {
         title: "isValid cache",
         description: "...for both typed and untyped trees",
-        tags: ["tool"],
+        audienceTypes: ["tool"],
       },
       {
         title: "Broader language support",
         description: "Define the first 1000 languages",
-        tags: ["lang"],
+        audienceTypes: ["lang"],
       },
       {
         title: "More implementations",
         description: "Port BABLR engine to other runtimes",
-        tags: ["ide"],
+        audienceTypes: ["ide"],
       },
       {
         title: "1.0.0",
         description: "The first production-grade release",
-        tags: ["ide"],
+        audienceTypes: ["ide"],
       },
     ],
   },

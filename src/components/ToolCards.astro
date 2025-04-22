@@ -1,36 +1,26 @@
 ---
-import { Code, Terminal, Braces } from "lucide-astro";
-
+import { audiences } from "../data/audiences";
 const cards = [
   {
-    id: 1,
+    id: "tool",
     title: "Tool Authors",
     description:
       "Create and maintain tools with powerful abstractions and simplified workflows.",
-    icon: Code,
-    color: "bg-purple-100 text-purple-600",
-    borderColor: "border-purple-200",
-    shadowColor: "shadow-purple-100",
+    ...audiences.tool,
   },
   {
-    id: 2,
+    id: "ide",
     title: "IDE Developers",
     description:
       "Build rich editing experiences with comprehensive language support.",
-    icon: Terminal,
-    color: "bg-blue-100 text-blue-600",
-    borderColor: "border-blue-200",
-    shadowColor: "shadow-blue-100",
+    ...audiences.ide,
   },
   {
-    id: 3,
+    id: "lang",
     title: "Language Authors",
     description:
       "Design and implement languages with sophisticated parsing capabilities.",
-    icon: Braces,
-    color: "bg-orange-100 text-orange-600",
-    borderColor: "border-orange-200",
-    shadowColor: "shadow-orange-200",
+    ...audiences.lang,
   },
 ];
 ---
@@ -40,22 +30,24 @@ const cards = [
     Our APIs get out of your way so you can write code
   </h2>
   <p class="text-gray-600">
-    We're on a mission to move programming beyond its roots in punchcards and 80
-    character lines by defining a universal <a
+    We're building an API-first IDE centered around a <a
       class="hover:text-orange-600"
       href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction"
       >Document Object Model</a
-    > for code. Our hope is to create a new generation of tools for coding that feel
-    more trustworthy, transparent, powerful, and approachable in order to demonstrate
-    the unrealized potential we see in code editors.
+    > (or DOM) for code. We hope to create a new generation of tools that are more
+    trustworthy, transparent, powerful, and approachable in order to make software
+    literacy less rare. We believe when that software literacy is rare the incentives
+    are strong for software to be used to manipulate people rather than to serve
+    them.
   </p>
 </div>
 <div
-  class="w-full max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10"
+  class="w-full max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10 px-4"
 >
   {
     cards.map((card) => {
       const IconComponent = card.icon;
+
       return (
         <div
           class={`bg-white rounded-xl border ${card.borderColor} ${card.shadowColor} shadow-lg p-6 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:translate-y-1 cursor-pointer`}
