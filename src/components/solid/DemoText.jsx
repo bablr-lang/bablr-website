@@ -68,13 +68,13 @@ function* gen(tags, node, traverse = false) {
   let step = iter.next();
   let open;
   let spans = [];
+  let i = -1;
 
   let range = document.createRange();
   range.selectNodeContents(node.firstChild);
   range.collapse();
 
   while (!step.done) {
-    let i = 0;
     let tag = step.value;
 
     switch (tag.type) {
@@ -86,8 +86,8 @@ function* gen(tags, node, traverse = false) {
       case LiteralTag: {
         i++;
 
-        debugger;
         if (traverse) {
+          range.selectNode(node.children[i]);
         } else {
           range.setStart(node.lastChild, 0);
           range.setEnd(node.lastChild, 1);
@@ -106,7 +106,9 @@ function* gen(tags, node, traverse = false) {
               ? currentColors.pop()
               : "black";
 
-        let wrapper = (
+        let wrapper = traverse ? (
+          node.children[i]
+        ) : (
           <span
             openSpan={openSpan}
             closeSpan={closeSpan}
@@ -117,15 +119,18 @@ function* gen(tags, node, traverse = false) {
           />
         );
 
-        if (!traverse) {
+        if (traverse) {
+          wrapper.style.color = color;
+        } else {
           range.surroundContents(wrapper);
         }
 
-        wrapper.animate([startFrame, midFrame, startFrame], {
-          duration: 500,
-          delay: 0,
-          fill: "forwards",
-        });
+        if (!traverse || (!openSpan && !closeSpan))
+          wrapper.animate([startFrame, midFrame, startFrame], {
+            duration: 500,
+            delay: 0,
+            fill: "forwards",
+          });
 
         yield;
 
@@ -158,7 +163,7 @@ export default function ColourfulText({ text }) {
       let step = iter.next();
 
       if (step.done) {
-        wasteTicks = 30;
+        wasteTicks = 100;
 
         iter = gen(streamParse(language, matcher, text), node, true);
       }
