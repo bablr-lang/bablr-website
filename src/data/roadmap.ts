@@ -14,6 +14,58 @@ interface RoadmapCategory {
 
 export const roadmapData: RoadmapCategory[] = [
   {
+    title: "Planned",
+    status: "planned",
+    items: [
+      {
+        title: "isValid cache",
+        description: "...for both typed and untyped trees",
+        audienceTypes: ["tool"],
+      },
+      {
+        title: "Broader language support",
+        description: "Define the first 1000 languages",
+        audienceTypes: ["tool"],
+      },
+      {
+        title: "More implementations",
+        description: "Port BABLR engine to other runtimes",
+        audienceTypes: ["lang"],
+      },
+      {
+        title: "1.0.0",
+        description: "The first production-grade release",
+        audienceTypes: ["tool", "ide", "lang"],
+      },
+    ],
+  },
+  {
+    title: "In Progress",
+    status: "in-progress",
+    items: [
+      {
+        title: "Javascript language support",
+        description: "Our tools should parse our own source code",
+        audienceTypes: ["tool"],
+      },
+      {
+        title: "Spamex",
+        description: "Structural Pattern Matcher EXpressions",
+        audienceTypes: ["tool", "ide"],
+      },
+      {
+        title: "Syntax highlighting",
+        description: "A CSS-like system for styling code",
+        audienceTypes: ["ide"],
+      },
+      {
+        title: "Documentation",
+        description: "API docs, guides, architecture and more",
+        audienceTypes: ["tool", "ide", "lang"],
+      },
+    ],
+  },
+  {
     title: "Completed",
     status: "completed",
     items: [
@@ -35,59 +87,7 @@ export const roadmapData: RoadmapCategory[] = [
       {
         title: "Language embedding",
         description: "Languages can refer to and extend each other",
-        audienceTypes: ["lang"],
-      },
-    ],
-  },
-  {
-    title: "In Progress",
-    status: "in-progress",
-    items: [
-      {
-        title: "Javascript language support",
-        description: "Our tools should parse our own source code",
-        audienceTypes: ["tool"],
-      },
-      {
-        title: "Spamex",
-        description: "Structural Pattern Matcher EXpressions",
-        audienceTypes: ["tool"],
-      },
-      {
-        title: "Syntax highlighting",
-        description: "A CSS-like system for styling code",
-        audienceTypes: ["ide"],
-      },
-      {
-        title: "Documentation",
-        description: "API docs, guides, architecture and more",
-        audienceTypes: ["tool", "ide", "lang"],
-      },
-    ],
-  },
-  {
-    title: "Planned",
-    status: "planned",
-    items: [
-      {
-        title: "isValid cache",
-        description: "...for both typed and untyped trees",
-        audienceTypes: ["tool"],
-      },
-      {
-        title: "Broader language support",
-        description: "Define the first 1000 languages",
-        audienceTypes: ["lang"],
-      },
-      {
-        title: "More implementations",
-        description: "Port BABLR engine to other runtimes",
-        audienceTypes: ["ide"],
-      },
-      {
-        title: "1.0.0",
-        description: "The first production-grade release",
-        audienceTypes: ["ide"],
+        audienceTypes: ["tool", "lang"],
       },
     ],
   },
