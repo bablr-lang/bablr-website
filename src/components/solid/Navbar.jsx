@@ -1,7 +1,6 @@
 import { createSignal } from "solid-js";
 
 const LINKS = [
-  { label: "ABOUT", path: "/about" },
   { label: "DOCS", path: "https://docs.bablr.org/" },
   { label: "BLOG", path: "/blog" },
   { label: "LANGUAGES", path: "/languages" },

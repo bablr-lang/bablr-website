@@ -37,32 +37,40 @@ const cards = [
 
 <div class="w-full max-w-6xl mx-auto py-12 px-4 text-center">
   <h2 class="text-4xl font-bold text-gray-900 py-2">
-    Your Role. Your Power. Your Platform.
+    Our APIs get out of your way so you can write code
   </h2>
-  <p class="text-gray-600 mt-2">
-    Pick your path. BABLR adapts to you—whether you're building tools,
-    languages, or editor features.
+  <p class="text-gray-600">
+    We're on a mission to move programming beyond its roots in punchcards and 80
+    character lines by defining a universal <a
+      class="hover:text-orange-600"
+      href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction"
+      >Document Object Model</a
+    > for code. Our hope is to create a new generation of tools for coding that feel
+    more trustworthy, transparent, powerful, and approachable in order to demonstrate
+    the unrealized potential we see in code editors.
   </p>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-    {
-      cards.map((card) => {
-        const IconComponent = card.icon;
-        return (
-          <div
-            class={`bg-white rounded-xl border ${card.borderColor} ${card.shadowColor} shadow-lg p-6 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:translate-y-1 cursor-pointer`}
-          >
-            <div class={`p-4 rounded-full ${card.color} mb-4`}>
-              <IconComponent size={48} />
-            </div>
-            <h3 class="text-xl font-semibold text-gray-800 text-center">
-              {card.title}
-            </h3>
-            <p class="mt-2 text-gray-600 text-center text-sm">
-              {card.description}
-            </p>
+</div>
+<div
+  class="w-full max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10"
+>
+  {
+    cards.map((card) => {
+      const IconComponent = card.icon;
+      return (
+        <div
+          class={`bg-white rounded-xl border ${card.borderColor} ${card.shadowColor} shadow-lg p-6 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:translate-y-1 cursor-pointer`}
+        >
+          <div class={`p-4 rounded-full ${card.color} mb-4`}>
+            <IconComponent size={48} />
           </div>
-        );
-      })
-    }
-  </div>
+          <h3 class="text-xl font-semibold text-gray-800 text-center">
+            {card.title}
+          </h3>
+          <p class="mt-2 text-gray-600 text-center text-sm">
+            {card.description}
+          </p>
+        </div>
+      );
+    })
+  }
 </div>
