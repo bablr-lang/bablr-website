@@ -234,7 +234,7 @@ export default function App() {
                 Input
               </label>
               <div class="controls">
-                <label for="matcher-tag">Matcher: </label>
+                <label for="matcher-tag">Production: </label>
                 <select
                   id="matcher-tag"
                   onInput={(e) => {
