@@ -16,14 +16,14 @@ export const audiences: { [T in AudienceType]: Audience } = {
     icon: Code,
     color: "bg-purple-100 text-purple-600",
     borderColor: "border-purple-200",
-    shadowColor: "shadow-purple-100",
+    shadowColor: "shadow-purple-200",
   },
   ide: {
     title: "IDE Developers",
     icon: Terminal,
     color: "bg-blue-100 text-blue-600",
     borderColor: "border-blue-200",
-    shadowColor: "shadow-blue-100",
+    shadowColor: "shadow-blue-200",
   },
   lang: {
     title: "Language Authors",
