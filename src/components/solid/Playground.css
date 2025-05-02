@@ -12,8 +12,14 @@ select {
 
 .controls {
   display: inline-flex;
+  flex-wrap: wrap;
   gap: 1rem;
   padding: 10px 0;
+}
+
+.buttons {
+  display: inline-flex;
+  gap: 1rem;
 }
 
 #playground {
@@ -28,8 +34,8 @@ select {
   display: flex;
   height: 100%;
   margin: 2px;
-  font-family:
-    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
   font-size: 13px;
 }
 

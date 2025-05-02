@@ -1,8 +1,14 @@
-/* global setTimeout document */
-import { spam } from "@bablr/boot";
+/* global console window setTimeout document */
 import { streamParse, Context } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
-import { buildString, buildIdentifier } from "@bablr/helpers/builders";
+import {
+  buildString,
+  buildIdentifier,
+  buildPropertyMatcher,
+  buildBasicNodeMatcher,
+  buildOpenNodeMatcher,
+  buildNodeFlags,
+} from "@bablr/helpers/builders";
 import { generateProductions } from "@bablr/helpers/grammar";
 import { resolveTags } from "@bablr/helpers/stream";
 import { createSignal, For, Match, Switch } from "solid-js";
@@ -14,6 +20,8 @@ import { getStreamIterator, StreamIterable } from "@bablr/agast-helpers/stream";
 import { Coroutine } from "@bablr/coroutine";
 import * as helpers from "@bablr/helpers";
 import "./Playground.css";
+import { getFlagsWithGap, nodeFlags } from "@bablr/agast-helpers/tree";
+import { buildEmbeddedMatcher } from "@bablr/agast-vm-helpers/builders";
 
 function* __map(tags, fn) {
   const co = new Coroutine(getStreamIterator(tags));
@@ -75,7 +83,8 @@ const wait = (timeout) =>
 
 export default function App() {
   const [input, setInput] = createSignal("<!0:cstml><_></>");
-  const [matcherTag, setMatcherTag] = createSignal("Document");
+  const [productionName, setProductionName] = createSignal("Document");
+  const [flags, setFlags] = createSignal(getFlagsWithGap(nodeFlags));
   const [playing, setPlaying] = createSignal(false);
   const [paused, setPaused] = createSignal(false);
   const [storageType, setStorageType] = createSignal("default");
@@ -120,7 +129,18 @@ export default function App() {
   };
 
   const matcher = () => {
-    return spam`<$${buildString(language().canonicalURL)}:${buildIdentifier(matcherTag())} />`;
+    return buildEmbeddedMatcher(
+      buildPropertyMatcher(
+        null,
+        buildBasicNodeMatcher(
+          buildOpenNodeMatcher(
+            flags(),
+            language().canonicalURL,
+            productionName(),
+          ),
+        ),
+      ),
+    );
   };
 
   const productions = () => {
@@ -218,7 +238,6 @@ export default function App() {
               display: "flex",
               "flex-flow": "row",
               "align-items": "center",
-              "flex-grow": "1",
             }}
           >
             <div
@@ -238,7 +257,7 @@ export default function App() {
                 <select
                   id="matcher-tag"
                   onInput={(e) => {
-                    setMatcherTag(e.currentTarget.value);
+                    setProductionName(e.currentTarget.value);
                   }}
                 >
                   <For
@@ -261,7 +280,7 @@ export default function App() {
                   >
                     {(key) => {
                       return (
-                        <option selected={key === matcherTag()} value={key}>
+                        <option selected={key === productionName()} value={key}>
                           {key}
                         </option>
                       );
@@ -269,129 +288,174 @@ export default function App() {
                   </For>
                 </select>
 
-                <Switch>
-                  <Match when={paused()}>
-                    <button
-                      id="form-resume"
-                      class="icon-button"
-                      title="Resume"
-                      onClick={() => {
-                        setPlaying(true);
-                        setPaused(false);
-                        deferreds[0].resolve();
+                <div class="buttons">
+                  <b title="token">
+                    <label class="mx-2">*</label>
+                    <input
+                      checked={flags().token}
+                      onInput={(e) => {
+                        setFlags({ ...flags(), token: e.target.checked });
                       }}
-                      style={{ height: "100%" }}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M17 6v12h-2V6zm-4 6l-6 6V6z"
-                        />
-                      </svg>
-                    </button>
-                  </Match>
-                  <Match when={!paused()}>
-                    <button
-                      id="form-pause"
-                      class="icon-button"
-                      title="Pause"
-                      onClick={() => {
-                        setPlaying(false);
-                        setPaused(true);
+                      type="checkbox"
+                    />
+                  </b>
+                  <b title="hasGap">
+                    <label class="mx-2">$</label>
+                    <input
+                      checked={flags().hasGap}
+                      onInput={(e) => {
+                        setFlags({ ...flags(), hasGap: e.target.checked });
                       }}
-                      style={{ height: "100%" }}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
+                      type="checkbox"
+                    />
+                  </b>
+                  <b title="fragment">
+                    <label class="mx-2">_</label>
+                    <input
+                      checked={flags().fragment}
+                      onInput={(e) => {
+                        setFlags({ ...flags(), fragment: e.target.checked });
+                      }}
+                      type="checkbox"
+                    />
+                  </b>
+                  <b title="coverFragment">
+                    <label class="mx-2">_</label>
+                    <input
+                      checked={flags().cover}
+                      onInput={(e) => {
+                        setFlags({ ...flags(), cover: e.target.checked });
+                      }}
+                      type="checkbox"
+                    />
+                  </b>
+                </div>
+
+                <div
+                  class="buttons"
+                  style={{ "flex-grow": "1", "justify-content": "flex-end" }}
+                >
+                  <Switch>
+                    <Match when={paused()}>
+                      <button
+                        id="form-resume"
+                        class="icon-button"
+                        title="Resume"
+                        onClick={() => {
+                          setPlaying(true);
+                          setPaused(false);
+                          deferreds[0].resolve();
+                        }}
                       >
-                        <path
-                          fill="currentColor"
-                          d="M6 3h2v18H6zm10 0h2v18h-2z"
-                        />
-                      </svg>
-                    </button>
-                  </Match>
-                </Switch>
-                <button
-                  id="form-play"
-                  class="icon-button"
-                  title="Play"
-                  onClick={() => {
-                    setPlaying(true);
-                    document.getElementById("experiment-output").innerHTML = "";
-                    consume();
-                  }}
-                  style={{ height: "100%" }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M17 6v12h-2V6zm-4 6l-6 6V6z"
+                          />
+                        </svg>
+                      </button>
+                    </Match>
+                    <Match when={!paused()}>
+                      <button
+                        id="form-pause"
+                        class="icon-button"
+                        title="Pause"
+                        onClick={() => {
+                          setPlaying(false);
+                          setPaused(true);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M6 3h2v18H6zm10 0h2v18h-2z"
+                          />
+                        </svg>
+                      </button>
+                    </Match>
+                  </Switch>
+                  <button
+                    id="form-play"
+                    class="icon-button"
+                    title="Play"
+                    onClick={() => {
+                      setPlaying(true);
+                      document.getElementById("experiment-output").innerHTML =
+                        "";
+                      consume();
+                    }}
                   >
-                    <path
-                      fill="currentColor"
-                      d="M6 20.196V3.804a1 1 0 0 1 1.53-.848l13.113 8.196a1 1 0 0 1 0 1.696L7.53 21.044A1 1 0 0 1 6 20.196"
-                    />
-                  </svg>
-                </button>
-                <button
-                  id="form-step"
-                  class="icon-button"
-                  title="Step"
-                  onClick={() => {
-                    if (deferreds.length) {
-                      let deferred = deferreds.shift();
-                      deferred.resolve();
-                    }
-                  }}
-                  style={{ height: "100%" }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M6 20.196V3.804a1 1 0 0 1 1.53-.848l13.113 8.196a1 1 0 0 1 0 1.696L7.53 21.044A1 1 0 0 1 6 20.196"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    id="form-step"
+                    class="icon-button"
+                    title="Step"
+                    onClick={() => {
+                      if (deferreds.length) {
+                        let deferred = deferreds.shift();
+                        deferred.resolve();
+                      }
+                    }}
                   >
-                    <path
-                      fill="currentColor"
-                      d="M12.172 11L7.515 6.343L8.929 4.93l7.07 7.07l-7.07 7.072l-1.414-1.414L12.17 13H3v-2zM18 19V5h2v14z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  id="form-reset"
-                  class="icon-button"
-                  title="Reset"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setPlaying(false);
-                    setPaused(false);
-                    document.getElementById("experiment-output").innerHTML = "";
-                    deferreds = [];
-                  }}
-                  style={{ height: "100%" }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M12.172 11L7.515 6.343L8.929 4.93l7.07 7.07l-7.07 7.072l-1.414-1.414L12.17 13H3v-2zM18 19V5h2v14z"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    id="form-reset"
+                    class="icon-button"
+                    title="Reset"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setPlaying(false);
+                      setPaused(false);
+                      document.getElementById("experiment-output").innerHTML =
+                        "";
+                      deferreds = [];
+                    }}
                   >
-                    <path
-                      fill="currentColor"
-                      d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 5.135 1.865L15 8V2h6l-2.447 2.447A9.98 9.98 0 0 1 22 12"
-                    />
-                  </svg>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 5.135 1.865L15 8V2h6l-2.447 2.447A9.98 9.98 0 0 1 22 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
               <textarea
                 id="experiment-input"
