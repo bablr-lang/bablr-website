@@ -2,15 +2,11 @@
 import { streamParse, Context } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
 import {
-  buildString,
-  buildIdentifier,
   buildPropertyMatcher,
   buildBasicNodeMatcher,
   buildOpenNodeMatcher,
-  buildNodeFlags,
 } from "@bablr/helpers/builders";
 import { generateProductions } from "@bablr/helpers/grammar";
-import { resolveTags } from "@bablr/helpers/stream";
 import { createSignal, For, Match, Switch } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
 import { printType, printTag } from "@bablr/agast-helpers/print";
@@ -161,17 +157,14 @@ export default function App() {
 
   let tags = () =>
     map(
-      resolveTags(
-        ctx(),
-        evaluateIO(() =>
-          getStreamIterator(
-            streamParse(
-              ctx(),
-              matcher(),
-              input(),
-              {},
-              { enhancers, emitEffects: true },
-            ),
+      evaluateIO(() =>
+        getStreamIterator(
+          streamParse(
+            ctx(),
+            matcher(),
+            input(),
+            {},
+            { enhancers, emitEffects: true },
           ),
         ),
       ),
