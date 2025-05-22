@@ -5,6 +5,7 @@ import {
   buildPropertyMatcher,
   buildBasicNodeMatcher,
   buildOpenNodeMatcher,
+  buildNodeFlags,
 } from "@bablr/helpers/builders";
 import { generateProductions } from "@bablr/helpers/grammar";
 import { createSignal, For, Match, Switch } from "solid-js";
@@ -130,7 +131,7 @@ export default function App() {
         null,
         buildBasicNodeMatcher(
           buildOpenNodeMatcher(
-            flags(),
+            buildNodeFlags(flags()),
             language().canonicalURL,
             productionName(),
           ),
