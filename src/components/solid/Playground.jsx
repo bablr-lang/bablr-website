@@ -130,11 +130,7 @@ export default function App() {
       buildPropertyMatcher(
         null,
         buildBasicNodeMatcher(
-          buildOpenNodeMatcher(
-            buildNodeFlags(flags()),
-            language().canonicalURL,
-            productionName(),
-          ),
+          buildOpenNodeMatcher(buildNodeFlags(flags()), productionName()),
         ),
       ),
     );
