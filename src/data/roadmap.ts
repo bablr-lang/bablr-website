@@ -63,6 +63,11 @@ export const roadmapData: RoadmapCategory[] = [
         description: "API docs, guides, architecture and more",
         audienceTypes: ["tool", "ide", "lang"],
       },
+      {
+        title: "Ruby language support",
+        description: "A BABLR grammar for your favorite friendly language",
+        audienceTypes: ["tool", "lang"],
+      },
     ],
   },
   {
