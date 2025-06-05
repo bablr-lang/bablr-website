@@ -21,26 +21,23 @@ importers:
         specifier: ^5.0.0
         version: 5.0.7(jiti@2.4.2)(lightningcss@1.29.2)(solid-js@1.9.5)
       '@bablr/agast-helpers':
-        specifier: ^0.7.1
+        specifier: 0.7.1
         version: 0.7.1
       '@bablr/agast-vm-helpers':
-        specifier: ^0.7.0
+        specifier: 0.7.1
         version: 0.7.1
       '@bablr/boot':
-        specifier: ^0.8.1
+        specifier: 0.8.1
         version: 0.8.1
       '@bablr/coroutine':
-        specifier: ^0.1.0
+        specifier: 0.1.0
         version: 0.1.0
       '@bablr/helpers':
-        specifier: ^0.22.1
+        specifier: 0.22.1
         version: 0.22.1
       '@bablr/io-vm-web':
-        specifier: ^0.4.0
+        specifier: 0.4.0
         version: 0.4.0
-      '@bablr/language-en-cstml':
-        specifier: ^0.9.0
-        version: 0.9.0
       '@fontsource/plus-jakarta-sans':
         specifier: ^5.2.5
         version: 5.2.5
@@ -303,22 +300,6 @@ packages:
 
   '@bablr/io-vm-web@0.4.0':
     resolution: {integrity: sha512-R9DQTouMd5FLUTt94JnHueJ76w1LVshivwSg3tqTXJjwp7y+1RLT2BeW/3W0lkG699Esh/B/6prjLgFbk8fasw==}
-
-  '@bablr/language-en-blank-space@0.7.0':
-    resolution: {integrity: sha512-2fP6VwKQbULHusBlzH7xR7MR80O27GgE+XtM9kUffhX7tRJ1393q9Q+BjRw/PMap7N9TtSuhGYgtyVEfWoW2hQ==}
-    engines: {node: '>=12.0.0'}
-
-  '@bablr/language-en-cstml-json@0.2.0':
-    resolution: {integrity: sha512-n9I8GRO4UhW9TOIvztWMVozlp5xdXbvPPufA4mz3gcg7b+po0tzpMRGILgnJCBzAE++tbHtRKZwBMAmlZFssoA==}
-    engines: {node: '>=12.0.0'}
-
-  '@bablr/language-en-cstml@0.9.0':
-    resolution: {integrity: sha512-nkKdT1UK/cPAqAx2OL2GmjsQdri+aJwJDcONU7cTBdenDcnVkRvwTR7cln8p/3/03lrRer/MJOQXBZqnU+g6tQ==}
-    engines: {node: '>=12.0.0'}
-
-  '@bablr/language-en-json@0.10.0':
-    resolution: {integrity: sha512-bqLWMqhb+RFnjjxDALqpQf9gCePE/P+gY4eFBVCSCtzebXqBHQRBsxfNAaKDsf/6zoKtMl/dYQZPiOsjeJBArA==}
-    engines: {node: '>=12.0.0'}
 
   '@bablr/language_enhancer-debug-log@0.9.1':
     resolution: {integrity: sha512-mYTc1xkTukLjC7nN1XnIgwhpImUX7OisgUc1LhqOguVw9SrwwZOex1xBTXiYUGXmw9Bu8fQDP9BkyevRCMHX2Q==}
@@ -3454,42 +3435,6 @@ snapshots:
       '@bablr/agast-vm-helpers': 0.7.1
       '@bablr/coroutine': 0.1.0
       '@iter-tools/imm-stack': 1.1.0
-
-  '@bablr/language-en-blank-space@0.7.0':
-    dependencies:
-      '@babel/runtime': 7.27.0
-      '@bablr/agast-helpers': 0.7.1
-      '@bablr/agast-vm-helpers': 0.7.1
-      '@bablr/boot': 0.8.1
-      '@bablr/helpers': 0.22.1
-
-  '@bablr/language-en-cstml-json@0.2.0':
-    dependencies:
-      '@babel/runtime': 7.27.0
-      '@bablr/agast-helpers': 0.7.1
-      '@bablr/agast-vm-helpers': 0.7.1
-      '@bablr/boot': 0.8.1
-      '@bablr/helpers': 0.22.1
-      '@bablr/language-en-json': 0.10.0
-
-  '@bablr/language-en-cstml@0.9.0':
-    dependencies:
-      '@babel/runtime': 7.27.0
-      '@bablr/agast-helpers': 0.7.1
-      '@bablr/agast-vm-helpers': 0.7.1
-      '@bablr/boot': 0.8.1
-      '@bablr/helpers': 0.22.1
-      '@bablr/language-en-blank-space': 0.7.0
-      '@bablr/language-en-cstml-json': 0.2.0
-
-  '@bablr/language-en-json@0.10.0':
-    dependencies:
-      '@babel/runtime': 7.27.0
-      '@bablr/agast-helpers': 0.7.1
-      '@bablr/agast-vm-helpers': 0.7.1
-      '@bablr/boot': 0.8.1
-      '@bablr/helpers': 0.22.1
-      '@bablr/language-en-blank-space': 0.7.0
 
   '@bablr/language_enhancer-debug-log@0.9.1':
     dependencies:

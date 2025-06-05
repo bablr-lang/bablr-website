@@ -11,7 +11,8 @@ import { generateProductions } from "@bablr/helpers/grammar";
 import { createSignal, For, Match, Switch } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
 import { printType, printTag } from "@bablr/agast-helpers/print";
-import { defaultLanguageInput } from "./language.js";
+import { defaultCSTMLGrammar } from "./cstml.js";
+import { defaultJSONGrammar } from "./json.js";
 import { makePersisted } from "@solid-primitives/storage";
 import { getStreamIterator, StreamIterable } from "@bablr/agast-helpers/stream";
 import { Coroutine } from "@bablr/coroutine";
@@ -84,7 +85,7 @@ export default function App() {
   const [flags, setFlags] = createSignal(getFlagsWithGap(nodeFlags));
   const [playing, setPlaying] = createSignal(false);
   const [paused, setPaused] = createSignal(false);
-  const [storageType, setStorageType] = createSignal("default");
+  const [parserType, setParserType] = createSignal("cstml");
   const [localLanguageInput, setLocalLanguageInput] = makePersisted(
     createSignal(""),
     { name: "languageInput" },
@@ -103,7 +104,7 @@ export default function App() {
   const language = () => {
     try {
       return new Function(
-        `return (helpers) => { ${getLanguageTextForStorageType()};
+        `return (helpers) => { ${getLanguageTextForParserType()};
         let _return_ = {};
         if (typeof canonicalURL !== 'undefined') _return_.canonicalURL = canonicalURL;
         if (typeof grammar !== 'undefined') _return_.grammar = grammar;
@@ -115,13 +116,16 @@ export default function App() {
     }
   };
 
-  const getLanguageTextForStorageType = () => {
-    if (storageType() === "local") {
-      return localLanguageInput();
-    } else if (storageType() === "default") {
-      return defaultLanguageInput;
-    } else {
-      throw new Error();
+  const getLanguageTextForParserType = () => {
+    switch (parserType()) {
+      case "local":
+        return localLanguageInput();
+      case "cstml":
+        return defaultCSTMLGrammar;
+      case "json":
+        return defaultJSONGrammar;
+      default:
+        throw new Error();
     }
   };
 
@@ -503,11 +507,12 @@ export default function App() {
               <select
                 id="grammar-flag"
                 onInput={(e) => {
-                  setStorageType(e.currentTarget.value);
+                  setParserType(e.currentTarget.value);
                 }}
                 style={{ width: "200px" }}
               >
-                <option value="default">🔒 CSTML</option>
+                <option value="cstml">🔒 CSTML</option>
+                <option value="json">🔒 JSON</option>
                 <option value="local">My grammar</option>
               </select>
             </div>
@@ -517,13 +522,13 @@ export default function App() {
                 background: "white",
                 "white-space": "pre",
                 "font-family": "monospace",
-                color: storageType() !== "local" ? "gray" : null,
+                color: parserType() !== "local" ? "gray" : null,
               }}
               spellcheck="false"
               contentEditable
               onKeyDown={(e) => {
                 if (
-                  (storageType() !== "local" &&
+                  (parserType() !== "local" &&
                     !(e.metaKey || e.ctrlKey || e.altKey || e.fnKey) &&
                     ![
                       "ArrowLeft",
@@ -555,7 +560,7 @@ export default function App() {
               }}
               onPaste={(e) => {
                 e.preventDefault();
-                if (storageType() !== "local") return;
+                if (parserType() !== "local") return;
 
                 if (document.getSelection().focusNode.tagName === "DIV") {
                   let range = document.createRange();
@@ -590,12 +595,12 @@ export default function App() {
                 document.getSelection().getRangeAt(0).collapse();
               }}
               onBlur={(e) => {
-                if (storageType() === "local") {
+                if (parserType() === "local") {
                   setLocalLanguageInput(e.currentTarget.innerText);
                 }
               }}
             >
-              <div id="grammar-wrapper">{getLanguageTextForStorageType()}</div>
+              <div id="grammar-wrapper">{getLanguageTextForParserType()}</div>
             </div>
           </div>
         </div>
