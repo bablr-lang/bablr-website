@@ -1,11 +1,11 @@
 @import "tailwindcss";
-@import '@fontsource/plus-jakarta-sans/200.css';
-@import '@fontsource/plus-jakarta-sans/300.css';
-@import '@fontsource/plus-jakarta-sans/400.css';
-@import '@fontsource/plus-jakarta-sans/500.css';
-@import '@fontsource/plus-jakarta-sans/600.css';
-@import '@fontsource/plus-jakarta-sans/700.css';
-@import '@fontsource/plus-jakarta-sans/800.css';
+@import "@fontsource/plus-jakarta-sans/200.css";
+@import "@fontsource/plus-jakarta-sans/300.css";
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/plus-jakarta-sans/800.css";
 
 /* Blog content specific styles */
 .blog-content {
@@ -28,7 +28,7 @@
   @apply mb-4 leading-relaxed;
 }
 
-.blog-content ul, 
+.blog-content ul,
 .blog-content ol {
   @apply mb-4 pl-6;
 }
@@ -54,16 +54,16 @@
 }
 
 .blog-content code {
-  @apply bg-gray-100 px-1 py-0.5 rounded text-sm font-mono;
+  @apply px-1 py-0.5 rounded text-sm font-mono;
 }
 
 .blog-content pre {
-  @apply bg-gray-100 p-4 rounded-lg overflow-x-auto my-4;
+  @apply p-4 rounded-lg overflow-x-auto my-4;
 }
 
 @font-face {
-  font-family: 'Kronika';
-  src: url('/fonts/KRONIKA_.ttf') format('truetype');
+  font-family: "Kronika";
+  src: url("/fonts/KRONIKA_.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -93,10 +93,10 @@ body {
 }
 
 .font-kronika {
-  font-family: 'Kronika', sans-serif;
+  font-family: "Kronika", sans-serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

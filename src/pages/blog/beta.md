@@ -64,10 +64,10 @@ That's why one of our biggest goals was to create an system that could replicate
 
 We designed CSTML with the goal of making it general enough to replace the many (20+) ad-hoc syntaxes we had seen for presenting similar data in other debugging tools:
 
-![ASTExplorer uses a JSON-like format](<../../images/Screenshot 2025-06-06 at 6.43.22 AM.png>)
-![Tree-sitter use Python-looking syntax](<../../images/Screenshot 2025-06-06 at 6.43.48 AM.png>)
-![Biome uses a different JSON-like format](<../../images/Screenshot 2025-06-06 at 6.44.28 AM.png>)
-![Ruby's Prism uses extended ASCII to visually draw a tree](<../../images/Screenshot 2025-06-06 at 6.45.14 AM.png>)
+|                                                                                                    |                                                                                                                     |
+| :------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: |
+|   ![ASTExplorer uses a JSON-like format](<../../images/Screenshot 2025-06-06 at 6.43.22 AM.png>)   |          ![Tree-sitter use Python-looking syntax](<../../images/Screenshot 2025-06-06 at 6.43.48 AM.png>)           |
+| ![Biome uses a different JSON-like format](<../../images/Screenshot 2025-06-06 at 6.44.28 AM.png>) | ![Ruby's Prism uses extended ASCII to visually draw a tree](<../../images/Screenshot 2025-06-06 at 6.45.14 AM.png>) |
 
 We knew we had made the right choice when we could feel our own fear and stress levels lowered by being able to use our tools -- tools we started to trust.
 
