@@ -1,5 +1,5 @@
 /* global console window setTimeout document */
-import { streamParse, Context } from "bablr/enhanceable";
+import { streamParse } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
 import {
   buildPropertyMatcher,
@@ -133,6 +133,7 @@ export default function App() {
     return buildEmbeddedMatcher(
       buildPropertyMatcher(
         null,
+        null,
         buildBasicNodeMatcher(
           buildOpenNodeMatcher(buildNodeFlags(flags()), productionName()),
         ),
@@ -152,16 +153,12 @@ export default function App() {
 
   enhancers = { ...debugEnhancers, enhancers };
 
-  const ctx = () => {
-    return Context.from(language(), enhancers.bablrProduction);
-  };
-
   let tags = () =>
     map(
       evaluateIO(() =>
         getStreamIterator(
           streamParse(
-            ctx(),
+            language(),
             matcher(),
             input(),
             {},
@@ -512,7 +509,7 @@ export default function App() {
                 style={{ width: "200px" }}
               >
                 <option value="cstml">🔒 CSTML</option>
-                <option value="json">🔒 JSON</option>
+                {/* <option value="json">🔒 JSON</option> */}
                 <option value="local">My grammar</option>
               </select>
             </div>
