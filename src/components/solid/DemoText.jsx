@@ -45,7 +45,7 @@ const language = {
   },
 };
 
-const matcher = m`<$${buildString(language.canonicalURL)}:Message />`;
+const matcher = m`<$Message />`;
 
 let startFrame = {
   filter: "blur(0px)",
