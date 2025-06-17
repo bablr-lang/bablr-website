@@ -80,7 +80,7 @@ const wait = (timeout) =>
   new Promise((resolve) => setTimeout(resolve, timeout));
 
 export default function App() {
-  const [input, setInput] = createSignal("<!0:cstml><_></>");
+  const [input, setInput] = createSignal("<!0:cstml><__></>");
   const [productionName, setProductionName] = createSignal("Document");
   const [flags, setFlags] = createSignal(getFlagsWithGap(nodeFlags));
   const [playing, setPlaying] = createSignal(false);

@@ -83,7 +83,7 @@ Regex is a notoriously cryptic-looking language. Lets use CSTML to explore the s
 
 ```cstml
 <!0:cstml { bablrLanguage: 'https://bablr.org/languages/core/en/bablr-regex-pattern' }>
-<_>
+<__>
   .:
   <Pattern>
     openToken:
