@@ -61,6 +61,22 @@
   @apply p-4 rounded-lg overflow-x-auto my-4;
 }
 
+code span[type="String"] {
+  color: green;
+}
+
+code span[type="Keyword"] {
+  color: darkred;
+}
+
+code span.selected.token:not([type="Indent"]:not(.selected)) {
+  @apply bg-orange-300;
+}
+
+code span.selected span.token:not([type="Indent"]:not(.selected)) {
+  @apply bg-orange-300;
+}
+
 @font-face {
   font-family: "Kronika";
   src: url("/fonts/KRONIKA_.ttf") format("truetype");
@@ -97,6 +113,6 @@ body {
 }
 
 code {
-  font-family:
-    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }

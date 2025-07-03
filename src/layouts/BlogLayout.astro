@@ -1,5 +1,6 @@
 ---
 import Layout from "./Layout.astro"
+import Highlighter from "../components/solid/Highlighter";
 
 const {frontmatter} = Astro.props
 ---
@@ -22,4 +23,5 @@ const {frontmatter} = Astro.props
       </div>
     </div>
   </div>
+  <Highlighter client:only="solid" />
 </Layout>

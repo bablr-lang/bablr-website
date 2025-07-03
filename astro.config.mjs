@@ -5,6 +5,7 @@ import node from "@astrojs/node";
 import solidJs from "@astrojs/solid-js";
 
 import mdx from "@astrojs/mdx";
+import cstml from "@bablr/astro_integration-cstml";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -23,6 +24,7 @@ export default defineConfig({
     solidJs({
       include: ["**/solid/*"],
     }),
+    cstml(),
   ],
   server: { port: 8080 },
   site: "https://bablr.org",
