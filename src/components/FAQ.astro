@@ -1,108 +1,22 @@
 ---
-// FAQ Mock Data - Edit this section to update FAQ content
-const faqData = [
-  {
-    id: 1,
-    question: "What is BABLR?",
-    answer: "BABLR is a next-generation LR parser framework designed for creating elegant and efficient language tools. It provides a powerful API-first IDE centered around a Document Object Model (DOM) for code."
-  },
-  {
-    id: 2,
-    question: "How is BABLR different from other parser frameworks?",
-    answer: "BABLR offers self-aware parsing capabilities, bootstrapped VM system, and efficient representation for asynchronous input streams. It's built from the ground up to be more trustworthy, transparent, and approachable."
-  },
-  {
-    id: 3,
-    question: "Is BABLR open source?",
-    answer: "Yes, BABLR is completely open source. You can find our repositories on GitHub and contribute to our growing community. We welcome contributions at all skill levels."
-  },
-  {
-    id: 4,
-    question: "When will BABLR be production-ready?",
-    answer: "We're working towards an alpha release around November 18th. The project has been in development since 2020 and is rapidly approaching production readiness."
-  },
-  {
-    id: 5,
-    question: "How can I get started with BABLR?",
-    answer: "You can start by checking out our documentation, trying our interactive playground, or joining our Discord community. We're building comprehensive guides and tutorials to help you get started quickly."
-  },
-  {
-    id: 6,
-    question: "What programming languages does BABLR support?",
-    answer: "BABLR is designed to work with any programming language. The framework allows you to define custom grammars and build language tools for both existing and new programming languages."
-  }
-];
-
 import { ChevronDown } from "lucide-astro";
 ---
-
-<div class="max-w-4xl mx-auto px-4 py-16">
-  <div class="text-center mb-12">
-    <h2 class="text-4xl font-bold text-gray-900 mb-4">
-      Frequently Asked Questions
-    </h2>
-    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-      Get answers to common questions about BABLR and how it can help you build better language tools.
-    </p>
-  </div>
-
-  <div class="space-y-4">
-    {faqData.map((faq) => (
-      <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
-        <details class="group">
-          <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-orange-50 transition-colors duration-200">
-            <h3 class="text-lg font-semibold text-gray-900 pr-4">
-              {faq.question}
-            </h3>
-            <div class="flex-shrink-0 text-orange-500 transform transition-transform duration-200 group-open:rotate-180">
-              <ChevronDown size={24} />
-            </div>
-          </summary>
-          <div class="px-6 pb-6">
-            <div class="border-t border-gray-100 pt-4">
-              <p class="text-gray-600 leading-relaxed">
-                {faq.answer}
-              </p>
-            </div>
-          </div>
-        </details>
+<div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+  <details class="group">
+    <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-orange-50 transition-colors duration-200">
+      <h3 class="text-lg font-semibold text-gray-900 pr-4">
+        <slot name="question" />
+      </h3>
+      <div class="flex-shrink-0 text-orange-500 transform transition-transform duration-200 group-open:rotate-180">
+        <ChevronDown size={24} />
       </div>
-    ))}
-  </div>
-
-  <div class="text-center mt-12">
-    <p class="text-gray-600 mb-4">
-      Still have questions? We'd love to help!
-    </p>
-    <div class="flex justify-center space-x-4">
-      <a
-        href="https://discord.gg/pTbg4JGEZp"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors duration-200 font-medium"
-      >
-        Join Discord
-      </a>
-      <a
-        href="https://docs.bablr.org"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="border-2 border-orange-500 text-orange-500 px-6 py-3 rounded-lg hover:bg-orange-50 transition-colors duration-200 font-medium"
-      >
-        View Docs
-      </a>
+    </summary>
+    <div class="px-6 pb-6">
+      <div class="border-t border-gray-100 pt-4">
+        <p class="text-gray-600 leading-relaxed">
+          <slot name="answer" />
+        </p>
+      </div>
     </div>
-  </div>
+  </details>
 </div>
-
-<style>
-  
-  details summary::-webkit-details-marker {
-    display: none;
-  }
-  
-  details summary::marker {
-    display: none;
-  }
-  
-</style> 
