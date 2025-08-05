@@ -20,6 +20,8 @@
     "@bablr/coroutine": "0.1.0",
     "@bablr/helpers": "0.23.0",
     "@bablr/io-vm-web": "0.4.0",
+    "@bablr/astro_integration-cstml": "0.1.0",
+    "@bablr/vite_plugin-cstml-to-jsx": "0.1.0",
     "@fontsource/plus-jakarta-sans": "^5.2.5",
     "@solid-primitives/storage": "^4.2.1",
     "@tailwindcss/vite": "^4.1.3",
@@ -47,9 +49,6 @@
     "typescript": "^5.8.3"
   },
   "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp"
-    ]
+    "onlyBuiltDependencies": ["esbuild", "sharp"]
   }
 }
