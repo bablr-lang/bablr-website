@@ -1,13 +1,20 @@
 ---
 import { ChevronDown } from "lucide-astro";
 ---
-<div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+
+<div
+  class="my-4 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden"
+>
   <details class="group">
-    <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-orange-50 transition-colors duration-200">
+    <summary
+      class="flex items-center justify-between p-6 cursor-pointer hover:bg-orange-50 transition-colors duration-200"
+    >
       <h3 class="text-lg font-semibold text-gray-900 pr-4">
         <slot name="question" />
       </h3>
-      <div class="flex-shrink-0 text-orange-500 transform transition-transform duration-200 group-open:rotate-180">
+      <div
+        class="flex-shrink-0 text-orange-500 transform transition-transform duration-200 group-open:rotate-180"
+      >
         <ChevronDown size={24} />
       </div>
     </summary>

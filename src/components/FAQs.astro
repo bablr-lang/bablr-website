@@ -1,31 +1,211 @@
 ---
 import FAQ from "./FAQ.astro";
 ---
+
 <div class="max-w-4xl mx-auto px-4 py-16">
   <div class="text-center mb-12">
     <h2 class="text-4xl font-bold text-gray-900 mb-4">
       Frequently Asked Questions
     </h2>
     <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-      Get answers to common questions about BABLR and how it can help you build better language tools.
+      Get answers to common questions about BABLR and how it can help you build
+      better language tools.
     </p>
   </div>
 
   <div class="space-y-4">
     <FAQ>
-      <span slot="question">
-        What is BABLR?
-      </span>
-      <span slot="answer">
-        BABLR is a new kind of thing that does not quite fit into any category of things that has existed before it. In purpose it is made to be an instrument of code literacy -- a unified toolchain for software developers that supports a new generation of richly visual interfaces for coding. In form BABLR is a collection of scripts and virtual machines written in plain Javascript that run in almost any modern web browser. BABLR is also a community and an ecosystem, including a small but rapidly growing collection of ready-to-use parsers for popular languages.
-      </span>
+      <div slot="question">What is BABLR?</div>
+      <div slot="answer">
+        BABLR is a new kind of thing that does not quite fit into any category
+        of things that has existed before it. In purpose it is made to be an
+        instrument of code literacy -- a unified toolchain for software
+        developers that supports a new generation of richly visual interfaces
+        for coding. In form BABLR is a collection of scripts and virtual
+        machines written in plain Javascript that run in almost any modern web
+        browser. BABLR is also a community and an ecosystem, including a small
+        but rapidly growing collection of ready-to-use parsers for popular
+        languages.
+      </div>
+    </FAQ>
+  </div>
+
+  <div class="space-y-4">
+    <FAQ>
+      <div slot="question">Why another toolchain?</div>
+      <div slot="answer">
+        Existing projects which BABLR competes with generally fit into one of a
+        few categories:
+        <ul class="space-y-4 list-disc list-inside [&_ul]:list-[revert]">
+          <li>
+            Tools for writing Javascript
+            <ul class="ps-5 mt-2 space-y-1 list-disc list-inside">
+              <li>Examples: ESLint, Prettier, Babel</li>
+            </ul>
+          </li>
+          <li>
+            Toolchains for writing Javascript
+            <ul class="ps-5 mt-2 space-y-1 list-disc list-inside">
+              <li>
+                Examples: Biome (in Rust), VoidZero (in Rust), Typescript
+                (moving to Go)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Toolchains for working with code in any
+            <ul class="ps-5 mt-2 space-y-1 list-disc list-inside">
+              <li class="mb-4">language Examples: ANTLR, TreeSitter, SrcML</li>
+            </ul>
+          </li>
+        </ul>
+
+        BABLR is the first toolchain written in Javascript for working with code
+        in any language.
+        <ul class="space-y-4 mt-4 list-disc list-inside">
+          <li>
+            We wanted a "toolchain" so that we could make all our tools dovetail
+            perfectly with each other.
+          </li>
+          <li>
+            We wanted our toolchain to be multilingual so that once we built
+            trust in our tools we could take them with us anywhere.
+          </li>
+          <li>
+            We wanted the toolchain to be written in Javascript so that it would
+            be an asset to anyone with a web browser, and thus would also have
+            the widest possible base of open source contributors and
+            maintainers.
+          </li>
+        </ul>
+      </div>
+    </FAQ>
+  </div>
+
+  <div class="space-y-4">
+    <FAQ>
+      <div slot="question">Is BABLR open source?</div>
+      <div slot="answer">
+        <p>
+          BABLR code is open source under the MIT License. In addition the
+          project is "open" in the sense that its complete development history
+          is recorded in a public forum (our
+          <a class="underline" href="https://discord.gg/NfMNyYN6cX">Discord</a>)
+          where community members are welcome to come and share their
+          experiences and insights for how to improve the product.
+        </p><br />
+        <p>
+          Because we need to make money the Silphium Labs team that built BABLR
+          will also start to build closed-source products, yet we believe that
+          BABLR will always be free and open no matter what because we've
+          designed it that way. Insead of centralizing the cost of maintaining
+          an ecosystem on ourselves, we've done everything to ensure that the
+          ownership costs of this system can be distributed between a large
+          number of individuals who may only trust each other provisionally.
+          We've intentially left ourselves with very little "proprietary"
+          leverage by building the kind of products that are complete not when
+          there is nothing more to add, but when there is nothing left to take
+          away.
+        </p>
+      </div>
+    </FAQ>
+  </div>
+
+  <div class="space-y-4">
+    <FAQ>
+      <div slot="question">Is BABLR production-ready?</div>
+      <div slot="answer">
+        <p>
+          The answer is conditional, but yes, BABLR is stable enough to use in
+          production.
+        </p><br />
+        <p>
+          How our project reaches production stability is a process that often
+          surprises people. We don't write a lot of tests for example, and we
+          often don't do much testing before we ship releases. Instead we test
+          exhaustively after we ship releases, which is the only way we know of
+          knowing for sure that the product we shipped does what we think it
+          does. This tends to separate our releases into two categories:
+          bleeding edge feature releases, and follow-on stability releases. If
+          you're going to deploy a release to production, make sure it's one of
+          the stability releases!
+        </p><br />
+        <p>
+          We also don't (usually) practice TDD. If you look at the number of
+          tests we have, it likely won't seem like it's anywhere near enough to
+          keep a project of this size stable! The secret sauce here is that our
+          key invariants aren't written in our test files, they're baked into
+          the core of the implementation. Every time you use the code, you're
+          essentially testing it. To gain confidence in our core, we simply try
+          to use it to do a lot of real work.
+        </p>
+      </div>
+    </FAQ>
+  </div>
+
+  <div class="space-y-4">
+    <FAQ>
+      <div slot="question">Why don't BABLR parsers support error recovery?</div>
+      <div slot="answer">
+        <p>Garbage in, garbage out. Keep It Simple, Stupid. Etc.</p><br />
+        <p>
+          We don't want to support error recovery in parsers because it's not a
+          game you can win: if you have a scenario where the product breaks
+          because you no longer know what it was the user meant to do, you can't
+          fix that by guessing. The only solution that will fix that problem and
+          keep it fixed is to give the user the ability to express their
+          intended meaning.
+        </p><br />
+        <p>
+          Our goal is less to support existing code editors than to start a
+          metamorphasis towards intent-driven IDE design that will spread itself
+          everywhere.
+        </p>
+      </div>
+    </FAQ>
+  </div>
+
+  <div class="space-y-4">
+    <FAQ>
+      <div slot="question">How can I get started using BABLR?</div>
+      <div slot="answer">
+        <p>
+          The answer to that depends on what you want to do with it and whether
+          we already have a parser for your language. If we don't have a parser
+          for the language you want to use BABLR with, come talk to us and we
+          may be able to help you get one built quickly. If we do, we have a
+          variety of tutorials that can help walk you through first-time usage.
+        </p>
+      </div>
+    </FAQ>
+  </div>
+
+  <div class="space-y-4">
+    <FAQ>
+      <div slot="question">How can I help the project?</div>
+      <div slot="answer">
+        <p>
+          We would love if you wanted to help us reach our goals! We're always
+          looking for both monetary donations and code contributions. If you
+          want to give money we are able to accept such donations through <a
+            class="underline"
+            href="https://opencollective.com/bablr">our OpenCollective.</a
+          > If you want to help code, right now we badly need people to try using
+          BABLR to write parsers for more real languges. If you want to show off
+          your mad skillz while putting your knowledge of an existing language like
+          Python, Java, or Ruby, we'd love to see what you can do and are happy to
+          provide any help and support we can. Our <a
+            class="underline"
+            href="https://docs.bablr.org/guides/parser"
+            >writing a parser tutorial</a
+          > is the place to get started.
+        </p>
+      </div>
     </FAQ>
   </div>
 
   <div class="text-center mt-12">
-    <p class="text-gray-600 mb-4">
-      Still have questions? We'd love to help!
-    </p>
+    <p class="text-gray-600 mb-4">Still have questions? We'd love to help!</p>
     <div class="flex justify-center space-x-4">
       <a
         href="https://discord.gg/pTbg4JGEZp"
@@ -48,13 +228,11 @@ import FAQ from "./FAQ.astro";
 </div>
 
 <style>
-  
   details summary::-webkit-details-marker {
     display: none;
   }
-  
+
   details summary::marker {
     display: none;
   }
-  
-</style> 
+</style>
