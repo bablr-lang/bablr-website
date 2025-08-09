@@ -28,7 +28,7 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.1",
     "astro": "^5.0.9",
-    "bablr": "0.10.1",
+    "bablr": "0.10.2",
     "clsx": "^2.1.1",
     "lucide-astro": "^0.487.0",
     "sharp": "^0.33.5",
@@ -49,6 +49,9 @@
     "typescript": "^5.8.3"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }
