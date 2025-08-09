@@ -19,7 +19,7 @@
     "@bablr/boot": "0.10.0",
     "@bablr/coroutine": "0.1.0",
     "@bablr/helpers": "0.24.0",
-    "@bablr/io-vm-web": "0.4.0",
+    "@bablr/io-vm-web": "0.5.0",
     "@bablr/astro_integration-cstml": "0.2.1",
     "@bablr/vite_plugin-cstml-to-jsx": "0.2.1",
     "@fontsource/plus-jakarta-sans": "^5.2.5",
