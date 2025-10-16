@@ -201,7 +201,7 @@ export default function App() {
       );
       el.append(sp);
 
-      if (tag.type === Symbol.for("OpenNodeTag")) {
+      if (tag.type === Symbol.for("OpenNodeTag") && !tag.value.selfClosing) {
         depth++;
       }
 
