@@ -1,0 +1,306 @@
+---
+layout: "../../layouts/BlogLayout.astro"
+title: "On Legos and Lock-in: BABLR"
+author: "Conrad Buck"
+date: "9/16/2025"
+draft: true
+---
+<!0:cstml>
+<_>
+  <p>
+    "The hardest problem in developer tooling is known informally as" '"m times n"' ". "
+    "Put simply it goes like this: as an IDE author (with limited resources), how will I support "
+    "a large and ever-growing number of programming languages that users wish for their tools to "
+    "know of? And relatedly: as an author of a programming language, how can I support people who "
+    "want to develop in my language from a large and ever-growing number of different language-aware "
+    "editors and tools?"
+  </>
+
+  <p>
+    "Imagining we had 25 different editors and 25 different languages, the number of possible combinations "
+    "of editor and language would be 625. Engineers instinctively shy away from this kind of combinatoric "
+    "math because nobody wants to be left in a situation of maintaining 625 adapters. To manage this "
+    "complexity we must always seek to change to form of the problem: to exchange the cost structure of "
+    '"m times n"' "for costs that grow as " '"m plus n"' ". This is done by creating standards. USB, "
+    "for example, solves a similar problem of exploding complexity in pairings between peripherals and "
+    "hosts, by creating a single, central target for compatibility. The m plus n formulation indicates "
+    "that a protocol like USB must support all the features peripherals-creators need and want in a standard, "
+    "as well as all the features which are non-negotiable to makers of host devices."
+  </>
+
+  <p>
+    "In practice the cost of exploding complexity virtually guarantees that some solution to the m times n "
+    "problem will be adopted. In modern IDE development, the solution we have is Microsoft's Language Server Protocol, "
+    "or LSP for short, often augmented with Tree-sitter, TextMate or Prism grammars for syntax highlighting. "
+    "More than anything else, it is the fundamental nature of these standards for interoperability that "
+    "determines what a modern IDE looks like and how it feels to use."
+  </>
+
+  <p>
+    "While a solution to m times n is a blessing, it's also a kind of curse in that it creates strong lock-in. "
+    "In the case of IDE design, it has created the paradox even the most forward-looking and innovative IDEs all "
+    "more or less feel like clones of each other's user experience. If I were to say that our developer tools "
+    "have largely hit some kind of " '"plateau"' " beyond which we seem to be unable to make meaningful progress, "
+    "I suspect that a great many people would understand what I mean."
+  </>
+
+  <p>
+    <b>
+      "That is why I am thrilled to be able to announce that today, there is a new competitor in the IDE space: "
+      "not just a new IDE but a new set of standards and a new solution to m times n: BABLR."
+    </>
+  </>
+
+  <p>
+    "BABLR is a project that intends to not just move past but completely shatter the moribund status quo in user "
+    "experience for software developers. It does this by offering a new " '"m plus n-ish"' " architecture. "
+    "On one hand, BABLR is a fully-featured parser framework: a language-author-oriented product with all the "
+    "features necessary to facilitate parsing even the most complex languages with relative ease. On the other hand "
+    "we have a collection of standards from data structures to protocols and APIs which are carefully designed to "
+    "serve the needs of IDE authors without dictating a particular look and feel."
+  </>
+
+  <p>
+    "Because m plus n is still a complex compromise to be brokered between parties with competing needs which, "
+    "once adopted, will rapidly become set in stone, I've invested the last five years of my life into iterating on a "
+    "set of proposed standards, making them flexible enough and sturdy enough to serve as the foundation on which a "
+    "new generation of IDEs and developer tools my be built. Bring on the sci-fi future!"
+  </>
+
+  <h3 "What we've built" />
+
+  <p>
+    "Today after 5 years of full-time building there is a great deal to be announced all at once:"
+    <ul>
+      <li>
+        <b "BABLR" /> ": a parser system to compete with " <a "ANTLR" { href: "https://www.antlr.org/" } /> " and "
+        <a "Tree-sitter" { href: "https://tree-sitter.github.io/" } />
+      </>
+      <li>
+        <b "Bedazzlr" /> ": a novel syntax highlighter and AST explorer which we are using in this blog post"
+      </>
+      <li>
+        <b "agAST" /> ": a new standardized syntax tree format for Javascript built to compete with "
+        <a "ESTree" { href: "https://github.com/estree/estree/blob/master/es5.md" } /> " and "
+        <a "unist" { href: "https://github.com/syntax-tree/unist" } />
+      </>
+      <li>
+        <b "CSTML" /> ": a new data language for storing syntax trees, and a potential successor to HTML and XML"
+      </>
+    </>
+  </>
+
+  <p>
+    "In addition to these technologies which make up the " '"kernel"' " of an IDE and are more or less mature as of today, "
+    "we are announcing the kickoff of primary feature development on our genre-bending semantic-syntactic IDE, Paneditor, "
+    "the first in a family of code editors built from the ground up for touchscreen and VR interfaces."
+  </>
+
+  <p>
+    "Finally I, Conrad Buck, together with my co-founder and BABLR collaborator Stirling Hosstetter, have created "
+    "Silphium Labs, a for-profit company which supports the open development on BABLR with the intention of going "
+    "head to head with Microsoft in the market for services. We believe we have the potential to expose the degree "
+    "to which their horizontally-integrated tech stack anchored by LSP, Git, Github, and VSCode is what you would call "
+    '"legacy software".'
+  </>
+
+  <h3 "Coding with bricks" />
+
+  <p>
+    "Our primary motivation for doing all this is our perception that code literacy is much lower than it aught "
+    "to be. Not only are there a great many people for whom the barriers to entry are simply too daunting to get "
+    "into programming at all, but even people who are highly literate in a handful of programming languages "
+    "(myself included) are usually illiterate in many if not most of the others."
+  </>
+
+  <p>
+    "Tools like Scratch can make programming simple enough for even kids to understand intuitively, but no "
+    "professional would code in Scratch and the chasm from brick programming to write-the-syntax programming is a "
+    "wide one. In a professional-grade IDE like VSCode, many if not most sequences of random user interactions do not "
+    "edit code, but rather completely destroy it: they cause the syntax that makes up a program to become invalid "
+    "and thus conceptually the program being edited winks out of existence, becoming an inscrutable text file."
+  </>
+
+  <p>
+    "While logic-brick-based programming environments show us one way to avoid the degrade-to-text pitfall, "
+    "they have never been a serious option for professional software developers because of their lower "
+    "density of information: there is simply no more compact way to represent the logic of a program than as syntax: "
+    "the natural result of the human brain's prodigious ability to scan words as well as many langauge-generations "
+    "worth of selecting for more expressive syntaxes."
+  </>
+
+  <p>
+    "Our key innovation then is to take the " '"bricks snap together like legos"' " experience that is native "
+    "in an IDE like Scratch or Unreal Blueprints, and to fuse it with syntatic programming so that the "
+    "syntax tree node becomes the fundamental building block from which larger textual programs are composed."
+  </>
+
+  <h3 "A DOM for code" />
+
+  <p>
+    "So far this blog post has been a lot of prose, so thanks for your patience as we worked to set the stage. "
+    "Now it's time to dive into the product! Our product is a set of APIs implemented in plain Javascript, and "
+    "it can be used anywhere that Javascript can be used. It is even running in this webpage!"
+  </>
+
+  <p "A basic usage of BABLR looks something like this:" />
+
+  <pre>
+    <code { "bablr-language": "https://bablr.org/languages/universe/es6", "bablr-production": "Program" }>
+      "import { parse } from 'bablr';" "\n"
+      "import { get, printSource, printPrettyCSTML } from '@bablr/helpers/tree';" "\n"
+      "import * as language from '@bablr/language-en-json';" "\n"
+      "\n"
+      "let input = '[\"1\", true, 3]';" "\n"
+      "let document = parse(language, input);"  "\n"
+      "\n"
+      "// a BABLR parse result always contains the complete exact text of input" "\n"
+      "assert(printSource(document) === input);" "\n"
+      "\n"
+      "// documents support log-amortized named lookups" "\n"
+      "assert(printSource(get(['elements', 0], document)) === '\"1\"');" "\n"
+      "\n"
+      "console.log(printPrettyCSTML(document)); // see below" "\n"
+    </>
+  </>
+
+  <p>
+    "If you're able to see the above code snippet with syntax highlighting then you've already run a "
+    "BABLR " <code "parse()" { "bablr-language": "https://bablr.org/languages/universe/es6" } /> " "
+    "in your web browser using this very API: BABLR is used to generate metadata about text, "
+    "and we use the metadata it generates to provide syntax highlighting, semantic selection, and "
+    "the ability to explore the underlying syntax tree in-place. This lets us have an experience like "
+    <a "ASTExplorer" { href: "https://astexplorer.net" } /> " embedded right into each code snippet "
+    "in this blog post. We do this by running a specially-designed parser right in your browser, on your device. "
+  </>
+
+  <p>
+    "This ability to explore the syntax tree in place should also give a clue to something in the "
+    "example code. When we fetched" <code '"1"' /> " by its name, how did we know its name was "
+    <code 'elements 0' /> "? The CSTML document is what shows us all the nodes and their names."
+  </>
+
+  <p>
+    "One of the key things you should know about CSTML is that it's an embedding format for text documents. "
+    "What I mean by this is that the CSTML document representing our simple parse result is 34 lines long, "
+    "which is a substantial increase in size for an input that was only 16 characters long. But we don't "
+    "expect you to have to read the 34 line document. Instead we expect to present the parse result to you "
+    "like this: " 
+    <code '["1", true, 3]' { "bablr-language": "https://bablr.org/languages/core/en/json" } /> "."
+  </>
+
+  <p>
+    "The interactive presentation is essentially a compact way of allowing you to explore this underlying "
+    "CSTML document which was produced by the BABLR parser: "
+  </>
+
+  <pre>
+    <code { "bablr-language": "https://bablr.org/languages/core/en/cstml" }>
+      "<Array>" "\n"
+      "  openToken*: <* '[' { balanced: ']' } />" "\n"
+      "  elements[]+:" "\n"
+      "  <String>" "\n"
+      "    openToken*: <* '\"' { balanced: '\"', balancedSpan: 'String:Double' } />" "\n"
+      "    content: <*StringContent '1' />" "\n"
+      "    closeToken*: <* '\"' { balancer: true } />" "\n"
+      "  </>" "\n"
+      "  #separatorTokens[]: <* ',' />" "\n"
+      "  elements[]+:" "\n"
+      "  <_>" "\n"
+      "    #: :Space: <*Space ' ' />" "\n"
+      "    <Boolean>" "\n"
+      "      sigilToken: <*Keyword 'true' />" "\n"
+      "    </>" "\n"
+      "  </>" "\n"
+      "  #separatorTokens[]: <* ',' />" "\n"
+      "  elements[]+:" "\n"
+      "  <_>" "\n"
+      "    #: :Space: <*Space ' ' />" "\n"
+      "    <Number { span: 'Number' }>" "\n"
+      "      wholePart:" "\n"
+      "      <Integer>" "\n"
+      "        signToken: null" "\n"
+      "        value*: <*UnsignedInteger '3' />" "\n"
+      "      </>" "\n"
+      "      fractionalSeparatorToken*: null" "\n"
+      "      fractionalPart: null" "\n"
+      "      exponentSeparatorToken*: null" "\n"
+      "      exponentPart: null" "\n"
+      "    </>" "\n"
+      "  </>" "\n"
+      "  closeToken*: <* ']' { balancer: true } />" "\n"
+      "</>" "\n"
+    </>
+  </>
+
+
+  <p>
+    "A complete explanation of CSTML is beyond this post, but I hope the language should feel a bit "
+    "familiar if you already know HTML or XML or JSX. Like those languages it "
+    "has angle-brace tags to open and close nodes. A key difference is that while all XML nodes "
+    "are simply considered to be in their parent's " <code 'children' /> " list, CSTML allows a parent "
+    "node to name the relationships it has to each of its children. This is done with a reference tag,"
+    " like "
+    <code 'relatedName[]: <Node />' { "bablr-language": "https://bablr.org/languages/core/en/cstml", "bablr-production": "Property" } />
+    ". In this case the " <code '[]' /> " option "
+    "is present, indicating that many nodes with the same name will form a list. CSTML also allows a "
+    "node's text content to be written inside it, shortening "
+    <code "<Token> 'text' </>" /> " to " <code "<Token 'text' />" /> "."
+  </>
+
+  <p>
+    "As a matter of interest, this blog post itself was written in CSTML then rendered to HTML!"
+  </>
+
+  <h3 "Gaps" />
+
+  <p>
+    "I have not so far discussed probably the most key feature of CSTML: gaps. In a CSTML document "
+    "a gap looks like this: " <code "<//>" /> ", and it represents a place where something is known "
+    "to be missing from the document's underlying text. If a CSTML document is like a piece of paper "
+    "on which you can write text, having a gap in a document is like knowing that somebody took scissors "
+    "and cut a hole in your piece of paper."
+  </>
+
+  <p>
+    "Conveniently we already have a word that describes the kind of thing you get when you cut holes "
+    "in a piece of paper: you get a template. In programming as in real life templates are a highly "
+    "useful way to be able to create many copies of a single pattern, often with minor variations. "
+  </>
+
+  <p>
+    "BABLR's key strength as a parser framework is its ability to deal in templates, which is to say "
+    "in its ability to parse even documents which someone has taken scissors to. That ability makes it "
+    "an ideal fit for use with the appropriately-named template strings offered by Javascript. "
+  </>
+
+  <p>
+    "By working with templates we can easily build up complex code structures just with a process of "
+    "composing documents, like this:"
+  </>
+
+  <pre>
+    <code { "bablr-language": "https://bablr.org/languages/universe/es6", "bablr-production": "Program" }>
+      "import { buildTag, printSource } from 'bablr';" "\n"
+      "import * as language from '@bablr/language-en-esnext';" "\n"
+      "\n"
+      "let js = buildTag(language);" "\n"
+      "\n"
+      "let condition = js`true`;" "\n"
+      "let consequent = js.Statement`log(\"y\")`;" "\n"
+      "\n"
+      "// We parse first, *then* interpolate" "\n"
+      "// Without gap support, this template would not parse as valid JS" "\n"
+      "let code = js`while (${condition}) ${consequent}`;" "\n"
+      "\n"
+      "// All our formatting is preserved verbatim" "\n"
+      "let expectedResult = 'while (true) log(\"y\")';" "\n"
+      "\n"
+      "assert(printSource(code) === expectedResult);" "\n"
+    </>
+  </>
+
+  <h3 "Towards semantic IDEs" />
+
+  <h3 "The economics of Open Source" />
+</>
