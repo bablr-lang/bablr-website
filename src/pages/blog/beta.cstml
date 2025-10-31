@@ -8,103 +8,193 @@ draft: true
 <!0:cstml>
 <_>
   <p>
-    "The hardest problem in developer tooling is known informally as" '"m times n"' ". "
-    "Put simply it goes like this: as an IDE author (with limited resources), how will I support "
-    "a large and ever-growing number of programming languages that users wish for their tools to "
-    "know of? And relatedly: as an author of a programming language, how can I support people who "
-    "want to develop in my language from a large and ever-growing number of different language-aware "
-    "editors and tools?"
+    "The hardest problem in developer tooling is known informally as" '"m times n"' ". Put simply it goes like this: as an IDE author (with limited resources), how will I support a large and ever-growing number of programming languages that users wish for their tools to know of? And relatedly: as an author of a programming language, how can I support people who want to develop in my language from a large and ever-growing number of different language-aware editors and tools?"
   </>
 
   <p>
-    "Imagining we had 25 different editors and 25 different languages, the number of possible combinations "
-    "of editor and language would be 625. Engineers instinctively shy away from this kind of combinatoric "
-    "math because nobody wants to be left in a situation of maintaining 625 adapters. To manage this "
-    "complexity we must always seek to change to form of the problem: to exchange the cost structure of "
-    '"m times n"' "for costs that grow as " '"m plus n"' ". This is done by creating standards. USB, "
-    "for example, solves a similar problem of exploding complexity in pairings between peripherals and "
-    "hosts, by creating a single, central target for compatibility. The m plus n formulation indicates "
-    "that a protocol like USB must support all the features peripherals-creators need and want in a standard, "
-    "as well as all the features which are non-negotiable to makers of host devices."
+    "Imagining we had 25 different editors and 25 different languages, the number of possible combinations of editor and language would be 625. Engineers instinctively shy away from this kind of combinatoric math because nobody wants to be left in a situation of maintaining 625 adapters. To manage this complexity we must always seek to change to form of the problem: to exchange the cost structure of "
+    '"m times n" for costs that grow as "m plus n"' ". This is done by creating standards. USB, for example, solves a similar problem of exploding complexity in pairings between peripherals and hosts, by creating a single, central target for compatibility. The m plus n formulation indicates that a protocol like USB must support all the features peripherals-creators need and want in a standard, as well as all the features which are non-negotiable to makers of host devices."
   </>
 
   <p>
-    "In practice the cost of exploding complexity virtually guarantees that some solution to the m times n "
-    "problem will be adopted. In modern IDE development, the solution we have is Microsoft's Language Server Protocol, "
-    "or LSP for short, often augmented with Tree-sitter, TextMate or Prism grammars for syntax highlighting. "
-    "More than anything else, it is the fundamental nature of these standards for interoperability that "
-    "determines what a modern IDE looks like and how it feels to use."
+    "In practice the cost of exploding complexity virtually guarantees that some solution to the m times n problem will be adopted. Modern IDEs tackle the problem using two main abstractions: their source of truth for code is text files on disk, and for semantic analysis and code actions they talk to native compiler implementations using Microsoft's Language Server Protocol, or LSP for short. More than anything else, it is the nature of these two core abstractions over the polyglot complexities of modern programming that determines what a modern IDE looks like and how it feels to use."
   </>
 
   <p>
-    "While a solution to m times n is a blessing, it's also a kind of curse in that it creates strong lock-in. "
-    "In the case of IDE design, it has created the paradox even the most forward-looking and innovative IDEs all "
-    "more or less feel like clones of each other's user experience. If I were to say that our developer tools "
-    "have largely hit some kind of " '"plateau"' " beyond which we seem to be unable to make meaningful progress, "
-    "I suspect that a great many people would understand what I mean."
+    "While a solution to m times n is a blessing, it's also a kind of curse in that it creates strong lock-in. In the case of IDE design, it has created the paradox even the most forward-looking and innovative IDEs all more or less feel like clones of each other's user experience. You know what I mean. File tree on the left. Text buffer on the right. Line numbers. Colorful syntax. Plugins for things like linters and formatters. Regex search."
+  </>
+
+  <h3 "The problem statement" />
+    
+  <p>
+    "What we notice is that in addition to sharing features and design sensibilities, most modern IDEs share the same basic flaws:"
+    <ul>
+      <li>
+        "Syntax highlighting is static and 2D. Reading code in an IDE feels more like reading from piece of paper printed from a color printer. It should feel like you could reach out and touch the structure inside the code!"
+      <li>
+        "A minor mistake of cursor placement when moving a block of code can easily caused mistmatched braces, sending the behavior of the editor into undefined territory and forcing you to locate and repair the damage with careful sleuthwork."
+      </>
+      <li>
+        "If you have to close the IDE you will erase your detailed editing history, which can range from being a passing annoyance to a major headache."
+      </>
+      <li>
+        "Long lines cause slowness and breakages, so careful with those " <code ".min.js" /> " files!"
+      </>
+      <li>
+        "Sometimes the state of the system gets out of sync with itself and shows impossible results."
+      </>
+      <li>
+        "You can't do conceptually simple things like search for a word across the codebase while excluding results in comments."
+      </>
+      <li>
+        "If you can script changes to code, you will have to do so using custom APIs"
+      </>
+      <li>
+        "In general it feels like a system that would prefer to tell you that you did something wrong than to help you do something right, which only serves to push people more towards LLMs"
+      </>
+    </>        
   </>
 
   <p>
-    <b>
-      "That is why I am thrilled to be able to announce that today, there is a new competitor in the IDE space: "
-      "not just a new IDE but a new set of standards and a new solution to m times n: BABLR."
-    </>
+    "Having studied the situation in depth we think these high-level UX problems have much deeper technical roots. For example source code as flat text files checked out on a filesystem is not a particularly strong platform for building interoperability. If you're editing a 2MB file of code and you change one character in that file, the full 2MB of data has to be written back to the disk when you press save. The filesystem won't necessarily see that 2MB write as a single transaction either! There may be a moment in time when the file contains only 1MB of the 2MB, and if other parts of the IDE are watching the filesystem for changes they may get a change event at that half-done moment. Without knowning the original context, the receiver of the change event will be forced to make guesses about whether or not the change represents a partial write or a completed one. The common strategy is to wait a split-second to see if any more change events show up for a particular file. It's not too hard to see how timing conditions can introduce an element of random chance into the IDE's behavior. The user knew what they were doing, but by the time the actions reach the core of the system the user's intent has been stripped away, and to know how to proceed we have to rely on trying to reconstruct what the user's intention might have been using lossy heuristics like momentary delays."
   </>
-
+    
   <p>
-    "BABLR is a project that intends to not just move past but completely shatter the moribund status quo in user "
-    "experience for software developers. It does this by offering a new " '"m plus n-ish"' " architecture. "
-    "On one hand, BABLR is a fully-featured parser framework: a language-author-oriented product with all the "
-    "features necessary to facilitate parsing even the most complex languages with relative ease. On the other hand "
-    "we have a collection of standards from data structures to protocols and APIs which are carefully designed to "
-    "serve the needs of IDE authors without dictating a particular look and feel."
-  </>
-
-  <p>
-    "Because m plus n is still a complex compromise to be brokered between parties with competing needs which, "
-    "once adopted, will rapidly become set in stone, I've invested the last five years of my life into iterating on a "
-    "set of proposed standards, making them flexible enough and sturdy enough to serve as the foundation on which a "
-    "new generation of IDEs and developer tools my be built. Bring on the sci-fi future!"
+    "This lost-intent issue plays out in a more crucial way, and that's when sharing changes between peers. For example Alice might send Bob a " '"patch" or "diff"' " which changes the name of a particular function at its definition and at the 10 sites where it is called. Bob runs the command to apply the patch and the CLI tool says it applied cleanly, but for some reason Bob's code is now broken. What happened? Fortunately (this time) the compiler quickly leads Bob to the cause of the breakage: where Alice's codebase had 10 call sites, Bob had added an 11th call site which Alice's patch was not aware of and so did not update. Bob makes Alice's change at his new call site by hand and verifies that the code compiles now, but afterwards as he walks away from his desk to refill his coffee Bob asks himself a question: This miscommunication, it wasn't his fault, was it? But then, it wasn't Alice's fault either! Did this really need to happen at all?"
   </>
 
   <h3 "What we've built" />
 
   <p>
-    "Today after 5 years of full-time building there is a great deal to be announced all at once:"
-    <ul>
-      <li>
-        <b "BABLR" /> ": a parser system to compete with " <a "ANTLR" { href: "https://www.antlr.org/" } /> " and "
-        <a "Tree-sitter" { href: "https://tree-sitter.github.io/" } />
-      </>
-      <li>
-        <b "Bedazzlr" /> ": a novel syntax highlighter and AST explorer which we are using in this blog post"
-      </>
-      <li>
-        <b "agAST" /> ": a new standardized syntax tree format for Javascript built to compete with "
-        <a "ESTree" { href: "https://github.com/estree/estree/blob/master/es5.md" } /> " and "
-        <a "unist" { href: "https://github.com/syntax-tree/unist" } />
-      </>
-      <li>
-        <b "CSTML" /> ": a new data language for storing syntax trees, and a potential successor to HTML and XML"
-      </>
+    "Clearly my answer to the last question Bob posed is going to be no. I think this A/B parable is a pretty accurate description of a very real kind of problem that plays out all the time. I'm sure that in aggregate the problem of inability to effectively communicate costs billions if not trillions in lost productivity. In fact I believe nearly every weakness I've just described in the IDE experience can be improved upon by approaching the problem space with a philosophical framework rooted in preserving user intent, and to be able to prove it I've spent the last five years working full-time on building my own IDE powered by my own system of parsers and my own mechanism for version control, and all of it written in vanilla Javascript."
+  </>
+    
+  <p>
+    "If this sounds to you like an crazy amount of work to take on, don't worry, it does to me too! But something weird happens when you try to build all those things at the same time: it's a lot of work, but it's not as much work as you were afraid it was going to be. There are proven patterns for handling the complexity. There's lots of overlap and inefficiency in the way these current-gen systems run, and you start to realize that if the current system was a person its right hand would often be consumed in undoing work just done by the left. By avoiding including such Rube Goldberg contraptions as part of our design we can create the same functionality with a tiny fraction of the complexity involved in a traditional IDE architecture such as VSCode's. In fact we're so confident in the tiny footprint of our IDE that we included its parsing and rendering engine right in this page to do our syntax highlighting!"
+  </>
+
+  <p>
+    "To make this happen we have had to unlearn a great deal that we had previously taken for granted, like the idea that your IDE should interface with version control through checked out files in the working tree. It's still not hard to do this with our tools if you need to, but by not bringing the filesystem into the core of our IDE design we also get to avoid bringing in the immense complexity of cross-platform filesystem watching, for example. Instead we can just have the editor act interact directly with the version control database. The result is a terrifically simple API. In place of filesystem writes as your core abstraction layer it ends up looking like this: <code "editor.setState(transform(editor.getState()))" />
+  </>
+
+  <p>
+    "We think this " <code "code = transform(code)" /> " API is the key to solving many of the problems we've observed, including Bob's problem in replicating Alice's code changes in a way that preserved Alice's intent. Now instead of Alice sending Bob a text patch, Alice sends Bob a script which transforms Bob's code by making Alice's changes the way she made them: by searching for all usages of a certain function and renaming them. Alice continues to improve the factoring of the codebase knowing that her work isn't slowing down others by introducing conflicts, and Bob no longer has to live with a nagging fear in the back of his mind that horrible bugs have already crept undetected into the implementation thanks to merge conflicts that didn't result in immediate compile errors."
+  </>
+
+  <p>
+    "The reason Alice and Bob are living in this new state of luxury that the rest of us are left wanting is that they were able to agree on how to store the data that I have glossed over by referring to it simply as " <code "code" /> ". At the core of what we've built is just such a candidate to be that data structure that lets the two communicate easily and effectively."
+  </>
+
+  <h3 "A DOM for Code" />
+
+  <p>
+     "Let's say for the sake of argument that the data strcuture we used as " <code "code" /> " was a byte buffer. This would not be particularly convenient for either Alice or Bob. To script a semantically-driven change Alice's " <code "transform" /> " function would have to parse the code from text into a tree, make the scripted change to the tree, and then print the tree back to bytes. Applying a whole history of patches would mean passing the result buffer to another " <code "transform" /> " function which would likely repeat the whole process of parsing-changing-printing, and so on and so forth with lots of time spent parsing things we just printed and printing things we just parsed. The only way we can see to avoid this kind of busiwork is if " <code "code" /> " is already a syntax tree at the function boundary!"
+  </>
+
+  <p>
+    "Furthermore, embrace of the functional style of programming strongly suggests that " <code "code" /> "is some kind of immutable data structure, ensuring that an outer function doesn't have to worry about its data mutating if it passes that data as an argument to an inner function. This is particularly important for parse trees because not all parse trees are valid, leading Lexi Lambda to offer advice we took gladly: " <a "Parse don't validate" { href: "https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/" } />"."
+  </>
+
+  <p>
+    "The last thing we knew we could say for sure about the nature of the structure Alice and Bob should optimally be useing as " <code "code" /> "is that in addition to metadata injected by the parser, the tree  must contain the complete text of the program, and must always be able to reproduce that original text without special knowledge about the parser used."
+  </>
+
+  <p>
+    "We call the data structure we've designed that meets all these requirements " '"agAST"' ", short for A General Abstract Syntax Tree, and agAST trees are how all our APIs represent stored data. A full description of " <code "agAST" /> " is beyond the scope of this blog post, but at a high level it's a btree-ish structure in which every node is a (deeply) frozen Javascript object of the form " <code "{ flags, type, children, tags, bounds, attributes }" /> ". This is the shape we have so far found to be optimal for a syntax tree DOM node."
+  </>
+
+  <p>
+    "To be able to talk about agAST trees in something like a blog post we need them to have syntax, and that is the purpose for which we designed CSTML, the Concrete Syntax Tree Markup Language. CSTML is closely related to XML, and both languages use the same angle-brace tags originated by the older SGML. A very basic CSTML document looks something like this: " <code "<ExpressionStatement> expression: <Boolean> 'true' </> </>" /> ". Like XML this document is considered to be made up of a stream of tags, in this case an open tag, a reference tag, another open tag, a literal tag and two close tags."
+  </>
+
+  <p>
+    "Even in this very simple example though CSTML is immediately distinct from XML in a few ways. We've wrapped "<code "true" />", which is the \"inner text\" of the node, in string quotes. We use JSON's simple rules for escapes in strings rather than XML's complex entity system. Putting the text content in a string also ensures we can reformat our document without triggering "<a "crazy edge cases around blank space" { href: 'https://blog.dwac.dev/posts/html-whitespace/' } />". Instead of repeating the tag name like XML, CSTML always uses the same generic closing tag: " <code "</>" /> ". This is a design choice we made because like JSON, CSTML is intended primarily as a machine-written data interchange format. This is also a major clue to how we expect to be able to drive adoption: we don't need to wait for people to hand-write a corpus of CSTML documents to have a critical mass that makes our formats worth using. All the data is out in the wild already: every textual program ever written. All we need is to be able to write parsers for various programming languages and to emit the resulting parse tree encoded as CSTML."
+  </>
+
+  <h3 "BABLR" />
+
+  <p>
+    "Since we're basically resigned to the fact that we're going to be asking people to write new parsers (or adapt old ones) we knew we needed to make it worth it in terms of the benefits, and also just really easy to do. BABLR is our tool to make writing parsers feel easy. Its name is a portmanteau of Babel and ANTLR. Like Babel, BABLR is a Javascript tool focused on source-to-source transformations. Like ANTLR, BABLR is a tool for parsing the many programming languages found in the real world. BABLR is meant to provide all the luxuries you could want when writing parsers. It has full support for language extensibility " 
+  </>
+
+  <p>
+    "First of all BABLR parser grammars are written in plain Javascript files and do not require any kind of compile step. BABLR grammars productions are expressed as generator functions and it is the instructions yielded by grammar productions which drive the evolving state of the parser core. A basic grammar might look something like this:"
+  </>
+
+  <pre>
+    <code>
+      "class Grammar {" "\n"
+      "  *Digits() {" "\n"
+      "    yield eat(re`/[0-9]+/`);" "\n"
+      "  }" "\n"
+      "}" "\n"
+    </>
+  </>
+    
+  <p>
+    "The thing that's most important to understand here is that even though we write " <code "eat()" /> " that function call is not actually eating anything, only constructing an instruction object which describes the desired eating. It's yielding the instruction to the parser which has side effects."
+  </>
+
+  <p>
+    "One of the lovely things about this arrangment is that you can easily write higher order grammars: functions which take grammars and return modified grammars. For example when we're debugging a grammar we wrap it in a higher order logger grammar, that modifies the underlying grammar by causing it to log each instruction it yields to the core. Let's flesh out our example to show how you might do this and what results you might expect:"
+  </>
+
+  <pre>
+    <code>
+      "class Grammar {" "\n"
+      "  *Fraction() {" "\n"
+      "    yield eat(m`numerator: <*Digits />`);" "\n"
+      "    yield eatMatch(m`#: <* /[ \t]+/ />`);" "\n"
+      "    yield eat(m`over: <* '/' />`);" "\n"
+      "    yield eatMatch(m`#: <* /[ \t]+/ />`);" "\n"
+      "    yield eat(m`denominator: <*Digits />`);" "\n"
+      "  }" "\n"
+      "\n"
+      "  *Digits() {" "\n"
+      "    yield eat(re`/[0-9]+/`);" "\n"
+      "  }" "\n"
+      "}" "\n"
+    </>
+  </>
+
+
+
+     You can also easily write higher order grammars -- functions which take grammars and return modified grammars. We use this special capability to handle recurring elements like blank space, as well as to provide tools like debug logging. If we're being honest we probably owe our biggest inspirational debt to the Redux ecosystem."
+    
+    
+    
+    like " <code "advance('foo')" /> ", which would indicate to the state machine that the next text in the input " <b "must" /> " be " <code "foo" /> " and that the input stream should be advanced past those three characters. To help you know what to " <code "advance" /> " the system provides another commonly used instruction, " <code "match" /> ", which can be given a regex pattern that will be tested to see if a match can be found at the current position in the stream: " <code "match(re`/[fm]oo/`)" /> "."
+    
+    
+     You write your grammar productions in generator functions, and the productions control the parser core by yielding effects to it. For example a grammar might .
+  </>
+
+
+  <p>
+   "While we are working on building out Paneditor as a feature-complete IDE (that runs in the browser), we're not ready to ship that experience today. What we do have ready is its core API for code transformation that will also serve as the basis for our ecosystem of plugins and language support. This is very much by design: we consider Paneditor to be an " '"api-first IDE"' ", and indeed as long as you don't expect a GUI experience"
+  </>
+
+  <p> 
+    <b>
+      "Today after years spent adding, removing, and reworking core features, we are confident that we have a product and a set of would-be standards that is ready to meet the challenges of real-world use. BABLR is Javascript's first framework for building extensible streaming parsers. You can find the beta release of the bablr package " <a "on npm" { href: "https://npmjs.org/package/bablr" } /> "."
     </>
   </>
 
   <p>
-    "In addition to these technologies which make up the " '"kernel"' " of an IDE and are more or less mature as of today, "
-    "we are announcing the kickoff of primary feature development on our genre-bending semantic-syntactic IDE, Paneditor, "
-    "the first in a family of code editors built from the ground up for touchscreen and VR interfaces."
+    "As of today we already have is already a working system for rewriting source code, capable of doing heavy lifting in real codebases. Its most notable ability is to permit source transformations with simple functional code like: " <code "outputTree = transform(inputTree)" /> ", a powerful technique that works well for us because we use immutable trees. " "!"
+  </>
+    
+  <p>
+    "But there's a caveat: to build the trees, you must have a working language definition. On release day we won't have many languages defined, and those we do (Javascript) are sure to contain bugs and omissions. The real strength of our product is that we've defined our APIs not as "
+    <code "parseLanguage(code)" /> " but as " <code "parse(language, code)" /> " which guarantees that our system can gain capabilities without needing to release a new version!"
   </>
 
   <p>
-    "Finally I, Conrad Buck, together with my co-founder and BABLR collaborator Stirling Hosstetter, have created "
-    "Silphium Labs, a for-profit company which supports the open development on BABLR with the intention of going "
-    "head to head with Microsoft in the market for services. We believe we have the potential to expose the degree "
-    "to which their horizontally-integrated tech stack anchored by LSP, Git, Github, and VSCode is what you would call "
-    '"legacy software".'
+    "Finally I, Conrad Buck, together with BABLR collaborator Stirling Hosstetter, have co-founded a for-profit company, Silphium Labs, around our work. Silphium does not yet have any (significant) outside funding. In the long term our business plan is to model Github's growth strategy and eventually to capture their market. In the mean time we are available for hire as consultants to companies or projects struggling with thorny code analysis or transformation problems, or who are curious about how to put our free and open products to work for them most effectively."
   </>
 
   <h3 "Coding with bricks" />
+
 
   <p>
     "Our primary motivation for doing all this is our perception that code literacy is much lower than it aught "
@@ -135,7 +225,7 @@ draft: true
     "syntax tree node becomes the fundamental building block from which larger textual programs are composed."
   </>
 
-  <h3 "A DOM for code" />
+  <h3 "Using it" />
 
   <p>
     "So far this blog post has been a lot of prose, so thanks for your patience as we worked to set the stage. "
@@ -233,7 +323,6 @@ draft: true
     </>
   </>
 
-
   <p>
     "A complete explanation of CSTML is beyond this post, but I hope the language should feel a bit "
     "familiar if you already know HTML or XML or JSX. Like those languages it "
@@ -300,7 +389,64 @@ draft: true
     </>
   </>
 
-  <h3 "Towards semantic IDEs" />
+  <h3 "Paneditor" />
+
+  <p>
+    "OK I left one thing off the list at the start of the blog post, and that's because unlike the other things being announced here it's not a product that's ready for you to test-drive as of today. The rest of the products we've built more or less constitute all the pieces you'd need to assemble a visual IDE"
+  </>
+
+  <p>
+    "Paneditor represents the last step in the evolution of these composable code snippets and templates into a complete product. It uses these same technologies and APIs that I've demonstrated to parse code into a semantic document, and then it allows you to drag the snippets around and snap them together."
+
+    "Paneditor isn't ready for you to use as a daily driver yet today. 
+  </>
 
   <h3 "The economics of Open Source" />
+
+  <p>
+    "I'm a big fan of philosophy. I don't mean that I've read the works of the great philosophers (sorry), I more mean that in the practice of engineering, I think it is very important that we interrogate ourselves as to how our values drive our choices."
+  </>
+
+  <p>
+    "We're highly aware that the products we're releasing will enter a crowded space. We're not the first to try any of the techniques I'm sharing with you today. We're not the first ones to try to build a semantic text-based IDE: our work owes debts to Tree-sitter and Hazel and SrcML. We're not the first ones to try to unify the JS build toolchain. The original creator of Babel, Sebastian McKenzie, became dismayed with the maintainability of Javascript tooling and founded Rome to work on unifying the IDE's tools for Javascript projects. While Rome-the-company went under, the Rome codebase lives on as Biome. More recently, Evan You has founded, funded, and unveiled VoidZero: a Vite-based vision to succeed where Rome failed."
+  </>
+
+  <p>
+    "I guess my point here is, why should our tiny team allow itself to think it has a chance to succeed against well-known teams stacked with talent and money? Indeed this is a question I ask myself. "
+  </>
+
+  <p>
+    "In addition a great deal of our work (and our philosophy) follows in the footsteps of the engineers who built Electron, Atom, Tree-sitter, and now Zed, who we now also expect to compete with. Why when there is so much exceptional talent and money already stacked up against us should we think we have a chance to change the game?"
+  </>
+
+  <p>
+    "While I have great respect for the skill and dedication of the engineers who have built these awesome pieces of technology, I have little fear that t "
+  </>
+
+  <p>
+    "To translate this belief to practice I use one of the oldest engineering tricks in the book: I imagine I'm on the verge of great success, but then one stupid choice I made in the past causes everything I built to unravel. What was that choice, and how can I can stop myself before I make it? If you can do this well you won't necessarily know a certain path to succeed, but you should gain confidence that you haven't already failed without realizing it."
+  </>
+
+  <p>
+    "For me the obvious way to fail is to create something that would crush me with its maintenance burden over the long term. I'm just one person doing most of the coding on BABLR and I hope to be able to move on and do other things with my life at some point, which combine to mean that I'm allergic to anything that creates continuous maintenance work forever. This is why BABLR itself doesn't prescribe any specific lint errors or formatting rules: matters of stylistic preference are ever-changing, and I'd have to create a product that kept changing forever to be able to keep up."
+  </>
+  
+  <p>
+    "For us it means that our product isn't a specific set of rules we think make for good code style, it's the environment in which you can write those rules and run the rules others have written. Unlike our competitors, what we're offering is less like a plugin API and more like a compute platform. You wouldn't say that assembly code running on an x86 CPU is a " '"plugin"' " for that CPU, or that a website is a plugin for a browser. Browsers and CPUs are both platforms meant to support a plethora of distinct, novel usages with minimal bias."
+  </>
+
+  <p>
+    "In general we think of any line of code we write as an economic bargain -- a balancing game. On one side of the scale is the total amount of code necessary to make a product or feature work. Balancing that out is the amount of that code that we don't have to maintain ourselves. The code in our Firmware and OS and Browser are all necessary to make features work, but the OS and the browser are useful to so many people that even if only a small fraction of them contribute time or money to maintenance, the costs can be spread widely enough to be viable."
+  </>
+
+  <p>
+    "What we know about our mission is that to succeed in a technical sense we're going to need to take ownership of a lot of new code, but to succeed over the long term we're relying on being able to share the maintenance burdens among the largest group of people we can convince to help out."
+  </>
+
+  <p>
+    "If we were to try to calculate how widely we could share the costs of a particular piece of code, the math would probably look something like "
+    <code "(number_of_users * pct_who_want_to_contribute * contribution_success_rate)" />
+    ". Our stragegy is to make each of these factors work in our favor, and thus to form a more virulent ecosystem than those that are our competitiors. For example, we can reach more users by making tools that can be immediately useful even to people using in other programming languages, or spoken languages other than English, or working on phones or tablets. We can increase the contribution success rate by writing our code in Javascript instead of Rust, and by building tools and making it easy to debug. We can increase the percentage of people who want to contribute (and return to contribute again) just by being welcoming and embracing a diverse community of users with perspectives and needs different than our own, and by showing how much real value contributions can create."
+  </>
+
 </>
