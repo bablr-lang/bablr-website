@@ -239,7 +239,7 @@ draft: true
     <code { "bablr-language": "https://bablr.org/languages/universe/es6", "bablr-production": "Program" }>
       "import { parse } from 'bablr';" "\n"
       "import { get, printSource, printPrettyCSTML } from '@bablr/helpers/tree';" "\n"
-      "import * as language from '@bablr/language-en-json';" "\n"
+      "import language from '@bablr/language-en-json';" "\n"
       "\n"
       "let input = '[\"1\", true, 3]';" "\n"
       "let document = parse(language, input);"  "\n"
@@ -371,7 +371,7 @@ draft: true
   <pre>
     <code { "bablr-language": "https://bablr.org/languages/universe/es6", "bablr-production": "Program" }>
       "import { buildTag, printSource } from 'bablr';" "\n"
-      "import * as language from '@bablr/language-en-esnext';" "\n"
+      "import language from '@bablr/language-en-esnext';" "\n"
       "\n"
       "let js = buildTag(language);" "\n"
       "\n"
