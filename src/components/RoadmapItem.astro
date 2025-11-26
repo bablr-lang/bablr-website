@@ -1,13 +1,6 @@
 ---
-import type { AudienceType } from "../data/audiences";
 import { audiences } from "../data/audiences";
 
-interface Props {
-  title: string;
-  description: string;
-  audienceTypes: Array<AudienceType>;
-  status: "completed" | "in-progress" | "planned";
-}
 const { title, description, status, audienceTypes } = Astro.props;
 ---
 
