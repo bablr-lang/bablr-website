@@ -287,12 +287,12 @@ draft: true
   <pre>
     <code { "bablr-language": "https://bablr.org/languages/core/en/cstml" }>
       "<Array>" "\n"
-      "  openToken*: <* '[' { balanced: ']' } />" "\n"
+      "  openToken*: <* '[' />" "\n"
       "  elements[]+:" "\n"
       "  <String>" "\n"
-      "    openToken*: <* '\"' { balanced: '\"', balancedSpan: 'String:Double' } />" "\n"
+      "    openToken*: <* '\"' />" "\n"
       "    content: <*StringContent '1' />" "\n"
-      "    closeToken*: <* '\"' { balancer: true } />" "\n"
+      "    closeToken*: <* '\"' />" "\n"
       "  </>" "\n"
       "  #separatorTokens: <* ',' />" "\n"
       "  elements[]+:" "\n"
@@ -306,7 +306,7 @@ draft: true
       "  elements[]+:" "\n"
       "  <_>" "\n"
       "    #: :Space: <*Space ' ' />" "\n"
-      "    <Number { span: 'Number' }>" "\n"
+      "    <Number>" "\n"
       "      wholePart:" "\n"
       "      <Integer>" "\n"
       "        signToken: null" "\n"
@@ -318,7 +318,7 @@ draft: true
       "      exponentPart: null" "\n"
       "    </>" "\n"
       "  </>" "\n"
-      "  closeToken*: <* ']' { balancer: true } />" "\n"
+      "  closeToken*: <* ']' />" "\n"
       "</>" "\n"
     </>
   </>
