@@ -11,6 +11,7 @@ import { generateProductions } from "@bablr/helpers/grammar";
 import { createSignal, For, Match, Switch } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
 import { printType, printTag } from "@bablr/agast-helpers/print";
+import { wait } from "@bablr/agast-helpers/stream";
 import { defaultCSTMLGrammar } from "./cstml.js";
 import { defaultJSONGrammar } from "./json.js";
 import { makePersisted } from "@solid-primitives/storage";
@@ -28,7 +29,7 @@ function* __map(tags, fn) {
     co.advance();
 
     if (co.current instanceof Promise) {
-      co.current = yield co.current;
+      co.current = yield wait(co.current);
     }
     if (co.done) break;
 
@@ -36,7 +37,7 @@ function* __map(tags, fn) {
 
     let result = fn(tag);
     if (result instanceof Promise) {
-      result = yield result;
+      result = yield wait(result);
     }
     yield result;
   }
