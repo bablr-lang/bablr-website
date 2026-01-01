@@ -3,9 +3,11 @@ import { streamParse } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
 import {
   buildPropertyMatcher,
-  buildBasicNodeMatcher,
-  buildOpenNodeMatcher,
+  buildTreeNodeMatcher,
+  buildTreeNodeMatcherOpen,
   buildNodeFlags,
+  buildBoundNodeMatcher,
+  buildTreeNodeMatcherOpen,
 } from "@bablr/helpers/builders";
 import { generateProductions } from "@bablr/helpers/grammar";
 import { createSignal, For, Match, Switch } from "solid-js";
@@ -134,9 +136,11 @@ export default function App() {
     return buildEmbeddedMatcher(
       buildPropertyMatcher(
         null,
-        null,
-        buildBasicNodeMatcher(
-          buildOpenNodeMatcher(buildNodeFlags(flags()), productionName()),
+        buildBoundNodeMatcher(
+          [],
+          buildTreeNodeMatcher(
+            buildTreeNodeMatcherOpen(buildNodeFlags(flags()), productionName()),
+          ),
         ),
       ),
     );
