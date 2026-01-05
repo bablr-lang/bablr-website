@@ -139,7 +139,11 @@ export default function App() {
         buildBoundNodeMatcher(
           [],
           buildTreeNodeMatcher(
-            buildTreeNodeMatcherOpen(buildNodeFlags(flags()), productionName()),
+            buildTreeNodeMatcherOpen(
+              buildNodeFlags(flags()),
+              null,
+              productionName(),
+            ),
           ),
         ),
       ),
@@ -259,18 +263,13 @@ export default function App() {
                   <For
                     each={[
                       ...new Set(
-                        [...productions()]
-                          .filter(
-                            ({ 0: key }) =>
-                              key !== Symbol.for("@bablr/fragment"),
-                          )
-                          .map(({ 0: key }) => {
-                            let string = key;
-                            if (typeof string === "symbol") {
-                              string = `[${printType(string)}]`;
-                            }
-                            return string;
-                          }),
+                        [...productions()].map(({ 0: key }) => {
+                          let string = key;
+                          if (typeof string === "symbol") {
+                            string = `[${printType(string)}]`;
+                          }
+                          return string;
+                        }),
                       ),
                     ].sort()}
                   >
