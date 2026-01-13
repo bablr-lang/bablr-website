@@ -307,7 +307,7 @@ export default function App() {
                   <b title="fragment">
                     <label class="mx-2">_</label>
                     <input
-                      checked={flags().fragment}
+                      checked={flagsfragment}
                       onInput={(e) => {
                         setFlags({ ...flags(), fragment: e.target.checked });
                       }}
@@ -317,7 +317,7 @@ export default function App() {
                   <b title="coverFragment">
                     <label class="mx-2">_</label>
                     <input
-                      checked={flags().cover}
+                      checked={flagscover}
                       onInput={(e) => {
                         setFlags({ ...flags(), cover: e.target.checked });
                       }}
