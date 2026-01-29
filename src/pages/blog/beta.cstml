@@ -236,7 +236,7 @@ draft: true
   <p "A basic usage of BABLR looks something like this:" />
 
   <pre>
-    <code { "bablr-language": "https://bablr.org/languages/universe/es6", "bablr-production": "Program" }>
+    <code { "bablr-language": "https://bablr.org/languages/universe/en/es6", "bablr-production": "Program" }>
       "import { parse } from 'bablr';" "\n"
       "import { get, printSource, printPrettyCSTML } from '@bablr/helpers/tree';" "\n"
       "import language from '@bablr/language-en-json';" "\n"
@@ -256,7 +256,7 @@ draft: true
 
   <p>
     "If you're able to see the above code snippet with syntax highlighting then you've already run a "
-    "BABLR " <code "parse()" { "bablr-language": "https://bablr.org/languages/universe/es6" } /> " "
+    "BABLR " <code "parse()" { "bablr-language": "https://bablr.org/languages/universe/en/es6" } /> " "
     "in your web browser using this very API: BABLR is used to generate metadata about text, "
     "and we use the metadata it generates to provide syntax highlighting, semantic selection, and "
     "the ability to explore the underlying syntax tree in-place. This lets us have an experience like "
@@ -369,7 +369,7 @@ draft: true
   </>
 
   <pre>
-    <code { "bablr-language": "https://bablr.org/languages/universe/es6", "bablr-production": "Program" }>
+    <code { "bablr-language": "https://bablr.org/languages/universe/en/es6", "bablr-production": "Program" }>
       "import { buildTag, printSource } from 'bablr';" "\n"
       "import language from '@bablr/language-en-esnext';" "\n"
       "\n"

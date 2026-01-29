@@ -4,7 +4,6 @@ import { streamParse } from "bablr";
 import { spam as m, re } from "@bablr/boot";
 import { eat, match } from "@bablr/helpers/grammar";
 import { OpenNodeTag, LiteralTag } from "@bablr/helpers/symbols";
-import { buildString } from "@bablr/helpers/builders";
 import "./DemoText.css";
 
 const arrayLast = (arr) => arr[arr.length - 1];
