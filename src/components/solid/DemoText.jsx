@@ -1,4 +1,5 @@
 /* global document window */
+import "@bablr/deep-freeze/register";
 import { onCleanup, getOwner, runWithOwner } from "solid-js";
 import { streamParse } from "bablr";
 import { spam as m, re } from "@bablr/boot";

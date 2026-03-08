@@ -1,5 +1,6 @@
 /* global console window setTimeout document */
-import { streamParse } from "bablr/enhanceable";
+import "@bablr/deep-freeze/register";
+import { buildModule } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
 import {
   buildPropertyMatcher,
@@ -7,22 +8,30 @@ import {
   buildTreeNodeMatcherOpen,
   buildNodeFlags,
   buildBoundNodeMatcher,
-  buildTreeNodeMatcherOpen,
 } from "@bablr/helpers/builders";
 import { generateProductions } from "@bablr/helpers/grammar";
 import { createSignal, For, Match, Switch } from "solid-js";
 import { evaluateIO } from "@bablr/io-vm-web";
 import { printType, printTag } from "@bablr/agast-helpers/print";
-import { wait } from "@bablr/agast-helpers/stream";
+import {
+  wait as waitFor,
+  getStreamIterator,
+  StreamIterable,
+} from "@bablr/agast-helpers/stream";
 import { defaultCSTMLGrammar } from "./cstml.js";
 import { defaultJSONGrammar } from "./json.js";
 import { makePersisted } from "@solid-primitives/storage";
-import { getStreamIterator, StreamIterable } from "@bablr/agast-helpers/stream";
 import { Coroutine } from "@bablr/coroutine";
 import * as helpers from "@bablr/helpers";
 import "./Playground.css";
 import { getFlagsWithGap, nodeFlags } from "@bablr/agast-helpers/tree";
 import { buildEmbeddedMatcher } from "@bablr/agast-vm-helpers/builders";
+
+let enhancers = {};
+
+enhancers = { ...debugEnhancers, enhancers };
+
+let { streamParse } = buildModule(enhancers);
 
 function* __map(tags, fn) {
   const co = new Coroutine(getStreamIterator(tags));
@@ -31,7 +40,7 @@ function* __map(tags, fn) {
     co.advance();
 
     if (co.current instanceof Promise) {
-      co.current = yield wait(co.current);
+      co.current = yield waitFor(co.current);
     }
     if (co.done) break;
 
@@ -39,7 +48,7 @@ function* __map(tags, fn) {
 
     let result = fn(tag);
     if (result instanceof Promise) {
-      result = yield wait(result);
+      result = yield waitFor(result);
     }
     yield result;
   }
@@ -158,10 +167,6 @@ export default function App() {
     }
   };
 
-  let enhancers = {};
-
-  enhancers = { ...debugEnhancers, enhancers };
-
   let tags = () =>
     map(
       evaluateIO(() =>
@@ -171,7 +176,7 @@ export default function App() {
             matcher(),
             input(),
             {},
-            { enhancers, emitEffects: true },
+            { emitEffects: true },
           ),
         ),
       ),

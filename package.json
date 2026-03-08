@@ -18,6 +18,7 @@
     "@bablr/astro_integration-cstml": "0.2.11",
     "@bablr/boot": "0.11.4",
     "@bablr/coroutine": "0.1.0",
+    "@bablr/deep-freeze": "1.0.0",
     "@bablr/helpers": "0.25.5",
     "@bablr/io-vm-web": "0.5.0",
     "@bablr/language-en-cstml": "0.12.6",
