@@ -23,9 +23,9 @@ import { defaultJSONGrammar } from "./json.js";
 import { makePersisted } from "@solid-primitives/storage";
 import { Coroutine } from "@bablr/coroutine";
 import * as helpers from "@bablr/helpers";
-import "./Playground.css";
 import { getFlagsWithGap, nodeFlags } from "@bablr/agast-helpers/tree";
 import { buildEmbeddedMatcher } from "@bablr/agast-vm-helpers/builders";
+import "./Playground.css";
 
 let enhancers = {};
 
