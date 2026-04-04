@@ -125,7 +125,7 @@ draft: true
     <code>
       "class Grammar {" "\n"
       "  *Digits() {" "\n"
-      "    yield eat(re`/[0-9]+/`);" "\n"
+      "    yield eat(m`/[0-9]+/`);" "\n"
       "  }" "\n"
       "}" "\n"
     </>
@@ -151,7 +151,7 @@ draft: true
       "  }" "\n"
       "\n"
       "  *Digits() {" "\n"
-      "    yield eat(re`/[0-9]+/`);" "\n"
+      "    yield eat(m`/[0-9]+/`);" "\n"
       "  }" "\n"
       "}" "\n"
     </>
@@ -163,7 +163,7 @@ draft: true
     
     
     
-    like " <code "advance('foo')" /> ", which would indicate to the state machine that the next text in the input " <b "must" /> " be " <code "foo" /> " and that the input stream should be advanced past those three characters. To help you know what to " <code "advance" /> " the system provides another commonly used instruction, " <code "match" /> ", which can be given a regex pattern that will be tested to see if a match can be found at the current position in the stream: " <code "match(re`/[fm]oo/`)" /> "."
+    like " <code "advance('foo')" /> ", which would indicate to the state machine that the next text in the input " <b "must" /> " be " <code "foo" /> " and that the input stream should be advanced past those three characters. To help you know what to " <code "advance" /> " the system provides another commonly used instruction, " <code "match" /> ", which can be given a regex pattern that will be tested to see if a match can be found at the current position in the stream: " <code "match(m`/[fm]oo/`)" /> "."
     
     
      You write your grammar productions in generator functions, and the productions control the parser core by yielding effects to it. For example a grammar might .

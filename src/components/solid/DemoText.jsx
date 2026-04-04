@@ -2,7 +2,7 @@
 import "@bablr/deep-freeze/register";
 import { onCleanup, getOwner, runWithOwner } from "solid-js";
 import { streamParse } from "bablr";
-import { spam as m, re } from "@bablr/boot";
+import { m } from "@bablr/boot";
 import { eat, match } from "@bablr/helpers/grammar";
 import { OpenNodeTag, LiteralTag } from "@bablr/helpers/symbols";
 import "./DemoText.css";
@@ -27,7 +27,7 @@ const language = {
   grammar: class DemoLanguage {
     *Message({ ctx }) {
       let l;
-      while ((l = yield match(re`/./s`))) {
+      while ((l = yield match(m`/./s`))) {
         let str = ctx.sourceTextFor(l);
         if (str === "<") {
           yield eat(m`letters[]: <*Letter { openSpan: 'Tag' } />`);
@@ -40,7 +40,7 @@ const language = {
     }
 
     *Letter() {
-      yield eat(re`/./s`);
+      yield eat(m`/./s`);
     }
   },
 };
