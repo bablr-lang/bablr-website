@@ -1,5 +1,4 @@
 /* global console window setTimeout document */
-import "@bablr/deep-freeze/register";
 import { buildModule } from "bablr/enhanceable";
 import { debugEnhancers } from "@bablr/helpers/enhancers";
 import {

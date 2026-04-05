@@ -1,4 +1,3 @@
-import "@bablr/deep-freeze/register";
 import { highlightAll } from "bedazzlr";
 import cstml from "@bablr/language-en-cstml";
 import esnext from "@bablr/language-en-esnext";
