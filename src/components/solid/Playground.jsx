@@ -16,6 +16,7 @@ import {
   wait as waitFor,
   getStreamIterator,
   StreamIterable,
+  continue_,
 } from "@bablr/agast-helpers/stream";
 import { defaultCSTMLGrammar } from "./cstml.js";
 import { defaultJSONGrammar } from "./json.js";
@@ -31,27 +32,6 @@ let enhancers = {};
 enhancers = { ...debugEnhancers, enhancers };
 
 let { streamParse } = buildModule(enhancers);
-
-function* __map(tags, fn) {
-  const co = new Coroutine(getStreamIterator(tags));
-
-  for (;;) {
-    co.advance();
-
-    if (co.current instanceof Promise) {
-      co.current = yield waitFor(co.current);
-    }
-    if (co.done) break;
-
-    const tag = co.value;
-
-    let result = fn(tag);
-    if (result instanceof Promise) {
-      result = yield waitFor(result);
-    }
-    yield result;
-  }
-}
 
 const fixupSelection = () => {
   let selection = document.getSelection();
@@ -84,8 +64,6 @@ const fixupSelection = () => {
 
   return empty;
 };
-
-export const map = (tags, fn) => new StreamIterable(__map(tags, fn));
 
 const wait = (timeout) =>
   new Promise((resolve) => setTimeout(resolve, timeout));
