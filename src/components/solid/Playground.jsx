@@ -26,6 +26,7 @@ import * as helpers from "@bablr/helpers";
 import { getFlagsWithGap, nodeFlags } from "@bablr/agast-helpers/tree";
 import { buildEmbeddedMatcher } from "@bablr/agast-vm-helpers/builders";
 import "./Playground.css";
+import { map } from "@bablr/agast-helpers/iterable";
 
 let enhancers = {};
 
