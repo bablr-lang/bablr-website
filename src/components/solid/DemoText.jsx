@@ -1,8 +1,10 @@
 /* global document window */
 import { onCleanup, getOwner, runWithOwner } from "solid-js";
 import { streamParse } from "bablr";
-import { m } from "@bablr/boot";
-import { eat, match } from "@bablr/helpers/grammar";
+import { freezeClass } from "@bablr/agast-helpers/object";
+import { printSource } from "@bablr/agast-helpers/tree";
+import { parseTag, parseObject } from "@bablr/agast-helpers/builders";
+import { m, eat, match } from "@bablr/helpers/grammar";
 import { OpenNodeTag, LiteralTag } from "@bablr/helpers/symbols";
 import "./DemoText.css";
 
@@ -21,28 +23,29 @@ export const colors = [
   "rgb(249, 129, 47)",
 ];
 
-const language = {
-  canonicalURL: "https://localhost/bablr-org-demo",
-  grammar: class DemoLanguage {
-    *Message({ ctx }) {
-      let l;
-      while ((l = yield match(m`/./s`))) {
-        let str = ctx.sourceTextFor(l);
-        if (str === "<") {
-          yield eat(m`letters[]: <*Letter { openSpan: 'Tag' } />`);
-        } else if (str === ">") {
-          yield eat(m`letters[]: <*Letter { closeSpan: true } />`);
-        } else {
-          yield eat(m`letters[]: <*Letter />`);
-        }
+const language = class DemoLanguage {
+  static canonicalURL = "https://localhost/bablr-org-demo";
+
+  *Message() {
+    let l;
+    while ((l = yield match(m`/./s`))) {
+      let str = printSource(l);
+      if (str === "<") {
+        yield eat(m`letters[]: <*Letter { openSpan: 'Tag' } />`);
+      } else if (str === ">") {
+        yield eat(m`letters[]: <*Letter { closeSpan: true } />`);
+      } else {
+        yield eat(m`letters[]: <*Letter />`);
       }
     }
+  }
 
-    *Letter() {
-      yield eat(m`/./s`);
-    }
-  },
+  *Letter() {
+    yield eat(m`/./s`);
+  }
 };
+
+freezeClass(language);
 
 const matcher = m`<$Message />`;
 
@@ -74,7 +77,7 @@ function* gen(tags, node, traverse = false) {
   range.collapse();
 
   while (!step.done) {
-    let tag = step.value;
+    let tag = parseTag(step.value);
 
     switch (tag.type) {
       case OpenNodeTag: {
@@ -92,7 +95,7 @@ function* gen(tags, node, traverse = false) {
           range.setEnd(node.lastChild, 1);
         }
 
-        let { openSpan, closeSpan } = open.value.attributes;
+        let { openSpan, closeSpan } = parseObject(open.value.attributes);
 
         if (closeSpan) {
           spans.pop();

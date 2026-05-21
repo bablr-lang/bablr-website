@@ -23,31 +23,27 @@ export const roadmapData: RoadmapCategory[] = [
         audienceTypes: ["tool", "ide", "lang"],
       },
       {
-        title: "Broader language support",
-        description: "Define the first 100 and the first 1000 languages",
-        audienceTypes: ["tool"],
-      },
-      {
         title: "More implementations",
-        description: "Port BABLR engine to other runtimes",
-        audienceTypes: ["lang"],
-      },
-      {
-        title: "Syntax themes",
-        description: "A CSS-like system for styling code",
-        audienceTypes: ["ide"],
-      },
-      {
-        title: "Structural hashing",
-        description:
-          "Enables progressive tree transfer and syntax-aware version control",
-        audienceTypes: ["tool"],
+        description: "Try using BABLR to port itself to... Python? Rust?",
+        audienceTypes: ["tool", "ide"],
       },
       {
         title: "Snapshot testing",
         description:
-          "Use BABLR to codemod test files to include the expected test results",
+          "Use BABLR to update test files when the expected results change",
         audienceTypes: ["tool", "lang"],
+      },
+      {
+        title: "Paneditor",
+        description:
+          "A browser-based semantic code editor using an agAST document as a DOM. Structural search powered by Spamex",
+        audienceTypes: ["ide"],
+      },
+      {
+        title: "Far.OS",
+        description:
+          "A UNIX-inspired in-browser operating system with streaming data and a virtual filesystem",
+        audienceTypes: ["ide"],
       },
     ],
   },
@@ -61,26 +57,28 @@ export const roadmapData: RoadmapCategory[] = [
         audienceTypes: ["tool", "ide", "lang"],
       },
       {
-        title: "Spamex",
+        title: "Broader Language Support",
         description:
-          "Pattern matching language for searching in CSTML structures",
+          "Currently incomplete grammars include Typescript, Python, and Ruby. Help us finish those and add more!",
         audienceTypes: ["tool", "ide"],
       },
       {
-        title: "Javascript language support",
-        description: "Our tools should parse our own source code",
-        audienceTypes: ["tool"],
-      },
-      {
-        title: "Ruby language support",
-        description: "A BABLR grammar for your favorite friendly language",
-        audienceTypes: ["tool", "lang"],
-      },
-      {
-        title: "Paneditor",
+        title: "Virtual Filesystem",
         description:
-          "A browser-based semantic code editor using a CSTML document as its state",
+          "<Directory> nodes let you put a whole repo into one CSTML or agAST tree!",
+        audienceTypes: ["tool", "ide"],
+      },
+      {
+        title: "Structural Hashing",
+        description:
+          "Enables progressive tree transfer and git-like version control",
         audienceTypes: ["ide"],
+      },
+      {
+        title: "Snippets/Forge",
+        description:
+          "A remote peer with a fancy web UI! Free for open source projects",
+        audienceTypes: ["ide", "lang"],
       },
     ],
   },
@@ -89,34 +87,33 @@ export const roadmapData: RoadmapCategory[] = [
     status: "completed",
     items: [
       {
-        title: "BedazzLR",
-        description: "Client-side syntax highlighter for the web",
-        audienceTypes: ["ide", "lang"],
+        title: "CSTML",
+        description:
+          "A modern, XML-like markup language that avoids repeating XML's mistakes",
+        audienceTypes: ["tool", "ide"],
       },
       {
-        title: "Shift operation",
-        description: "Enables LR parsing of expressions like 2+2",
+        title: "agAST",
+        description:
+          "Uses btrees to store CSTML documents in a way that is monomorphic, deeply immutable, and safe from prototype injection",
+        audienceTypes: ["tool", "ide"],
+      },
+      {
+        title: "Guarded Spans",
+        description:
+          "A parser author can set a guard pattern which, until cleared, will seem to end the input when matched",
         audienceTypes: ["lang"],
       },
       {
-        title: "Unicode support",
-        description: "CSTML identifiers may now contain unicode",
-        audienceTypes: ["tool", "lang"],
-      },
-      {
-        title: "Immutable btrees",
-        description: "Amortized-cost changes to wide nodes",
-        audienceTypes: ["tool"],
-      },
-      {
-        title: "Language embedding",
-        description: "Languages can refer to and extend each other",
-        audienceTypes: ["tool", "lang"],
+        title: "Themes",
+        description: "Users can use CSS to add custom styling to code",
+        audienceTypes: ["ide"],
       },
       {
         title: "CLI",
-        description: "Test parsers from your favorite shell",
-        audienceTypes: ["lang"],
+        description:
+          "Runs and traces parsers. Includes helpful syntax highlighting.",
+        audienceTypes: ["lang", "tool"],
       },
     ],
   },
