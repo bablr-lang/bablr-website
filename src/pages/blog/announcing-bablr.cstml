@@ -23,7 +23,7 @@ date: "5/25/2026"
   </>
 
   <p>
-    "Each of these technologies can stand alone, but together the represent a thoroughly-integrated platform that is more than the sum of its parts. BABLR parsers provide the means to create CSTML and agAST trees, while libraries of data strucures and algorithms make the novel tree formats useful in practice. Whether the platform achieves impressive growth over the long term will depend mostly on how good a compromise I've brokered between language authors, tool authors, and users, because ultimately each of these three groups of people will see value in the platform if it is a place where they can come to meet the other two groups."
+    "Each of these technologies can stand alone, but together they represent a thoroughly-integrated platform that is more than the sum of its parts. BABLR parsers provide the means to create CSTML and agAST trees, while libraries of data structures and algorithms make the novel tree formats useful in practice. Whether the platform achieves impressive growth over the long term will depend mostly on how good a compromise I've brokered between language authors, tool authors, and users, because ultimately each of these three groups of people will see value in the platform if it is a place where they can come to meet the other two groups."
   </>
 
   <p>
@@ -33,7 +33,7 @@ date: "5/25/2026"
   <h3 'BABLR for Devs' />
 
   <p>
-    "We see several ways to get developers to fall in love with our platform. We've made it browser-native and incredibly lightweight, so that our code analysis can run in any docs site or blog post while only adding ~10KB. Our syntax highlighting tool is called Bedazzlr and it's running right here in this page powering code exaples like this one:"
+    "We see several ways to get developers to fall in love with our platform. We've made it browser-native and incredibly lightweight, so that our code analysis can run in any docs site or blog post while only adding ~10KB. Our syntax highlighting tool is called Bedazzlr and it's running right here in this page powering code examples like this one:"
   </>
 
   <pre>
@@ -43,11 +43,11 @@ date: "5/25/2026"
   </>
 
   <p>
-    "Bedazzlr is going beyond the basic token coloring that other tools offer though: it's providing a more like a version of the " <a 'ASTExplorer' { href: 'https://astexplorer.net' } /> " experience embedded right into the web page, allowing the user to interrogate the structure through semantic selection and through the ability to see the names of nodes in the embedded syntax tree. These names can be much more useful to colors when you're learning a new language, and our ability to compute them on the frontend also ensures that our ability to help users learn new langauges by directly exposing them to the structure of syntax trees need not be limited to English-speaking users."
+    "Bedazzlr is going beyond the basic token coloring that other tools offer though: it's providing a more like a version of the " <a 'ASTExplorer' { href: 'https://astexplorer.net' } /> " experience embedded right into the web page, allowing the user to interrogate the structure through semantic selection and through the ability to see the names of nodes in the embedded syntax tree. These names can be much more useful to colors when you're learning a new language, and our ability to compute them on the frontend also ensures that our ability to help users learn new languages by directly exposing them to the structure of syntax trees need not be limited to English-speaking users."
   </>
 
   <p>
-    "BABLR is more than just a fancy syntax highlghter though, it can also be the basis for a visual, tactile, API-programmable code editor that runs right in your browser. The code editor product, Paneditor will be the first code editor built from the ground up to be natively usable on touchscreen devices like phones and tablets, as those are the devices we believe the next generation is likely to have in their hands when they become curious about programming. Using Paneditor to write code will not require users to download any software, nor even to have root permissions on the device they are using. Paneditor will feature powerful features such as semantic code search and replace, all powered by the BABLR code that is shipping today."
+    "BABLR is more than just a fancy syntax highlighter though, it can also be the basis for a visual, tactile, API-programmable code editor that runs right in your browser. The code editor product, Paneditor will be the first code editor built from the ground up to be natively usable on touchscreen devices like phones and tablets, as those are the devices we believe the next generation is likely to have in their hands when they become curious about programming. Using Paneditor to write code will not require users to download any software, nor even to have root permissions on the device they are using. Paneditor will feature powerful features such as semantic code search and replace, all powered by the BABLR code that is shipping today."
   </>
 
   <p>
@@ -79,7 +79,7 @@ date: "5/25/2026"
   <h3 'BABLR for Parser authors' />
 
   <p>
-    "A huge chunk of BABLR's value in practice will be determined by how many languages the platform has parsers for. Right now on release day it's a small number. We support several of our own languages, and then more or less just JS and Python, and as of today neither of those langauges even has " <em 'complete' /> " support yet."
+    "A huge chunk of BABLR's value in practice will be determined by how many languages the platform has parsers for. Right now on release day it's a small number. We support several of our own languages, and then more or less just JS and Python, and as of today neither of those languages even has " <em 'complete' /> " support yet."
   </>
 
   <p>
@@ -101,7 +101,7 @@ date: "5/25/2026"
   </>
 
   <p>
-    "I'm breaking lots of other rules too: I'm not using monorepos, even though indivdual repositories introduce more process overhead. My commit messages are total garbage, and there has been no code review process. I'm not using AI of any kind, and I have so much trouble with carpel tunnel that I have to wear wrist braces when I work."
+    "I'm breaking lots of other rules too: I'm not using monorepos, even though individual repositories introduce more process overhead. My commit messages are total garbage, and there has been no code review process. I'm not using AI of any kind, and I have so much trouble with carpel tunnel that I have to wear wrist braces when I work."
   </>
 
   <p>
@@ -210,7 +210,7 @@ date: "5/25/2026"
   </>
 
   <p>
-    "In some ways this is a finish line for BABLR, and in some ways it's very much just the starting line. What we have more or less complete are the core standards: agAST, CSTML, and the way BABLR grammars are written. The work I'm about to throw myself into includes buiding out the semantic code editor and investing in support for more languages."
+    "In some ways this is a finish line for BABLR, and in some ways it's very much just the starting line. What we have more or less complete are the core standards: agAST, CSTML, and the way BABLR grammars are written. The work I'm about to throw myself into includes building out the semantic code editor and investing in support for more languages."
   </>
 
   <p>
@@ -218,6 +218,6 @@ date: "5/25/2026"
   </>
 
   <p>
-    "Much hangs in the balance right now though. As of yet our company has taken no VC money, and what options and opportunities we have for the future will depend in part of how the community reacts to this announcment. If you'd like to show your support for our open source work, we welcome your feedback, your human-written code contributions, or if you just want to send us a few bucks because something we made made your day easier, we take donations on " <a 'OpenCollective' { href: 'https://opencollective.com/bablr' } /> "."
+    "Much hangs in the balance right now though. As of yet our company has taken no VC money, and what options and opportunities we have for the future will depend in part of how the community reacts to this announcement. If you'd like to show your support for our open source work, we welcome your feedback, your human-written code contributions, or if you just want to send us a few bucks because something we made made your day easier, we take donations on " <a 'OpenCollective' { href: 'https://opencollective.com/bablr' } /> "."
   </>
 </>
