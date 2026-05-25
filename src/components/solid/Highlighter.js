@@ -3,6 +3,7 @@ import cstml from "@bablr/language-en-cstml";
 import esnext from "@bablr/language-en-esnext";
 import json from "@bablr/language-en-json";
 import * as BMap from "@bablr/agast-helpers/b-map";
+import { evaluateReturn } from "@bablr/agast-helpers/stream";
 
 let { entry } = BMap;
 
@@ -13,7 +14,7 @@ let languages = BMap.from(
 );
 
 let Highlighter = () => {
-  highlightAll(languages);
+  evaluateReturn(highlightAll(languages));
 };
 
 export default Highlighter;

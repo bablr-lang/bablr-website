@@ -3,7 +3,7 @@ layout: "../../layouts/BlogLayout.astro"
 title: "An introduction to BABLR"
 author: "Stirling Hostetter"
 date: "10/31/2024"
-draft: false
+draft: true
 ---
 
 # The first of many...

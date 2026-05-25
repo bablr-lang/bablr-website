@@ -1,65 +1,63 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const philosophyHeader = `The BABLR team believes that great software is built on strong principles. When engineering choices create trade-offs, a system of philosophy is needed to ensure that "why" is captured in addition to "what". Philosophy also provides context for past choices in a way that can empower new contributors and new leaders to pursue the BABLR mission in a decentralized manner.`;
 const philosophyData = [
   {
     title: "Have a philosophy.",
     content:
-      "Consider what is unique about your system of values. Your philosophy should be useful in informing your choices, but it should not be gospel: your philosophy should change and grow with you as you reflect on your experiences and instincts. Record your philosophy and the reasoning behind shifts in it: growth comes from reflection, and progress requires understanding."
+      "We commit to trying to write down what we value so that we may make decisions in accordance with our values and empower others to do the same. As our philosophy evolves, we will record its evolution",
   },
   {
-    title: "Software should serve people.",
+    title: "Serve people.",
     content:
-      "People should not become servants to software. Developers should seek empathy with their users so that they can design software that enhances users’ creativity and autonomy."
+      "Technology must be rooted in service to the needs of regular people. When a person or group becomes dependent on a technology we feel they must seek to own it, lest they instead should come to be owned by it.",
   },
   {
     title: "Be curious.",
     content:
-      "Ask open-ended questions, and make a good-faith attempt to find answers. Embrace the hardest questions: those without obvious answers."
+      "Understanding that curiousity can be a luxury, being able to ask ourselves difficult, open-ended questions and make rigorous inquiry into the answers is our luxury of preference.",
   },
   {
-    title: "Use plain language.",
+    title: "Communicate.",
     content:
-      "Seek simplicity through the creation of a unified and consistent terminology and symbology that aids new users’ comprehension and minimizes the cognitive overhead associated with using our tools."
+      "Did you get your idea get across? Did you fully comprehend the idea another person was explaining? Communication must be embraced as a continuous process because it can easily break down yet still appear to be working.",
+  },
+  {
+    title: "Value diversity.",
+    content:
+      "Diversity is messy and creates inefficiency, but at the same time drives systems and communities towards being more adaptable and resiliant. We seek to assemble the largest possible coalition of individuals and groups who support our efforts because our work supports their efforts.",
+  },
+  {
+    title: "Scale process up and down.",
+    content:
+      "Over time software tends to accumulate layers of process: writing tests, CI runs, code review, external QA. This is natural process creep. Stability is maximized at the cost of agility. Adaptable organizations retain the ability to experiment outside the confines of the most rigorous processes in place.",
   },
   {
     title: "Build living software.",
     content:
-      "Supported by sustainable communities. Pay down tech debt. Create new tech debt. Embrace forks. Value resilience over purity, and the Bazaar over the Cathedral."
+      "Pay down tech debt. Create new tech debt. Embrace forks. Do the work that makes it worth doing the work. Think about a project as if it has a will to survive!",
   },
-  {
-    title: "Support the long tail of use cases.",
-    content:
-      "Seek to create a playing field that is level for the most niche needs and the most generic needs of current or future users."
-  },
-  {
-    title: "Prioritize developer agency.",
-    content:
-      "Allow developers to optimize their environment for their own process."
-  },
-  {
-    title: "Value stability in infrastructure.",
-    content:
-      "Seek to create a durable foundation on top of which a variety of creative endeavors can thrive."
-  }
 ];
 ---
+
 <Layout title="Philosophy">
   <div class="max-w-5xl mx-auto px-4 py-16">
-    <h1 class="text-6xl font-extrabold text-center mb-12 tracking-tight">Philosophy</h1>
-    <p class="text-lg md:text-xl leading-relaxed mb-12 text-center max-w-3xl mx-auto">
-      {philosophyHeader}
-    </p>
+    <h1 class="text-6xl font-extrabold text-center mb-12 tracking-tight">
+      Philosophy
+    </h1>
+
     <ul class="space-y-8 text-base md:text-lg leading-relaxed">
-      {philosophyData.map((item, idx) => (
-        <li
-          class="bg-white shadow-lg rounded-2xl p-6 border border-orange-200 opacity-0 translate-y-6 animate-fade-in-slide"
-          style={`animation-delay: ${idx * 100}ms`}
-        >
-          <span class="font-semibold text-orange-600">{item.title}</span> {item.content}
-        </li>
-      ))}
+      {
+        philosophyData.map((item, idx) => (
+          <li
+            class="bg-white shadow-lg rounded-2xl p-6 border border-orange-200 opacity-0 translate-y-6 animate-fade-in-slide"
+            style={`animation-delay: ${idx * 100}ms`}
+          >
+            <span class="font-semibold text-orange-600">{item.title}</span>{" "}
+            {item.content}
+          </li>
+        ))
+      }
     </ul>
   </div>
 </Layout>

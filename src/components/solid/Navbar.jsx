@@ -3,7 +3,6 @@ import { createSignal } from "solid-js";
 const LINKS = [
   { label: "DOCS", path: "https://docs.bablr.org/" },
   { label: "BLOG", path: "/blog" },
-  { label: "LANGUAGES", path: "/languages" },
   { label: "PHILOSOPHY", path: "/philosophy" },
 ];
 
@@ -15,7 +14,7 @@ const Navbar = () => {
       {/* Logo */}
       <div class="flex items-center space-x-2 flex-1">
         <a href="/" class="block">
-          <img src="/bablr_logo.png" alt="Bablr Logo" class="h-16 w-16" />
+          <img src="/bablr_logo.svg" alt="Bablr Logo" class="h-16 w-16" />
         </a>
       </div>
 

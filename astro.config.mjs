@@ -16,9 +16,6 @@ export default defineConfig({
     locales: ["en"],
     defaultLocale: "en",
   },
-  redirects: {
-    "/experiments/playground": "/playground",
-  },
   integrations: [
     mdx(),
     solidJs({

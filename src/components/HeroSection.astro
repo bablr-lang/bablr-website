@@ -18,14 +18,19 @@ import DemoText from "./solid/DemoText.jsx";
     tools
   </p>
   <div class="flex justify-center space-x-6">
-    <a
-      href="https://docs.bablr.org"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="bg-orange-500 text-white px-4 md:px-8 py-3 rounded-lg flex items-center space-x-2 hover:bg-orange-600 text-xs md:text-base cursor-pointer"
-    >
-      <span>Get Started</span>
-      <ChevronRight size={20} />
-    </a>
+    <div>
+      Read our
+      <a
+        class="text-gray-700 hover:text-orange-600"
+        href="/blog/announcing-bablr">release announcment</a
+      >!
+    </div>
   </div>
 </div>
+
+<style>
+  a:hover,
+  a:focus {
+    text-decoration: underline;
+  }
+</style>

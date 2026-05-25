@@ -1,30 +1,35 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import BlogCard from '../../components/BlogCard.astro'
-const allPosts = await Astro.glob('./*.md')
-const filteredPosts = allPosts.filter((post) => !post.frontmatter.draft)
+import Layout from "../../layouts/Layout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+const allPosts = await Astro.glob("./*.cstml");
+const filteredPosts = allPosts.filter((post) => !post.frontmatter.draft);
 ---
 
 <Layout title="Blog">
-	<div class="min-h-screen bg-gradient-to-b from-orange-50 to-orange-100 font-jakarta px-4 py-20 text-gray-800">
-		<div class="max-w-3xl mx-auto">
-		  <h1 class="text-5xl font-extrabold text-center mb-8 text-gray-900">
-			BABLR Blog
-		  </h1>
-		  <p class="text-center text-lg text-gray-600 max-w-2xl mx-auto mb-12">
-			Ideas, insights, and stories from the BABLR team as we build the future of self-aware software.
-		  </p>
-		  <div class="flex flex-col gap-8">
-			{filteredPosts.map((post) => (
-			  <BlogCard
-				key={post.url}
-				href={post.url}
-				title={post.frontmatter.title}
-				date={post.frontmatter.date}
-				author={post.frontmatter.author}
-			  />
-			))}
-		  </div>
-		</div>
-	  </div>
+  <div
+    class="min-h-screen bg-gradient-to-b from-orange-50 to-orange-100 font-jakarta px-4 py-20 text-gray-800"
+  >
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-5xl font-extrabold text-center mb-8 text-gray-900">
+        BABLR Blog
+      </h1>
+      <p class="text-center text-lg text-gray-600 max-w-2xl mx-auto mb-12">
+        Ideas, insights, and stories from the BABLR team as we build the future
+        of self-aware software.
+      </p>
+      <div class="flex flex-col gap-8">
+        {
+          filteredPosts.map((post) => (
+            <BlogCard
+              key={post.url}
+              href={post.url}
+              title={post.frontmatter.title}
+              date={post.frontmatter.date}
+              author={post.frontmatter.author}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
 </Layout>

@@ -1,0 +1,223 @@
+---
+layout: "../../layouts/BlogLayout.astro"
+title: "Announcing BABLR"
+author: "Conrad Buck"
+date: "5/25/2026"
+---
+<!0:cstml>
+<__>
+  <p>
+    "Welcome! I'm Conrad, a Frontend Engineer by trade, and for the past five years I've been writing open source Javascript code. I've developed and am today releasing the latest version of a new generalized parser framework, BABLR, and with it a whole new API-based platform for software development."
+  </>
+
+  <p>
+    "My goal with this project is to explore what would happen if the IDE was not a text file editor first, but rather a code document editor. If we were willing to shed some of the baggage of history, what might we gain in return?"
+  </>
+
+  <p>
+    "Already developers are using document-driven coding tools daily: formatters to handle indentation, linters to catch common mistakes, transpilers to desugar new language, and codemods to perform refactors that touch anywhere from tens of files to hundreds of thousands and more."
+  </>
+
+  <p>
+    "Today we are shipping the core technologies of that platform: our parser framework, BABLR to compete with Tree-sitter; a parse tree format called agAST to compete with ESTree; and a new data language designed for parse trees called CSTML."
+  </>
+
+  <p>
+    "Each of these technologies can stand alone, but together the represent a thoroughly-integrated platform that is more than the sum of its parts. BABLR parsers provide the means to create CSTML and agAST trees, while libraries of data strucures and algorithms make the novel tree formats useful in practice. Whether the platform achieves impressive growth over the long term will depend mostly on how good a compromise I've brokered between language authors, tool authors, and users, because ultimately each of these three groups of people will see value in the platform if it is a place where they can come to meet the other two groups."
+  </>
+
+  <p>
+    "To tell the story of the product then is to tell the story of why each of these three core constituencies would see value in it."
+  </>
+
+  <h3 'BABLR for Devs' />
+
+  <p>
+    "We see several ways to get developers to fall in love with our platform. We've made it browser-native and incredibly lightweight, so that our code analysis can run in any docs site or blog post while only adding ~10KB. Our syntax highlighting tool is called Bedazzlr and it's running right here in this page powering code exaples like this one:"
+  </>
+
+  <pre>
+    <code { 'bablr-lang': 'https://bablr.org/languages/universe/en/esnext', 'bablr-prod': 'Program' }>
+      'let result = /[^^*+/[-]\[\]/.exec("input");'
+    </>
+  </>
+
+  <p>
+    "Bedazzlr is going beyond the basic token coloring that other tools offer though: it's providing a more like a version of the " <a 'ASTExplorer' { href: 'https://astexplorer.net' } /> " experience embedded right into the web page, allowing the user to interrogate the structure through semantic selection and through the ability to see the names of nodes in the embedded syntax tree. These names can be much more useful to colors when you're learning a new language, and our ability to compute them on the frontend also ensures that our ability to help users learn new langauges by directly exposing them to the structure of syntax trees need not be limited to English-speaking users."
+  </>
+
+  <p>
+    "BABLR is more than just a fancy syntax highlghter though, it can also be the basis for a visual, tactile, API-programmable code editor that runs right in your browser. The code editor product, Paneditor will be the first code editor built from the ground up to be natively usable on touchscreen devices like phones and tablets, as those are the devices we believe the next generation is likely to have in their hands when they become curious about programming. Using Paneditor to write code will not require users to download any software, nor even to have root permissions on the device they are using. Paneditor will feature powerful features such as semantic code search and replace, all powered by the BABLR code that is shipping today."
+  </>
+
+  <p>
+    "Our strongest argument to users is that the story will keep getting better and better day by day because we will keep attracting more languages, more tools, and more users."
+  </>
+
+  <h3 'BABLR for Tooling Devs' />
+
+  <p>
+    "Authors of tools care about how data is presented once it has been collected. We took our largest cues about how to think of data from the XML ecosystem."
+  </>
+
+  <p>
+    "agAST is our DOM-style API for data processing, and CSTML is our SAX-style API for data processing."
+  </>
+
+  <p>
+    "While the CSTML language is heavily inspired by XML, and like XML is designed to be parsed as a tag stream, we have avoided repeating XML's mistakes. CSTML has no CDATA and no entity codes, and can be parsed by a fairly simple parser. We've even 1-up'd XML by making our tag stream language trivial to parse with a stream parser. XML is non much fun for a stream parser to parse because of the ambiguity between " <code '<NodeName>' /> " and " <code '<Namespace.NodeName>' /> "."
+  </>
+
+  <p>
+    "Because BABLR is a streaming parser and CSTML is a streamable output format, BABLR is able to emit partial parse results before it has completed a full parse."
+  </>
+
+  <p>
+    "For tools that only wish to query code, using the tag stream API to access the document's structure may be optimal, since it can avoid the need to load the entire contents of the file into memory before searching begins. This allows developers to build structural searching tools that can even work correctly in files too large to be loaded into memory."
+  </>
+
+  <h3 'BABLR for Parser authors' />
+
+  <p>
+    "A huge chunk of BABLR's value in practice will be determined by how many languages the platform has parsers for. Right now on release day it's a small number. We support several of our own languages, and then more or less just JS and Python, and as of today neither of those langauges even has " <em 'complete' /> " support yet."
+  </>
+
+  <p>
+    "What I've done rather than focus on writing a lot of parsers myself is focus on making it as easy to write parsers. There's no compile step when writing parsers, for example, the code that runs is exactly the code you wrote, and you can debug it every step of the way with a normal old JS debugger. We also have several BABLR-specific tools to help parser authors, such as the BABLR CLI which can run parsers while showing beautifully formatted live trace output with luxuries like syntax highlighting inside regex patterns."
+  </>
+
+  <p>
+    "In addition to tools, we've made our parser APIs as powerful as we can to help when languages have gnarly design. We support arbitrary lookahead and speculative execution to make it easy to parse languages with ambiguity. We support \"shifting\" to make it easy to parse math-y expressions like " <code '2 + 2' { 'bablr-lang': 'https://bablr.org/languages/universe/en/esnext' } /> ". My personal favorite parser features is \"guarded spans,\" which until explicitly cleared will cause the source to appear to end at the location the guard pattern matches. Guarded spans make parsing quoted strings very easy in BABLR."
+  </>
+
+  <h3 "The Space Left Behind" />
+
+  <p>
+    "This is the part where we go off-script!"
+  </>
+
+  <p>
+    "This isn't supposed to be here. This whole project, it isn't supposed to be here. Ask anyone and they'll tell you that new tooling projects are supposed to be written in Rust, and if code absolutely must be written in Javascript it should at least be written in " <em 'Typescript' /> ", and if it isn't going to be written in Typescript the code should at least have legions and legions of test cases. Well, BABLR is written in plain Javascript and it doesn't have legions of test cases either."
+  </>
+
+  <p>
+    "I'm breaking lots of other rules too: I'm not using monorepos, even though indivdual repositories introduce more process overhead. My commit messages are total garbage, and there has been no code review process. I'm not using AI of any kind, and I have so much trouble with carpel tunnel that I have to wear wrist braces when I work."
+  </>
+
+  <p>
+    "Meanwhile the work itself could not be stepping on any more important people's toes. The names of the projects inheriting the JS tooling ecosystem are supposed to be known already: it'll be Biome or VoidZero, right?"
+  </>
+
+  <p>
+    "The problem that these companies seem not to have fully anticipated is what Josh Waitzkin in his Chessmaster 2000 tutorials calls, \"the space left behind.\" These projects like Biome and VoidZero, they decided that their focus was on building the fastest tools " <em 'for' /> " writing Javascript. Their decisions show that it was of no particular importance to them that the tools be written " <em 'in' /> " Javascript, and they continue to think that way."
+  </>
+
+  <p>
+    "That's all well and fine for them and I can't really argue with any strategy that seems to be working, and yet in leaving uncontested the project of making the best tools " <em 'in' /> " Javascript, they have ensured that I need not compete with them directly. Their tools expect that you're sitting in front of a laptop with a full-size keyboard, and that you're the root user. We're shipping tools that can go anywhere there's a browser. No root account? No matter. No keyboard? No matter. Their tools? 50 - 100MB download for every new version. Hope you're not on a stingy data plan! Our tools? 10 - 50KB. We can run in a system WebView, even. Their tools offer a second-class plugin API to JS, our tools make JS extensibility a first class feature from the ground up."
+  </>
+
+  <p>
+    "That's already a lot of differences, and we haven't even gotten to the biggest yet: BABLR supports being extended with support for new languages post-release. Neither Biome nor VoidZero has this ability. We're more like an x86; they're more like an XBox."
+  </>
+
+  <h3 'It gets worse' />
+
+  <p>
+    "Oh, much worse! CSTML in addition to being a suitable format for parse trees, is (in a purely technical sense at least) the natural successor to XML and HTML."
+  </>
+
+  <p "What!?" />
+
+  <h3 'XHTML' />
+
+  <p>
+    "Back when I started doing webdev we had a dream, and that dream was called \"the semantic web\". One of its most promising technologies was XHTML, with its partner in mischief XSLT serving as a bridge to XML."
+  </>
+
+  <p>
+    "On its surface the idea was brilliant: instead of requiring people to write XHTML markup for their webpages they would be allowed to write XML markup instead. Then as part of the rendering process the XSLT transformer would translate from the semantic XML input document to the HTML-XML (XHTML) output document. The idea was that if you wanted to have a restaurant menu the most basic asset would be extremely compact and simple, something like just:"
+  </>
+
+  <pre>
+    <code { 'bablr-lang': 'https://bablr.org/languages/core/en/cstml' }>
+      '<Menu>' "\n"
+      '  <Section>' "\n"
+      '    name: <Header "Appetizers" />' "\n"
+      '    #: "\\n\\n"' "\n"
+      '    <Item>' "\n"
+      '      name: "Spring Rolls"' "\n"
+      '      #: "  - "' "\n"
+      '      price: "$3.50"' "\n"
+      '    </>' "\n"
+      '    #: "\\n"' "\n"
+      '    <Item>' "\n"
+      '      name: "Deviled Eggs"' "\n"
+      '      #: "  - "' "\n"
+      '      price: "$5.25"' "\n"
+      '    </>' "\n"
+      '    #: "\\n"' "\n"
+      '    <Item>' "\n"
+      '      name: "Honey Burrata"' "\n"
+      '      #: " - "' "\n"
+      '      price: "$8"' "\n"
+      '    </>' "\n"
+      '  </>' "\n"
+      '</>' "\n"
+    </>
+  </>
+
+  <p>
+    "Notice that this menu document involves only some simple syntax, and otherwise contains nothing but the language of restaurants. There are are no " <code 'div' /> " or " <code 'span' /> " tags here: none of the language of page layout."
+  </>
+
+  <p>
+    "This can be a boon in several ways:"
+
+    <ul>
+      <li> "Documents are easier to read when there's a higher signal to noise ratio" </>
+      <li> "HTML page bodies are hardest to cache. This shrinks them, cheapening hosting" </>
+      <li> "The business shouldn't need a web developer just to be able to update the menu "</>
+      <li> "It is highly accessible, in all senses of the word" </>
+    </>
+  </>
+
+  <p>
+    "We have one other key advantage over XHML, which is that without a stylesheet you can still render a CSTML document because a CSTML document has inner text, just like HTML does. The menu document above with no additional transformation would render as this plain text:"
+  </>
+
+  <pre>
+    <code>
+      "Appetizers:" "\n"
+      "\n"
+      "Spring Rolls  - $3.50" "\n"
+      "Deviled Eggs  - $3.50" "\n"
+      "Honey Burrata - $8.00" "\n"
+    </>
+  </>
+
+  <p>
+    "Like HTML, when viewing the plain text of the menu the user could \"Inspect Element\" to view the raw markup. Most likely the page author, a restaurant owner, would be also be seeing the document in its source text form when editing, the same way a user composing a blog post in a browser might user a keyboard shortcut to make certain text italic without caring that the browser generated an " <code '<em>' /> " tag, the restaurant owner would be able to use UI to add an item to the menu without really needing to care that an " <code '<Item>' /> " tag is being added to the underlying markup document, and especially without needing to care about coder-y things like a " <code '"' /> " in the name of a dish needing to become " <code '\\"' /> " to avoid breaking the page's source code."
+  </>
+
+  <p>
+    "While we don't have a semantic page editor yet, this web page was in fact written as CSTML!"
+  </>
+
+  <h3 'What comes next' />
+
+  <p>
+    "We hope what comes next is that you'll take a chance on trying out our product! It's free-forever, MIT licensed, and available right now on NPM as " <a 'bablr@0.12.6' { href: 'https://www.npmjs.com/package/bablr' } /> "."
+  </>
+
+  <p>
+    "In some ways this is a finish line for BABLR, and in some ways it's very much just the starting line. What we have more or less complete are the core standards: agAST, CSTML, and the way BABLR grammars are written. The work I'm about to throw myself into includes buiding out the semantic code editor and investing in support for more languages."
+  </>
+
+  <p>
+    "We've also created a for-profit company, Silphium Labs, founded by myself and Stirling Hosstetter, with the intent to pursue this mission."
+  </>
+
+  <p>
+    "Much hangs in the balance right now though. As of yet our company has taken no VC money, and what options and opportunities we have for the future will depend in part of how the community reacts to this announcment. If you'd like to show your support for our open source work, we welcome your feedback, your human-written code contributions, or if you just want to send us a few bucks because something we made made your day easier, we take donations on " <a 'OpenCollective' { href: 'https://opencollective.com/bablr' } /> "."
+  </>
+</>

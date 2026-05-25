@@ -14,18 +14,23 @@ import FAQ from "./FAQ.astro";
       <div slot="question">What is BABLR?</div>
       <div slot="answer">
         <p>
-          BABLR is a parser framework roughly comparable to Tree-sitter, but built from the ground up
-          for the web. It is meant to be "everything but the GUI" of an IDE. It can provide version control,
-          syntax awareness, and the integration APIs that will allow products built on the BABLR core to support
-          our ecosystem of compatible libraries and extensions.
+          BABLR is a parser framework roughly comparable to Tree-sitter, but
+          built from the ground up for the web. It is meant to be "everything
+          but the GUI" of an IDE. It can provide version control, syntax
+          awareness, and the integration APIs that will allow products built on
+          the BABLR core to support our ecosystem of compatible libraries and
+          extensions.
         </p><br />
         <p>
-          Its purpose is to faciliate experimentation with new UX paradigms, particularly by faciliating the
-          creation of new generation of "semantic-syntactic" code editors. Such an editor is syntactic in that
-          it presents code as 2D text, but can also be semantic by not (ever) allowing invalid syntax like
-          unclosed quotes or mismatched braces. Instead such an editor should be centered around compostion:
-          it should make logically-coherent pieces of code feel like they can be taken apart and snapped together
-          with the delightful ease usually associated with Lego bricks.
+          Its purpose is to faciliate experimentation with new UX paradigms,
+          particularly by faciliating the creation of new generation of
+          "semantic-syntactic" code editors. Such an editor is syntactic in that
+          it presents code as 2D text, but can also be semantic by not (ever)
+          allowing invalid syntax like unclosed quotes or mismatched braces.
+          Instead such an editor should be centered around compostion: it should
+          make logically-coherent pieces of code feel like they can be taken
+          apart and snapped together with the delightful ease usually associated
+          with Lego bricks.
         </p>
       </div>
     </FAQ>
@@ -38,33 +43,35 @@ import FAQ from "./FAQ.astro";
         Existing projects which BABLR competes with generally fit into one of a
         few categories:
         <ul class="space-y-4 list-disc list-inside [&_ul]:list-[revert]">
+          <li>Tools for writing Javascript, like ESLint, Prettier, or Babel</li>
           <li>
-            Tools for writing Javascript, like ESLint, Prettier, or Babel
+            Toolchains for writing Javascript, like Biome (in Rust), VoidZero
+            (in Rust), or Typescript (moving to Go)
           </li>
           <li>
-            Toolchains for writing Javascript, like Biome (in Rust), VoidZero (in Rust), or Typescript (moving to Go)
-          </li>
-          <li>
-            Toolchains for working with code in any language, like ANTLR, TreeSitter, or SrcML
+            Toolchains for working with code in any language, like ANTLR,
+            TreeSitter, or SrcML
           </li>
         </ul><br />
 
-        BABLR is the first full toolchain written in Javascript for working with code
-        in any language!
+        BABLR is the first full toolchain written in Javascript for working with
+        code in any language!
         <ul class="space-y-4 mt-4 list-disc list-inside">
           <li>
-            We needed to own a full toolchain to be able to experiement with simplicity-focused
-            full-stack adaptations like gap parsing.
+            We needed to own a full toolchain to be able to experiement with
+            simplicity-focused full-stack adaptations like gap parsing.
           </li>
           <li>
             We wanted our toolchain to be multilingual so that once we built
             trust in our it we could take it with us to projects written in any
-            programming language and give it to people who speak any human language.
+            programming language and give it to people who speak any human
+            language.
           </li>
           <li>
             We wanted the toolchain to be written in Javascript so that it would
-            be an asset to anyone with a web browser, and could welcome to its community
-            of collaborators and maintainers anyone who knows Javascript
+            be an asset to anyone with a web browser, and could welcome to its
+            community of collaborators and maintainers anyone who knows
+            Javascript
           </li>
         </ul>
       </div>
