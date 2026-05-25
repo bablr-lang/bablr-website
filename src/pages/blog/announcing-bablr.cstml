@@ -196,7 +196,7 @@ date: "5/25/2026"
   </>
 
   <p>
-    "Like HTML, when viewing the plain text of the menu the user could \"Inspect Element\" to view the raw markup. Most likely the page author, a restaurant owner, would be also be seeing the document in its source text form when editing, the same way a user composing a blog post in a browser might user a keyboard shortcut to make certain text italic without caring that the browser generated an " <code '<em>' /> " tag, the restaurant owner would be able to use UI to add an item to the menu without really needing to care that an " <code '<Item>' /> " tag is being added to the underlying markup document, and especially without needing to care about coder-y things like a " <code '"' /> " in the name of a dish needing to become " <code '\\"' /> " to avoid breaking the page's source code."
+    "Like HTML, when viewing the plain text of the menu the user could \"Inspect Element\" to view the raw markup. Most likely the page author, a restaurant owner, would also be seeing the document in its source text form when editing, the same way a user composing a blog post in a browser might use a keyboard shortcut to make certain text italic without caring that the browser generated an " <code '<em>' /> " tag, the restaurant owner would be able to use UI to add an item to the menu without really needing to care that an " <code '<Item>' /> " tag is being added to the underlying markup document, and especially without needing to care about coder-y things like a " <code '"' /> " in the name of a dish needing to become " <code '\\"' /> " to avoid breaking the page's source code."
   </>
 
   <p>
