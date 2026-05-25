@@ -182,7 +182,7 @@ date: "5/25/2026"
   </>
 
   <p>
-    "We have one other key advantage over XHML, which is that without a stylesheet you can still render a CSTML document because a CSTML document has inner text, just like HTML does. The menu document above with no additional transformation would render as this plain text:"
+    "We have one other key advantage over XHTML, which is that without a stylesheet you can still render a CSTML document because a CSTML document has inner text, just like HTML does. The menu document above with no additional transformation would render as this plain text:"
   </>
 
   <pre>
