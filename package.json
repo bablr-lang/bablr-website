@@ -26,7 +26,7 @@
     "@tailwindcss/vite": "^4.1.3",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.1",
-    "astro": "^5.0.9",
+    "astro": "^5.7.0",
     "bablr": "0.12.6",
     "bedazzlr": "0.3.4",
     "clsx": "^2.1.1",
