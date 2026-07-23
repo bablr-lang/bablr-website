@@ -3,7 +3,7 @@ import { onCleanup, getOwner, runWithOwner } from "solid-js";
 import { streamParse } from "bablr";
 import { freezeClass } from "@bablr/agast-helpers/object";
 import { printSource } from "@bablr/agast-helpers/tree";
-import { parseTag, parseObject } from "@bablr/agast-helpers/builders";
+import { parseTag, parseObject } from "@bablr/agast-helpers/parsers";
 import { m, eat, match } from "@bablr/helpers/grammar";
 import { OpenNodeTag, LiteralTag } from "@bablr/helpers/symbols";
 import "./DemoText.css";
