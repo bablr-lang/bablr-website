@@ -47,7 +47,7 @@ const language = class DemoLanguage {
 
 freezeClass(language);
 
-const matcher = m`<$Message />`;
+const matcher = m`<Message />`;
 
 let startFrame = {
   filter: "blur(0px)",
